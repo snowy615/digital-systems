@@ -23,11 +23,11 @@ The Cortex-M0 core is an ARM processor, with sixteen 32-bit registers and a RISC
 - Geoffrey Brown's [notes](https://spivey.oriel.ox.ac.uk/wiki/images-corner/a/a9/Geoffrey-Brown-notes.pdf) for a course similar to this one at Indiana University ([source](https://www.cs.indiana.edu/~geobrown/c335book.pdf)).
 
 ## Microcontroller chip
-![](nRF51822.jpg)
+![](NRF51822.jpg)
+
 The [nRF51822](https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822) contains an implementation of the processor core that runs with a 16MHz clock, together with 16kB of RAM and 256kB of read-only flash memory.  It also contains several peripheral interfaces, including a UART, bus interfaces for I2C and SPI, a hardware random number generator, and a 2.4GHz radio interface.  The processor has the single-cycle multiplier option.
 - [Product specification](NRF51822-product-spec.pdf) for the nRF51822, containing the mechanical and electrical parts of the datasheet ([source](http://infocenter.nordicsemi.com/pdf/nRF51822_PS_v3.1.pdf)).
 - [Reference manual](NRF51822-ref-manual.pdf) for the nRF51822, containing detailed programming information for the peripheral interfaces ([source](http://infocenter.nordicsemi.com/pdf/nRF51_RM_v3.0.pdf)).
-- Product anomaly notices for the nRF51822: [[Media:NRF58122-pan-v3.2.pdf|version 3.2]], [[Media:NRF58122-pan-v2.4.pdf|version 2.4]].
 - A sneak peek at the [nRF58122 die](https://spivey.oriel.ox.ac.uk/corner/NRF51822_die_shot_(Digital_Systems)).
 
 ## micro:bit board
@@ -37,4 +37,5 @@ The micro:bit board adds connections and external devices to the nRF51822 chip
 - a UART interface, connected to a host computer via USB.
 
 There are more, as described on [Mike Spivey's micro:bit page](https://spivey.oriel.ox.ac.uk/corner/The_BBC_micro:bit_(Digital_Systems)).
+
 ![](1200px-Micro-bit-pinout.png)
