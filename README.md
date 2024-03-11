@@ -6,12 +6,22 @@ Welcome to the material repository of the Digital Systems course. This course is
   You will need this for problem sheets, and for lab exercises.
 - A [very quick guide](https://spivey.oriel.ox.ac.uk/corner/C_–_a_very_quick_guide_(Digital_Systems)) to programming in C.
   In this course, the labs and lecture examples will be given in C. Some students will have more experience with similar (imperative) programming languages than others. During this course, you will be expected to develop a practical ability to write programs in C, as well as the ability to read C programs.
+- [Frequently Asked Questions](https://spivey.oriel.ox.ac.uk/corner/Frequently_asked_questions_(Digital_Systems)) about programming the micro:bit, ARM assembly, and low-level C. Worth looking through!
 
 ## Lectures
 See the [lecture slides](lecture-slides) directory for pdf handouts of all the lectures.
 
 ## Course Notes
 All [course notes](./notes-digital-systems.pdf) are collected in a single pdf.
+
+## Problem Sheets
+Four [problem sheets](./problem-sheets) should be completed throughout the term.
+| Sheet | Week |
+|-------|------|
+| 1     |      |
+| 2     |      |
+| 3     |      |
+| 4     |      |
 
 ## Labs
 Labs will run in Hilary Term, and will put what we discuss in lectures into practice. [The handout](labs.pdf) contains all instructions you need to complete the labs.

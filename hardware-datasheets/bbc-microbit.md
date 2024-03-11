@@ -37,4 +37,4 @@ The micro:bit board adds connections and external devices to the nRF51822 chip
 - a UART interface, connected to a host computer via USB.
 
 There are more, as described on [Mike Spivey's micro:bit page](https://spivey.oriel.ox.ac.uk/corner/The_BBC_micro:bit_(Digital_Systems)).
-![[1200px-Micro-bit-pinout.png]]
+![](1200px-Micro-bit-pinout.png)
