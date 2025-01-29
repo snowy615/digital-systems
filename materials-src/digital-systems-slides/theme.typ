@@ -55,7 +55,7 @@
       #v(1cm)
     ]
     [Mark van der Wilk \
-     Hilary Term 2024]
+     Hilary Term 2025]
     set align(bottom)
 
     grid(columns: (0.7fr, 1fr), align(left)[#image("theme/ox-cs-log.png", width: 80%)],

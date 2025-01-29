@@ -98,6 +98,23 @@
 ]
 
 #polylux-slide[
+  == Running Our Subroutine
+  We need:
+  - to get our subroutine in the correct location in Memory
+  - our subroutine to be called (by another program?)
+  - to be able to observe the results
+
+  #light[Show source files of `lab1-asm`]
+
+  #pause
+
+  #callout_idea[The _only_ thing we can do to program this chip, \
+  is place instructions in memory.][] #pause
+  So we will need _tools_ that convert source files (C and asm)... \ 
+  to a list of instructions to be placed at specific _addresses_.
+]
+
+#polylux-slide[
   == Demo: Compiling, Assembling, Linking
   #image("figures/makefile.png", height: 90%)
 ]

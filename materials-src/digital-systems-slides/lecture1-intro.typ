@@ -9,10 +9,6 @@
 
 // #enable-handout-mode(true)
 
-#polylux-slide[
-  == Notes for Next Time
-  - Make clear to what extent C programming is required.
-]
 
 /*
 - First lectures in Digital Systems
@@ -56,6 +52,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #polylux-slide[
   == Intro
+  #line-by-line[
   - I'm Mark van der Wilk (#link("https://mvdw.uk")[mvdw.uk]) \ your lecturer for this course.
   - I usually work on machine learning, but I will be teaching you Digital Systems.
   - A course on building computers from the ground up.
@@ -65,17 +62,21 @@ This is not such a course. Instead, we will explore how we can take the messy an
     - Can build all sorts of gadgets. // Home automation: Open / close curtains based on light.
     - Understanding low-level programming has (in rare but important cases) helped me to make performant code in academic and industry projects.
     - Someone needs to actually build computers, \ and this course teaches you how.
+  ]
 ]
 
 #polylux-slide[
   == Plan for the Term
+  #line-by-line[
   - All information on Moodle
-  - Lectures first 3 weeks of term by video
   - Labs are a crucial part of the course
-    - You will not gain everything you need from the lectures
-    - Labs are designed to teach
-    - Official sessions start from week 4
-    - You are welcome to start sessions earlier (see Moodle)
+  - You will not gain everything you need from the lectures
+  - Labs are designed to teach
+  - You will need to pick up C programming in the labs
+  - Official sessions in weeks 3, 4, 6, 7
+  - It's a good idea to start sessions earlier (see Moodle)
+  - Also teaches general computer literacy \ (command line tools, Linux environments)
+  ]
 ]
 
 #polylux-slide[
@@ -259,7 +260,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 #polylux-slide[
   == Interesting questions we won't answer
   #callout_question[Why are there no computations that a Turing Machine cannot do?][]
-  #v(-0.5cm)
+  #v(0.4cm)
   #callout_question[Are there computers that can compute things fundamentally _faster_ than a Turing Machine?][
     - What does it mean for a type of computer to be "fundamentally faster"?
     - E.g. is there an analogue computer that is fundamentally faster than a Turing machine at certain computations?
@@ -336,6 +337,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
     We will consider ARM.
 
     - State machine: CPU
+    - State stored in "registers"
     - Replace tape with addressable memory // Each location on memory has an "address", and by specifying the address you can get its contents in constant time.
     - Conceptual separation between instructions and data // Although this only matters for how the state of the CPU evolves. Instructions can be manipulated as data.
   ],

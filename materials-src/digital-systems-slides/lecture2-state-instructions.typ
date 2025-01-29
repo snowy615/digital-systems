@@ -6,7 +6,6 @@
 // #enable-handout-mode(true)
 
 #polylux-slide[
-  == Today
   #line-by-line[
   #callout_question[How do instructions alter the CPU state?][
     - Understand the effect of instructions on the state of the CPU.
@@ -26,11 +25,11 @@
   == Operation
   #grid(columns: (1.5fr, 1fr),
   [
-    + Controller fetches an instruction from memory, at location in Program Counter (PC)
+    + Controller fetches an *instruction* from memory, at location in Program Counter (#pc) #light[(What is instruction? Look up-table)]
     + Decode instruction \ RISC, so instructions are:
       - Load / Store \ (register $arrow.l.r$ memory)
       - Arithmetic / Logic \ (register $arrow.l.r$ register)
-    + Execute instruction
+    + Execute instruction #light[(change state)]
     + Increment #pc by 1 instruction, and repeat
   ],
   {set align(right); image("figures/risc-vnm.png", height: 90%)})
@@ -39,14 +38,31 @@
 
 #polylux-slide[
   == Implementation
-  We will discuss electronics more later, but for now:
   #line-by-line[
+  #[We will discuss electronics more later, but for now:]
   - All state is represented by an electrical voltage.
   - Voltage is either "high" or "low".
   - Represents binary encoding of numbers.
-  #[We talk about "state", and "registers", and all that, but it's important to keep in mind that...]
+  #[We talk about "state", and "registers", and all that, but it's important to keep in mind that...
+  #v(0.5cm)]
   #callout_info[What you are about to learn is _physically real_][If you could open up the chip, and attach an LED circuit to the wires, you would literally see them light up according to binary.]
 ]
+]
+
+#polylux-slide[
+== Implementation
+#grid(columns: (1fr, 1fr), [
+#line-by-line[
+  - Electrical circuits are etched onto silicon.
+  - Can zoom in and _look_ at circuits!
+  - Register file is a specific segment
+  - _Representation_ of numbers, is high/low voltage on wires
+]
+], {
+set align(center)
+only(1)[#image("figures/386-chip.jpg", height: 90%)]
+only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
+})
 ]
 
 #polylux-slide[
@@ -59,8 +75,8 @@
 ]
 #polylux-slide[
 == Registers: Purpose
-All Registers are 32 bits "wide"
 #line-by-line[
+#[All Registers are 32 bits "wide"]
   - #r0 - #r7 : General purpose registers. Can be used for any value used in any calculation.
   - #r0 - #r3 : Handled differently during subroutine calls.
   - #r8 - #r12 : Can be used for any value, but the instruction set makes it hard to access them, so not as "general purpose" as #r0 - #r7.
@@ -75,7 +91,7 @@ All Registers are 32 bits "wide"
   == The Effect of an Instruction
   // Let's consider the effect of an instruction.
   // Imagine pc=192, and the instruction at that location is loaded, which we represent in hexadecimal as 0x1840.
-  #image("figures/instruction-adds.png", width: 100%)
+  #image("figures/instruction-adds.png", width: 90%)
   - Hex is convenient: Each hex digit corresponds to 4 bits.
   - #text(font: "Fira Code")[0x#highlight(fill: red.lighten(50%))[1]#highlight(fill: green.lighten(50%))[8]#highlight(fill: blue.lighten(50%))[4]#highlight(fill: yellow.lighten(50%))[0] = 0b#highlight(fill: red.lighten(50%))[0001]#highlight(fill: green.lighten(50%))[1000]#highlight(fill: blue.lighten(50%))[0100]#highlight(fill: yellow.lighten(50%))[0000]]
   - In assembly language: `adds r0, r0, r1`.
@@ -126,7 +142,7 @@ All Registers are 32 bits "wide"
     - `❌ adds r0, r1, #10` \
 
     Very annoying!
-    - Exam won't test whether you can memorise these rules.
+    - Exam won't test whether you can memorise these rules (you can look them up)
     - But we do want to understand why this happens!
     ]
   ]
@@ -139,11 +155,14 @@ All Registers are 32 bits "wide"
   #callout_skill[Decoding machine code][
     I.e. how to take machine code, and determine what assembly instruction it maps to.
   ]
+  #line-by-line[
+  #v(0.8cm)
   - As an assembly level programmer, no need to know this.
-  - ... unless you want to understand _why_ 
+  - ... unless you want to understand _why_  assembly works the way it does
   - But as a _machine code_ programmer, you definitely do!
     - Or as a designer of the underlying logic circuits!
     - Or if you want to _write_ an assembler.
+  ]
 ]
 
 #polylux-slide[
@@ -160,6 +179,13 @@ All Registers are 32 bits "wide"
 
 
   #text(font: "Fira Code")[#highlight(fill: orange.lighten(80%))[adds] #highlight(fill: maroon.lighten(50%))[r0], #highlight(fill: purple.lighten(80%))[r0], #highlight(fill: black.lighten(80%))[r1]]
+]
+
+#polylux-slide[
+  #set align( horizon)
+  #light[Show how to find this in the datasheet
+  - `adds` (register)
+  - `adds` (immediate)]
 ]
 
 #polylux-slide[
@@ -235,7 +261,7 @@ All Registers are 32 bits "wide"
     - Run multiple instructions in subroutine.
     - Change the #pc back to #lr.
   - Continue program.
-  We saw how `bx lr` allows the program to continue.
+  #[We saw how `bx lr` allows the program to continue.]
   ]
 ]
 
@@ -271,4 +297,10 @@ All Registers are 32 bits "wide"
     I.e. how to take machine code, and determine what it will do.
   ]
   #callout_question[How can we make parts of a program reusable?][How do subroutines work?]
+]
+
+#polylux-slide[
+== References / Further reading
+- Image of 386 chip. https://collection.sciencemuseumgroup.org.uk/objects/co523252/intel-386-microprocessor-1985
+- Image of 386 die. Ken Shirriff's Blog. _Reverse engineering the Intel 386 processor's register cell_. http://www.righto.com/2023/11/reverse-engineering-intel-386.html
 ]

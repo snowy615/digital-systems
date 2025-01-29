@@ -1,0 +1,171 @@
+# Lecture Presentation Notes
+## Lecture 1 -- From Abstract Machines to Real Machines
+- Overarching question: How to build computers
+- Informal definition (ask students, give chocolate)
+- Discuss weasel words in definition
+- One useful part: device => Link to physics
+- Using shape for computation: Representation of problem, representation of solution
+- More advanced form: Antikythera mechanism
+    - Concluded, that it is made to predict locations of astonomical bodies
+    - Positions of plantets, moon, sun, e.g. eclipses
+    - Not easy to specify mathematically what the motion of heavenly bodies is!
+    - Asking people nowadays to do this... not easy!
+    - **Unknown maker** constructed a physical system that behaved according to the same formulas as the movement of heavenly bodies.
+    - Incredibly intricate! Amazing that people created devices that could perform such sophisticated computations.
+- Another example of performing computation by analogy: Can perform integration with electricity.
+    - Integration is hard, but can build an electrical circuit that performs this naturally.
+    - Remember: Representation of problem, and produces representation of solution.
+    - Again: Use physical laws to construct physical system, that uses physical laws to perform a computation that you desire.
+- All these examples are analogue computers, but nowadays we use digital computers.
+- But digital computers also have a long history.
+- Blaise Pascal's calculator.
+    - Decimal representation on drums
+    - Lot of effort to remove analogue nature of physical laws... More accuracy!
+    - Idea behind digital computing.
+- Babbage analytical engine
+    - Previous examples could only perform one computation.
+    - This one was _programmable_
+- What do these examples show about how we should actually build computers?
+- Would it not be better to have _one_ machine that could compute anything?
+- Problem with question: haven't defined what computation is
+- Other courses where you learn more...
+- Luckily, people in past thought about this: Wanted to answer the question of what is computation? How do you define the set of all computations.
+- To do this, described a machine, although abstractly, but it leant heavily on analogies to things that could be built as a physical device.
+- What is Turing machine? State machine + tape
+    - Can draw symbols on tape from finite set
+    - What is drawn on tape depends on the _state_ of the state machine
+    - Where is the answer? Representation of the solution. So could be the symbol at a particular location on tape.
+- Church-Turing thesis is an _assertion_
+- Remember that this is a _practical_ course about _actually_ building computers.
+- If we want to actually build a physical computer, and we know that a Turing machine is a good model of a universal computing device... Maybe we should take a closer look at a Turing machine, to gain some inspiration for how we can build a practical computer..!
+- State and lookup can be implemented mechanically. You can build it if you want to.
+- Simple model of Turing machine is helpful as a mathematical model/analogy to prove things. But it is a real pain to program in practice.
+- How to program Turing machine: Set state machine. Can prove you can do anything, but very hard to actually do it. Must painstakingly choose what symbols to represent, and what lookup table should be for state transition. Very hard to do if you want to solve a particular problem.
+- **Key point**: Illustrates one particular point that influences a lot of computer design. Where you move from mathematics to design, is where humans come in. If you want humans to use something, you need to design it for humans to use. So you want to create a device that is easy for humans to reason about, or write compilers for, so that they can actually be programmed.
+    - So this is the point where we go from mathematical truth, to human convention.
+    - A lot of students don't like this, because it feels like memorising arbitrary things.
+    - However, there is a logic to this. Try to understand the logic, and you will not need to memorise.
+- **Our practical computer**: BBC Microbit
+    - Board contains entire computer on one chip.
+    - Embedded system...
+    - Heart of embedded system is microcontroller.
+    - Little chip contains: CPU, memory, all circuits to communicate with outside world
+    - Makers of microbit have put it on a circuit board to make it easy for us to program and use.
+- Throughout this course we will learn to create a board like this.
+    - From the smallest electronic building block (transistor)
+    - All the way to how circuits on the microcontroller work
+    - To how to program it, even to Operating Systems that operate on similar principles to OS on your desktop.
+- Is this a Turing machine?
+    - Well not quite, some differences.
+    - But it does contain recognisable components.
+    - No surprise, b/c we want our system to be reasonably general purpose
+    - Many different types of designs that you can prove to be general purpose, and therefore equivalent to Turing machine, if you give them enough memory.
+    - Limited memory
+- Reason we take alternative designs
+    - Want it to be fast
+    - Easy to program
+- ARM core
+    - CPU is state machine. Can represent state symbolically.
+    - There exists a lookup table that defines how each state of CPU moves to new state
+    - In order to make the design easier to think about, we give human interpretable concepts to ways to make the state change. We call these **instructions**.
+    - Each instruction is human interpretable operation, e.g. add two numbers together, or only do something if condition holds, or do logical operation.
+    - Still a state machine, but transitions are governed by interpretable instructions.
+- Memory system replaces tape of turing machine
+    - Instead of one long tape
+    - Random access memory
+    - Equal amounts of time to access any location
+- Similar to description of Turing machine earlier, can also give a description of the state of our computer
+    - Sequence of events...
+- RISC
+    - Number of instructions is kept deliberately small
+    - Load / store: From memory to register file
+    - Arithmetic & logic: Change state of register, and write back to register
+- Similar loop to Turing machine + recognisable features, but details are different
+- What does course look like for the rest of the term
+- All the way from electronic building blocks up through to programming it.
+- Bottom up approach. Each lecture we build tools that we need to solve the next most complex task.
+
+## Lecture 2 -- State and instructions
+Last lecture left off with:
+- **Church-Turing thesis** We discussed the definition of a universal computer machine, based on a definition of "everything that can be computed"
+- Arguing we want to build something inspired by a Turing Machine.
+  - CPU has state
+  - External memory
+- ARM chip that we will be using is similar
+    - CPU with state
+    - Random access memory
+    - Instructions either
+        - Change state of CPU, or
+        - Write to memory (tape)
+
+## Lecture 3 -- Building a Program
+- Skill: Build and run a program on the BBC Microbit
+- We know that we need to get instructions into memory.
+- Question: How do we do this?
+- Understanding more about the Microbit
+    - Discuss different memory and peripherals on CPU
+    - Second chip for programming mode
+    - Won't discuss how all this works. For the purpose of this course we will assume we can just "magic" the instructions into memory.
+- I/O device memory locations are special: Not just memory. Attached to electrical circuit that _does_ something. Possibly independently to the CPU, possibly at a different speed. Give example of UART.
+- Benefit of single address space: Can use the same instructions / procedures to use different types of memory.
+- Assmebly file defining subroutine. You'll see them in the labs!
+    - First few lines are boilerplate code... see comment.
+    - Calling convention: Subroutine knows that two inputs will be stored in registers r0 and r1
+    - Subroutine is free to run what it wishes, but must obey the calling convention!
+    - Promise is that values in registers r4 and above are kept the same
+    - Registers r0-r3 can be used at will
+    - Return value stored in r0
+- Question: What if we call a subroutine in this subroutine?
+    - Discuss problem
+    - Leave it to later
+- Assembly subroutine is only a tiny part of a much larger program, which is designed so we can observe the results
+
+Demo:
+- Show `func.s`
+- Introduce tool `make` (`make all`)
+- Interpret lines
+    - assembler. Note that it's a cross-compiler. `arm-none-eabi-as`: Target is arm, none OS, `eabi` is subroutine calling convention.
+    - Arguments to assembler
+- Look at output `func.o`
+    - `more func.o`
+    - `hexdump func.o`
+    - Look for instruction codes `1840` and `4770`
+    - File also contains metadata
+- Disassemble machine code
+    - `arm-none-eabi-objdump -d func.o`
+- Program takes a textual representation of code, and turns it into binary machine code, as specified by the datasheet. Same process as what we did manually.
+- Other instructions.
+    - Several invocations of the ARM C compiler `gcc`.
+    - One line for each source file.
+    - `fmain.c`: Will handle communication with the PC over the serial port.
+    - `lib.c`: Contains functions for printing text and numbers.
+    - `startup.c`: Contains absolute first code that gets run when power on, or reset.
+- Take a look at the C code...
+- Every C file gets turned into its own binary machine code file (object file)
+- But subroutines in different files call each other! 
+- Ultimately, all machine code has to be put in a sequential order, so that we have a list of instructions that we can put in the memory.
+- This is exactly what the linker does.
+    - Linker outputs elf file: Stores the instructions in binary... Common format.
+    - But microbit expects Intel HEX, which represents binary as text-readable ASCII characters.
+- Search for `1840` and `4770`... Each character is a nibble, each pair is a byte. This file format places most significant byte in the higher address location.
+    - This is known as Big-Endian
+    - ARM is a little-endian
+- Copy over code... Run code... Minicom
+- Debug. Make sure that python env is active, otherwise you get a timeout. Try running `pyocd` to check.
+- Tells us where in the program we're terminated. Can match this to the C code! This is metadata that is in the elf file.
+- Halted program. No characters get sent back.
+- Breakpoint `break *func`
+- Demo showing everyting in func:
+    - `layout asm`
+    - `layout regs`
+    - `break *func`
+    - `stepi`
+- Demo of assembl programming
+    ```
+    @ (a^2 - b^2) = (a+b) * (a-b)
+    @ at calling a is stored in r0
+    @            b is stored in r1
+    adds r3, r0, r1     @ (a + b) stored in r3
+    subs r0, r0, r1     @ (a - b) stored in r0
+    muls r0, r3, r0
+    ```
