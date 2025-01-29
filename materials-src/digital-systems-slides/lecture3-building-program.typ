@@ -115,6 +115,19 @@
 ]
 
 #polylux-slide[
+== Compilation from the Command Line
+#line-by-line[
+  - `make all` produces `func.hex`, which you can copy to Microbit.
+  - Look at commands it runs. Notice `arm-none-eabi-as`! *Assembler*!
+  - `more func.o`: Interpret binary _as_ ASCII-encoded text.
+  - `hexdump func.o`: Print the binary nicely as numbers.
+  - We notice the machine code we expect! `1840` and `4770`! (Plus metadata)
+  - `arm-none-eabi-objdump -d func.o`
+]
+]
+
+
+#polylux-slide[
   == Demo: Compiling, Assembling, Linking
   #image("figures/makefile.png", height: 90%)
 ]
@@ -127,8 +140,45 @@
 
 #polylux-slide[
   == Demo: Programming, Running, Debugging
+  #line-by-line[
+  - `arm-none-eabi-objdump -d func.elf`
+    - `func.elf` is *after linking*!
+    - What is the difference with earlier?
+  - Look at Intel Hex format (big-endian vs little-endian)
+  - Run code. `minicom` for communication.
+  Debugging
+  - `layout asm`
+  - `layout regs`
+  - `break *func`
+  - `stepi`
+  ]
 ]
 
 #polylux-slide[
   == Demo: Coding Assembly
+  #uncover((start: 1))[
+    ```
+    @ (a^2 - b^2) = (a+b) * (a-b)
+    @ at calling a is stored in r0
+    @            b is stored in r1
+    ```]
+  #uncover((start: 2))[
+    ```
+    adds r3, r0, r1     @ (a + b) stored in r3
+    ```]
+
+  #uncover((start: 3))[
+    ```
+    subs r0, r0, r1     @ (a - b) stored in r0
+    ```]
+
+  #uncover((start: 4))[
+    ```
+    muls r0, r3, r0
+    ```]
+
+  #uncover((start: 5))[
+    ```
+    bx lr
+    ```]
 ]
