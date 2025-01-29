@@ -14,12 +14,16 @@ This page contains exclusively documentation of the micro:bit itself: for inform
 ## Processor core
 The Cortex-M0 core is an ARM processor, with sixteen 32-bit registers and a RISC-style instruction set. Like other microcontroller-oriented versions of the ARM, it omits the standard 32-bit encoding of the instruction set, and executes only programs written in the more compact 16-bit Thumb encoding.
 
-- [ARM architecture reference manual](ARM-ARM-V6m.pdf) for ARM-V6m, describing the Cortex-M0 instruction set ([source](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0419d/DDI0419D_armv6m_arm.pdf)).
-- [A chart](rainbow-chart.pdf) showing Thumb instruction encodings. To use this chart, begin with table [A] in the top left, and find the entry identified by the first hexadecimal digit of the instruction at the left, and the second digit at the top. This will either identify a specific instruction, with assembly language syntax given at the right of the table, or give you a reference to one of the other tables [B] to [E]. In each table, the first hex digits of the instruction are shown to the left to the table, and sometimes a further digit at the top. The notation r1 or r2 denotes a low register, one of r0 to r7, while r/h1 denotes any register, including r8 to r12, sp, lr, pc. The notation #4*imm8 denotes an 8-bit immediate field whose (unsigned) value is multiplied by 4 – so it can express the values 0, 4, 8, ..., 1020. All immediate fields are unsigned, and all branch displacements are signed.
-- [A list of common instructions](rainbow-chart.pdf) that will be provided as part of the exam paper.
+- [A chart](rainbow-chart.pdf) showing Thumb instruction encodings.
+  - To use this chart, begin with table [A] in the top left, and find the entry identified by the first hexadecimal digit of the instruction at the left, and the second digit at the top. This will either identify a specific instruction, with assembly language syntax given at the right of the table, or give you a reference to one of the other tables [B] to [E]. In each table, the first hex digits of the instruction are shown to the left to the table, and sometimes a further digit at the top. The notation r1 or r2 denotes a low register, one of r0 to r7, while r/h1 denotes any register, including r8 to r12, sp, lr, pc. The notation #4*imm8 denotes an 8-bit immediate field whose (unsigned) value is multiplied by 4 – so it can express the values 0, 4, 8, ..., 1020. All immediate fields are unsigned, and all branch displacements are signed.
+- [A list of common instructions](rainbow-chart.pdf) that will be provided as part of the exam paper (page below the rainbow chart).
   - This is similar to the [Quick reference card](ARM-Thumb-QRC.pdf) that ARM provides. ([source](http://infocenter.arm.com/help/topic/com.arm.doc.qrc0006e/QRC0006_UAL16.pdf)).
 - [Generic user guide for Cortex-M0](Cortex-M0-generic-ug.pdf) ([source](http://infocenter.arm.com/help/topic/com.arm.doc.dui0497a/DUI0497A_cortex_m0_r0p0_generic_ug.pdf)).
+  - Contains high-level description of how to program and use the Cortex-M0.
 - [Technical reference manual](Cortex-M0-tech-ref.pdf) for Cortex-M0 ([source](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0432c/DDI0432C_cortex_m0_r0p0_trm.pdf)).
+- [ARM architecture reference manual](ARM-ARM-V6m.pdf) ([source](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0419d/DDI0419D_armv6m_arm.pdf)).
+  - Comprehensive document on ARMv6-M architecture. This architecture is shared between the Cortex-M0, M0+, and M1 cores.
+  - Describes instruction set in detail (including machine code encodings), and things like the interrupt controller.
 - Geoffrey Brown's [notes](https://spivey.oriel.ox.ac.uk/wiki/images-corner/a/a9/Geoffrey-Brown-notes.pdf) for a course similar to this one at Indiana University ([source](https://www.cs.indiana.edu/~geobrown/c335book.pdf)).
 
 ## Microcontroller chip
@@ -28,6 +32,7 @@ The Cortex-M0 core is an ARM processor, with sixteen 32-bit registers and a RISC
 The [nRF51822](https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822) contains an implementation of the processor core that runs with a 16MHz clock, together with 16kB of RAM and 256kB of read-only flash memory.  It also contains several peripheral interfaces, including a UART, bus interfaces for I2C and SPI, a hardware random number generator, and a 2.4GHz radio interface.  The processor has the single-cycle multiplier option.
 - [Product specification](NRF51822-product-spec.pdf) for the nRF51822, containing the mechanical and electrical parts of the datasheet ([source](http://infocenter.nordicsemi.com/pdf/nRF51822_PS_v3.1.pdf)).
 - [Reference manual](NRF51822-ref-manual.pdf) for the nRF51822, containing detailed programming information for the peripheral interfaces ([source](http://infocenter.nordicsemi.com/pdf/nRF51_RM_v3.0.pdf)).
+  - You can figure out how to use peripherals, like UART or GPIO, using this doc.
 - A sneak peek at the [nRF58122 die](https://spivey.oriel.ox.ac.uk/corner/NRF51822_die_shot_(Digital_Systems)).
 
 ## micro:bit board
@@ -38,4 +43,4 @@ The micro:bit board adds connections and external devices to the nRF51822 chip
 
 There are more, as described on [Mike Spivey's micro:bit page](https://spivey.oriel.ox.ac.uk/corner/The_BBC_micro:bit_(Digital_Systems)).
 
-![](1200px-Micro-bit-pinout.png)
+![](1200px-Micro-bit-pinout.png){width=40%}
