@@ -11,6 +11,7 @@
     - Can represent $2^32 = #calc.pow(2, 32)$ different values
     - Regular arithmetic is specified on a larger set of numbers!
   ]
+  #v(0.6cm)
 
   So far, we have implicitly assumed that operations work on *unsigned integers*, i.e. numbers from $0$ to $2^32 - 1$.
 
@@ -24,6 +25,7 @@
   #callout_question[What happens when we produce a result larger than the max?][
 We will precisely specify how condition codes in #psr are set by arithmetic operations.
   ]
+  #v(0.8cm)
 
   #callout_question[How do we represent negative numbers?][]
 
@@ -66,6 +68,8 @@ We will precisely specify how condition codes in #psr are set by arithmetic oper
   "bin"(a plus.circle b) = "bin"(a) + "bin"(b)
   $
 
+  #v(0.8cm)
+
   #callout_important[We cannot find $plus.circle$ that satisfies this!][Finite width of bitstrings means we cannot represent all answers we want. E.g. 254 + 3 = 257, but cannot represent this with 8 bits!]
 ]
 
@@ -75,6 +79,7 @@ Instead, want $plus.circle$ so that#footnote[$a≡b mod c$ means that $a-b = k c
 $
 "bin"(a plus.circle b) ≡ ("bin"(a) + "bin"(b)) &#h(2cm)& mod 2^n
 $
+#v(-0.3cm)
 - Gives the same result as normal addition if result $< 2^n$.
 - Result "wraps" around to zero if $>= 2^n$.
 - Can be implemented as normal binary addition, but ignoring bits $>= n$.
@@ -102,12 +107,14 @@ $
   == Representing Negative Numbers
   We can introduce a _different_ mapping from binary representations to numbers, to represent negative numbers.
 
+  #v(0.6cm)
   #callout_idea[Two's Complement Representation][
     $
     "twoc" &: {0, 1}^n arrow NN \
     "twoc"(a) &= sum_(i=0)^(n-2) 2^i a_i - a_(n-1) 2^(n-1)
     $
   ]
+  #v(0.8cm)
   - Easy to see that it can represent negative numbers.
   - But has many other nice properties!
   - All modern computers use twoc for representing negative numbers.
