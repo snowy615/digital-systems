@@ -110,7 +110,7 @@ $
   #v(0.6cm)
   #callout_idea[Two's Complement Representation][
     $
-    "twoc" &: {0, 1}^n arrow NN \
+    "twoc" &: {0, 1}^n arrow ZZ \
     "twoc"(a) &= sum_(i=0)^(n-2) 2^i a_i - a_(n-1) 2^(n-1)
     $
   ]
@@ -167,8 +167,8 @@ $
   == Negation
   Take $overline(a)$ to be the binary complement of $a$, i.e. $overline(a)_i = 1 - a_i$.
   $
-  "twoc"(overline(a)) &= sum_(i=0)^(n-2) (1-a_i)2^i - (1 - a_(n-1)) 2^(i-1) \
-  &= -"twoc"(a) + sum_(i=0)^(n-2)2^i - 2^(i-1) \
+  "twoc"(overline(a)) &= sum_(i=0)^(n-2) (1-a_i)2^i - (1 - a_(n-1)) 2^(n-1) \
+  &= -"twoc"(a) + sum_(i=0)^(n-2)2^i - 2^(n-1) \
   &= -"twoc"(a) -1
   $
 
@@ -193,7 +193,7 @@ $
 
   So, this allows us to define $b minus.circle a = b plus.circle overline(a) plus.circle 1$, where $plus.circle 1$ can be implemented by starting with a carry of 1!
   $
-  "twoc"(b minus.circle overline(a)) = "twoc"(b) - "twoc"(a) &#h(1.5cm)& mod 2^n,
+  "twoc"(b minus.circle a) = "twoc"(b) - "twoc"(a) &#h(1.5cm)& mod 2^n,
   $
 ]
 
