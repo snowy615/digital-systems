@@ -9,7 +9,7 @@
   == Last Lecture...
   We left off with the question: How does the interrupt know 
 
-  table with all interrupt addresses
+  Table with all interrupt addresses
 
   vectors part of the rom, all the way at the bottom of the address space
 ]

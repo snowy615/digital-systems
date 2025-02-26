@@ -29,22 +29,27 @@
 #callout_question[How can we accept more than 4 arguments?][
   - Arguments are stored in #r0 - #r3. Where do additional ones go?
 ]
-#callout_question[What we need more local memory than the registers?][
+#callout_question[What if we need more local memory than the registers?][
   - Where should we store these?
 ]
+#v(0.6cm)
 Today we will discuss how to use RAM to solve these problems.
 ]
 ]
 
 #polylux-slide[
   #line-by-line[
-#callout_important[Subroutines should be black-box][
+#[#callout_important[Subroutines should be black-box][
   Subroutines should work no matter who calls them. Instructions inside are fixed!
   - We need conventions that allow the same instructions to perform the same operation, *regardless of the state of the calling subroutine(s)*.
 ]
+#v(0.6cm)]
 Store registers in fixed memory addresses?
+#[
+  #v(0.6cm)
 #callout_warning[We cannot use absolute memory addresses][
   What about subroutines calling themselves (indirectly)?
+]
 ]
 ]
 ]
@@ -81,6 +86,7 @@ Store registers in fixed memory addresses?
 ]
 )
 #line-by-line[
+  #v(-0.5cm)
 - Convention: Stack starts at top of address space, and grows downwards. So "above" in the stack has a lower address!
 - Each time a subroutine is called, #sp points to a usable region of memory (stack frame), that won't interfere with other subroutines.
 - When a subroutine returns, the caller finds its stack frame as it left it.
@@ -92,7 +98,7 @@ Store registers in fixed memory addresses?
   #line-by-line[
   #[Calling function:
   - Places first arguments 1 ... 4 in #r0 - #r3
-  - Places arguments $>=4$ on stack (called function knows how many to expect) (won't need this in course)]
+  - Places arguments $>=4$ on stack (called function knows how many to expect) (labs won't need this)]
  #[Called function:
   - Leave values of #r4 and up unchanged on return
   - Leave stack pointer #sp unchanged on return
@@ -141,9 +147,10 @@ Store registers in fixed memory addresses?
   - `push` can store `lr`, as well
   - `pop` can restore to `pc`, as well
   #[Prev, we saw we could return from a subroutine using `bx lr`. Using `pop` to restore to #pc gives the same effect, but without first restoring to #lr!]
-  #callout_info[`push`/`pop` depart from RISC principles!][Normally, one instruction does one thing, but this gives speedupp! Load/store operation is 2 cycles, while `push`/`pop` is 1+n cycles.]
+  #[#v(0.6cm)
+    #callout_info[`push`/`pop` depart from RISC principles!][Normally, one instruction does one thing, but this gives speedup! \ Load/store operation is 2 cycles, while `push`/`pop` is 1+n cycles.]]
   #[
-  
+  #v(0.6cm)
   Remember, instruction set designers optimised the common case.]
   ]
 ]
@@ -300,6 +307,7 @@ Optimising compilers can spot this.
     - Must restore of #r4 and above at the end of subroutine.
 ]
 #[
+  #v(0.8cm)
 - See notes for:
   - Expanded discussion
   - More efficient multiplication routine

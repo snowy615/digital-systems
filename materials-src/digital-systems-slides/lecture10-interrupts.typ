@@ -6,26 +6,28 @@
 #title-slide(title: [Lecture 10 \ Programming with Interrupts])
 
 
-#polylux-slide[
+/*#polylux-slide[
   == More Chocolate
   #grid(columns: (1fr, 1fr), 
   [  #set align(center)
 #image("./figures/riddle-train-zoom-out.jpeg", height:78%)], [  #set align(center)
 #image("./figures/riddle-train-zoom-in.jpeg", height:78%)])
   What is going on here? Chocolate for the best hypothesis.
-]
+]*/
 
 #polylux-slide[
   #line-by-line[
   #callout_question[Do we need to wait around while UART is transmitting?][
     What is the point of having hardware to handle receiving/transmission, if the CPU will just wait around until it's done anyway?
   ]
+  #v(0.5cm)
     ```c
 void serial_putc(char ch) {
     while (! UART_TXDRDY) { /* idle */ } UART_TXDRDY = 0;
     UART_TXD = ch;
 }
   ```
+  #v(0.5cm)
   #callout_idea[Hardware should operate at the same time as CPU is executing useful instructions.][
     There was a _tiny_ bit of parallelism: The last character to be sent!
   ]
@@ -63,7 +65,7 @@ static char txbuf[NBUF];
 
 #polylux-slide[
   == Circular Buffer
-  #image("./figures/circular-buffer.png", height: 70%)
+  #image("./figures/circular-buffer.png", height: 69%)
   - Add characters at `bufin`.
   - Send characters from `bufout`.
 ]

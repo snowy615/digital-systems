@@ -3,7 +3,7 @@ set -e
 
 for file_name in "$@"; do
     file_name_noext="${file_name%.*}"
-    handout_name="./pdf/${file_name_noext}_handout.pdf"
+    handout_name="../../lecture-slides/${file_name_noext}_handout.pdf"
     slides_name="./pdf/${file_name_noext}_slides.pdf"
 
     
