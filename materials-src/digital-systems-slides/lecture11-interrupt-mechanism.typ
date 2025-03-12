@@ -162,9 +162,10 @@ void delay(unsigned usec) {
 ```
 
 #line-by-line[
-  - Any bugs / annoyances about this bit of code?
-  - The maximum delay gets smaller as `millis` increases! How to fix?
-  - `while ((millis - start_millis) < goal)`
+  Any bugs / annoyances about this bit of code?
+  - If `goal` overflows, loop terminates immediately $=>$ maximum delay gets smaller as `millis` increases! How to fix?
+  - `while ((millis - start_millis) < usec / 1000)`
+  - _Still works_ if `millis` overflows!
 ]
 
 ]
@@ -172,9 +173,7 @@ void delay(unsigned usec) {
 
 #polylux-slide[
   == Delay v2: Interrupt-driven
-  This allows computation while waiting.
-
-  Make `timer_interrupt` call this at 5ms intervals:
+  To allow computation while waiting, make `timer_interrupt` call this at 5ms intervals:
   ```c
 static int row = 0;
 void advance(void) {
@@ -183,8 +182,8 @@ void advance(void) {
     GPIO_OUT = heart[row];
 }
 ```
-- No internal control structure allowed.
 - Compare to `delay()` solution where beating heart is shown with loop.
+- Here: no internal control structure allowed.
 - Efficient but inflexible.
 ]
 
@@ -192,6 +191,8 @@ void advance(void) {
   == Summary
   - Details of how interrupts work.
   - Timer circuits.
+
+#v(0.8cm)
 
 #callout_question[How can we allow multiple subroutines to operate in an interleaved way?][
   - Currently, we can have one "main" function, that is interrupted. This function is special.

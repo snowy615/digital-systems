@@ -3,138 +3,6 @@
 
 // #enable-handout-mode(true)
 
-#title-slide(title: [Lecture 13 \ Device Drivers])
-
-#title-slide(title: [Lecture 12 \ Operating Systems (continued)])
-
-#polylux-slide[
-  == Mistake in Last Lecture?
-  What is `PRIME`?
-
-    ```c
-  void init(void) {
-    ...
-    GENPRIME = start("GenPrime", prime_task, 0, STACK);
-    USEPRIME = start("UsePrime", summary_task, 1000, STACK);
-  }
-
-  ```
-]
-
-#polylux-slide[
-  == Sending Messages
-  ```c
-void prime_task(int arg) { int n = 2;
-  message m;
-  while (1) {
-    if (prime(n)) {
-      m.int1 = n;
-      send(USEPRIME, PRIME, &m);
-    }
-    n++;
-  }
-}
-```
-]
-
-#polylux-slide[
-  == Receiving Messages
-  ```c
-void summary_task(int arg) {
-  int count = 0, limit = arg; message m;
-  while (1) {
-    receive(PRIME, &m);
-    while (m.int1 >= limit) {
-      printf("There are %d primes less than %d\n",
-             count, limit);
-      limit += arg;
-    }
-    count++;
-  }
-}
-```
-]
-
-#polylux-slide[
-  == List of Demands
-  We have a single CPU that can execute instructions.
-  // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
-
-  We want to be able to
-  - execute multiple programs simultaneously (concurrency),
-  - that can respond to external events and communicate with one another,
-  - with each program written using its own control flow,
-  - seeming as each program is running simultaneously,
-  - and doesn't require the programmer to know when to disable interrupts in order to guarantee correct code.
-]
-
-#polylux-slide[
-  == Message Communication
-  #line-by-line[
-  ```c
-  void init(void) {
-    ...
-    GENPRIME = start("GenPrime", prime_task, 0, STACK);
-    USEPRIME = start("UsePrime", summary_task, 1000, STACK);
-  }
-
-  ```
-  - Messages not buffered.
-  - If process wants to receive: It waits for the other process to send.
-  - If process wants to send: It waits for other process to receive.
-  - If message not ready, process yields, and OS runs another process.
-  - If message *is* ready, OS transfers when both processes are frozen.
-  - If two processes send to same receiver, OS determines ordering.
-]
-]
-
-#polylux-slide[
-  == Message Format
-  *Message type* (2 bytes, `short`), *Sender* (2 bytes, `short`), *Data* (3 `ints`, 12 bytes)
-    ```c
-typedef struct {           /* 16 bytes */
-  unsigned short type;     /* Type of message */
-  short sender;            /* PID of sender */
-  union {         /* An integer, a pointer, or four bytes */
-    int int1; void *ptr1;
-    struct { byte byte1, byte2, byte3, byte4; };
-  };
-  union { int int2; void *ptr2; }; /* Another int or ptr */
-  union { int int3; void *ptr3; }; /* A third int or ptr */
-} message;
-  ```
-]
-
-
-
-#polylux-slide[
-== Alternatives to messages
-Message passing:
-- no “shared variables” between processes.
-- all communication by messages
-
-Shared variables with semaphores:
-- like the serial output buffer.
-- more efficient, but hard to get right.
-]
-
-#polylux-slide[
-  == Other OSs
-  - Processes with communication
-  - Drivers for I/O devices
-  - Dynamically and unloading processes
-  - Memory management (protection/segmentation, virtual memory)
-  - File system
-  - Networking
-]
-
-#polylux-slide[
-  == Summary
-  - Why we need an OS
-  - How independent processes operate
-  - How processes can communicate by messages
-  - Danger of shared variables, safetey of messages
-]
 
 #title-slide(title: [Lecture 13 \ Device Drivers])
 
@@ -213,7 +81,7 @@ while (1) {
   switch (m.m_type) {
     case PUTC:
       ch = m.int1;
-      txbuf[bufin] = ch; ...
+      txbuf[bufin] = ch; ... // rest of circular buffer
       break;
     ...
   }
@@ -243,7 +111,7 @@ Remember: Hardware sends INTERRUPT message.
       UART_TXDRDY = 0;
     }
     clear_pending(UART_IRQ);
-    enable_irq(UART_IRQ);     // Board: Why enable interrupt?
+    enable_irq(UART_IRQ);
     break;
   ```
 ]
@@ -284,6 +152,43 @@ When the buffer is full, we just stop accepting requests until it has emptied a 
 ]
 
 #polylux-slide[
+  #set align(horizon)
+  #callout_idea[Use message mechanism to synchronise processes!][]
+]
+
+#polylux-slide[
+  == Full Driver
+  #columns(2, [
+    ```c
+while (1) {
+  if (bufcount == NBUF)
+    receive(INTERRUPT, &m);
+  else
+    receive(ANY, &m);
+  switch (m.type) {
+  case INTERRUPT:
+    if (UART_TXDRDY) {
+      txidle=1;UART_TXDRDY=0;}
+    clear_pending(UART_IRQ);
+    enable_irq(UART_IRQ);
+    break;
+  case PUTC:
+    txbuf[bufin] = m.int1;
+    bufin = wrap(bufin+1);
+    bufcount++;
+    break;
+  }
+  if (txidle && bufcount>0) {
+    UART_TXD = txbuf[bufout];
+    bufout = wrap(bufout+1);
+    bufcount--;
+    txidle = 0;
+} } }
+  ```
+  ])
+]
+
+#polylux-slide[
   == Omitted Here
   Lab 4 has a more elaborate serial driver
   - Supports both output and input with echoing and line editing.
@@ -295,9 +200,9 @@ When the buffer is full, we just stop accepting requests until it has emptied a 
   == Bottleneck
   #line-by-line[
   - How many context switches per character?
-  - Multiple µs per context switch.
-  - 10k characters/s
-  - Can use up to $10^5$ µs of CPU time per second! 10%!
+  - Multiple µs per context switch
+  - UART baud $=>$ 10k characters/s
+  - Can use up to $10^5$ µs of CPU time per second! 10% of CPU time!
 
 This is a downside of the messaging design
 - Allow `printf()` to accumulate characters in a buffer, and send them all at once.
@@ -343,6 +248,8 @@ Why do we need `disable_irq(...)`?
   - Device driver is a process that serves messages from hardware/software in a loop.
 
   #pause
+
+  #v(0.8cm)
 
   #callout_question[How does the OS switch tasks?][
     - How does it decide what to run next?

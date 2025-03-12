@@ -39,7 +39,7 @@ void advance(void) {  // Called by an interrupt
   We have a single CPU that can execute instructions.
   // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
 
-  #line-by-line[
+  #line-by-line(start: 3)[
   We want to be able to
   - execute multiple programs simultaneously (concurrency),
   - that can respond to external events and communicate with one another,
@@ -102,24 +102,6 @@ void show(const unsigned *img, int n){
 ]
 
 
-
-
-#polylux-slide[
-  == Processes
-  #line-by-line[
-  - Run until no more progress can be made \
-    (co-operative multitasking vs pre-emptive multitasking)
-  - Interrupts can still occur, and interrupt a process.
-  - When this happens, process _yields_ control of CPU, so other process can make progress.
-  - OS will decide which process to devote time to next.
-  - After 5ms, "operating system" wakes up process again, and continues.
-
-  #[Notice:]
-  - Yield could happen in a subroutine.
-  - So, each process needs its own subroutine stack.
-]
-]
-
 #polylux-slide[
   == Another Process: Prime
   ```c
@@ -138,6 +120,24 @@ static void prime_task(int arg) {
 ]
 
 
+
+
+
+#polylux-slide[
+  == Processes
+  #line-by-line[
+  - Run until no more progress can be made \
+    (co-operative multitasking vs pre-emptive multitasking)
+  - When this happens, process _yields_ control of CPU, so other process can make progress.
+  - OS will decide which process to devote time to next.
+  - After 5ms, "operating system" wakes up process again, and continues.
+  - Interrupts can still occur, and interrupt a process.
+  #[Notice:]
+  - Yield could happen in a subroutine.
+  - So, each process needs its own subroutine stack.
+]
+]
+
 #polylux-slide[
   == Startup
   ```c
@@ -149,7 +149,7 @@ void init(void) {
 }
 ```
 - a fixed collection of processes created before concurrent execution begins.
-- our two processes, plus device drivers for the timer (timer_delay) and serial port (serial_putc);
+- our two processes, plus device drivers for the timer (`timer_delay`) and serial port (`serial_putc`);
 - plus an idle task: Only place where CPU gets put to sleep.
 ]
 
@@ -164,6 +164,12 @@ void init(void) {
   - Each has its own stack
 
   micro:bian supports a fixed set of processes.
+]
+
+#polylux-slide[
+  #callout_question[How can processes communicate amongst them?][
+    Let's rewrite the prime example to split calculating, and handing the "UI" (printing to terminal).
+  ]
 ]
 
 #polylux-slide[
@@ -262,11 +268,6 @@ Shared variables with semaphores:
   Heart & Primes example.
 
   Sequence of events, and when CPU sleeps, and wakes.
-]
-
-#polylux-slide[
-  == If you are interested in this
-  Consider doing an internship in the summer!
 ]
 
 

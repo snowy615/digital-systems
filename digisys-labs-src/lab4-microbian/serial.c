@@ -251,4 +251,7 @@ void print_buf(char *buf, int n)
     m.ptr1 = buf;
     m.int2 = n;
     sendrec(SERIAL_TASK, &m);
+    /* Equivalent to
+    send(SERIAL_TASK, &m);
+    receive(REPLY, &m) */
 }
