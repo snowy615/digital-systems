@@ -15,13 +15,16 @@ See the [lecture slides](lecture-slides) directory for pdf handouts of all the l
 All [course notes](./notes-digital-systems.pdf) are collected in a single pdf.
 
 ## Problem Sheets
-Four [problem sheets](./problem-sheets) should be completed throughout the term.
-| Sheet | Week |
-|-------|------|
-| 1     | 3    |
-| 2     | 5    |
-| 3     | 6    |
-| 4     | 8    |
+Six [problem sheets](./problem-sheets) should be completed throughout the course.
+| Sheet | Week  |
+|-------|-------|
+| 1     | HT 3  |
+| 2     | HT 5  |
+| 3     | HT 6  |
+| 4     | HT 8  |
+| 5     | TT 3  |
+| 6     | TT 5  |
+
 
 ## Labs
 Labs will run in Hilary Term, and will put what we discuss in lectures into practice. The [`labs/`](labs/) directory contains all instructions you need to complete the labs.
