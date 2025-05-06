@@ -50,9 +50,9 @@ In many of your other courses, you explore how computation works by specifying a
 This is not such a course. Instead, we will explore how we can take the messy and non-cooperative physics that nature has provided us with, and actually build a computing machine. In this course we will see that if we build carefully, we will end up with a machine with behaviour that we can sensibly reason about in a symbolic way.
 */
 
-#polylux-slide[
+#slide[
   == Intro
-  #line-by-line[
+  #item-by-item[
   - I'm Mark van der Wilk (#link("https://mvdw.uk")[mvdw.uk]) \ your lecturer for this course.
   - I usually work on machine learning, but I will be teaching you Digital Systems.
   - A course on building computers from the ground up.
@@ -65,9 +65,9 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Plan for the Term
-  #line-by-line[
+  #item-by-item[
   - All information on Moodle
   - Labs are a crucial part of the course
   - You will not gain everything you need from the lectures
@@ -79,24 +79,25 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == The Overarching Question
-  #pause
+  #show: later
   
   #set align(center + horizon)
   #thebig_question[How should we \ _actually_\ build computers?]
 ]
 
-#polylux-slide[
+#slide[
   == Let's start at the beginning
-  #callout_info[What is a computer?][#pause A device that produces \ (a representation of) the outcome of a computation, \ given a (representation of) a problem specification.]
+  #callout_info[What is a computer?][#show: later
+  A device that produces \ (a representation of) the outcome of a computation, \ given a (representation of) a problem specification.]
 
-  #pause
+  #show: later
 
   You may well ask: What is a computation?
   - For now: some procedure following "well-defined" steps \ (e.g. calculating the outcome of any algebraic expression). // And you may well as, what is "well-defined"?
 
-  #pause
+  #show: later
 
   At least there is *one* useful part of this definition:
 
@@ -111,10 +112,10 @@ This is not such a course. Instead, we will explore how we can take the messy an
   */
 ]
 
-#polylux-slide[
+#slide[
   == Mathematical Descriptions of Physics
 
-  #line-by-line[
+  #item-by-item[
   #{[Physics is a mathematical description of how a description of a system (state) behaves through time. \ ]}
   #{[Example: State is the position of masses ${x_i}$. Newton's laws:
   $
@@ -124,10 +125,10 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
 == Using Shape for Computation
   Simple example (1600s - 1970s):
-  #line-by-line(start: 2)[
+  #item-by-item(start: 2)[
   - Can describe physical property of length by a number.
   - Putting objects end-to-end *adds* their lengths.
   - Flip: Represent numbers by lengths $arrow.double$ can add numbers.
@@ -142,7 +143,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 ]
 
 
-#polylux-slide[
+#slide[
   == Gears for Computation
   Antikythera Mechanism (somewhere 205 BC - 87 BC).
   - Discovered in ancient shipwreck off Antikythera coast in 1901.
@@ -158,9 +159,9 @@ This is not such a course. Instead, we will explore how we can take the messy an
     ]}
 ]
 
-#polylux-slide[
+#slide[
   == Integration with Electricity
-  #line-by-line[
+  #item-by-item[
   #{[How hard is it to integrate a general curve? \ ]}
   #{[An electric circuit does it naturally!
   #figure[
@@ -174,7 +175,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 
 
-#polylux-slide[
+#slide[
   #grid(columns: (1fr, 1fr), [
   == Positions, not Lengths
   Blaise Pascal's calculator (1642)
@@ -194,7 +195,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Babbage's Analytical Engine
   - Design only (1837), wasn't built.
   - Some parts displayed in London Science Museum (worth a trip).
@@ -204,9 +205,9 @@ This is not such a course. Instead, we will explore how we can take the messy an
   #image("figures/wiki-babbage-analytical.jpg", height: 62%)
 ]
 
-#polylux-slide[
+#slide[
   == General-Purpose Computers
-  #line-by-line[
+  #item-by-item[
   #{[From these examples, we have seen:]}
   - Several examples of _physical_ systems that can perform computations.
   - Examples of _analogue_ computers.
@@ -219,14 +220,14 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == General-Purpose Computers
   #thebig_question[How can we build one machine \ that can be configured \ to perform _any_ computation?]
 ]
 
-#polylux-slide[
+#slide[
   == Turing Machines
-  #line-by-line[
+  #item-by-item[
   #{[We haven't defined what a computation is yet.]} #{[Alan Turing did...]}
   - Describe a _Turing Machine_ (state machine w/ $infinity$-"tape" memory)
     #image("figures/wiki-turing-machine.jpeg", width: 60%)
@@ -236,9 +237,9 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Church-Turing Thesis
-  #line-by-line[
+  #item-by-item[
   #callout_info[Church-Turing Thesis][
     There exists a well-defined method for computing something \
     if and only if \
@@ -257,7 +258,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   */
 ]
 
-#polylux-slide[
+#slide[
   == Interesting questions we won't answer
   #callout_question[Why are there no computations that a Turing Machine cannot do?][]
   #v(0.4cm)
@@ -274,7 +275,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #show "LOOKUP": text(`lookup_table`)
 #show "TAPE": text[`tape`]
-#polylux-slide[
+#slide[
   == A Closer Look at a Turing Machine
     #grid(columns: (1.1fr, 1fr), [
   - "CPU" has a "state" at each time
@@ -296,7 +297,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   - Programming is a pain, you need to  select these lookup tables.
 ]
 
-#polylux-slide[
+#slide[
   #thebig_question[How can we build one machine \ that can be configured \ to perform _any_ computation?]
   
   #thebig_idea[
@@ -305,12 +306,12 @@ This is not such a course. Instead, we will explore how we can take the messy an
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Practical Computers
   - Turing Machine technically can do anything.
   - But is it the most _practical_?
 
-  #line-by-line[
+  #item-by-item[
   #callout_question[How to build a machine to perform any computation?][
     But we also want it to:
     - perform computations _quickly_ (constants matter!)
@@ -322,12 +323,12 @@ This is not such a course. Instead, we will explore how we can take the messy an
 ]
 ]
 
-#polylux-slide[
+#slide[
   == _Our_ Practical Computer
 #image("figures/microbit-photo.png")
 ]
 
-#polylux-slide[
+#slide[
   == RISC + The von Neumann Architecture
   #grid(columns: (1fr, 1fr),
   [
@@ -345,7 +346,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 ]
 
 
-#polylux-slide[
+#slide[
   == Operation
   #grid(columns: (1fr, 1fr),
   [
@@ -359,7 +360,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   {set align(right); image("figures/risc-vnm.png", width: 95%)})
 ]
 
-#polylux-slide[
+#slide[
   == Course Outline
   #set align(center + horizon)
   #image("figures/course-outline.png", width: 80%)
@@ -367,7 +368,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   // Now throughout this course, we will show how to build such a computer, all the way from the transistors upwards
 ]
 
-#polylux-slide[
+#slide[
   == Interesting Stuff (totally non-examined)
   Veritasium on analogue computers:
   - #link("https://www.youtube.com/watch?v=IgF3OX8nT0w")[The Most Powerful Computers You've Never Heard Of (YouTube)]

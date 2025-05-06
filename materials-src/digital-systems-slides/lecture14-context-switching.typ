@@ -5,7 +5,7 @@
 
 #title-slide(title: [Lecture 14 \ Context Switching])
 
-#polylux-slide[
+#slide[
 == Today
     #callout_question[How does the OS switch tasks?][
     - How does it decide what to run next?
@@ -14,13 +14,13 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Context Switching
   Switch processes on `send()`, `receive()`, `yield()`, or interrupt.
   
   Temporarily passes control to OS, which then decides what to do next.
 
-  #line-by-line[
+  #item-by-item[
   #[The plan to do so:]
   - Enter the OS via a software interrupt instruction `svc`, or by a normal interrupt.
   - Save _entire_ processor state on the stack.
@@ -30,9 +30,9 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == `svc` interrupt vs normal interrupt
-  #line-by-line[
+  #item-by-item[
   #[Instruction `svc` (supervisor call) operates like a normal interrupt:]
   - Hardware stores the usual state to conform to calling convention.
   - `r0-r3`, `r12`, `lr`, `pc`, `psr`
@@ -45,13 +45,13 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch I
   #set align(center)
   #image("./figures/context-switch1.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch II
   #[We additionally want:]
   - to be able to run a different process,
@@ -59,44 +59,44 @@
   - we must store _all_ state of the process on the stack.
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch II
   #set align(center)
   #image("./figures/context-switch2.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch III
   #set align(center)
 #image("./figures/context-switch3.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch IV
   #set align(center)
 #image("./figures/context-switch4.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch V
   #set align(center)
 #image("./figures/context-switch5.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Context Switch VI
   #set align(center)
 #image("./figures/context-switch6.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Initiating System Calls
 #image("./figures/system-calls.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Handling System Calls
-  #line-by-line[
+  #item-by-item[
   #[Sequence of events:]
   - `startup.c`: Vectors table.
   - `mpx-m0.s`: `svc_handler` stores remaining state.
@@ -106,7 +106,7 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == `svc_handler`
   ```
 svc_handler:
@@ -118,7 +118,7 @@ svc_handler:
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Saving the State
   Unavoidable bit of assembly to store additional state, since this is not done by hardware, cannot be done by calling convention, and C cannot be trusted to get this right.
   ```
@@ -138,7 +138,7 @@ svc_handler:
 ```
 ]
 
-#polylux-slide[
+#slide[
   == System Call: OS Side
   //- Receives stack pointer of current process.
   //- Returns stack pointer of process to be restored.
@@ -158,7 +158,7 @@ unsigned *system_call(unsigned *psp) {
 ```
 ]
 
-#polylux-slide[
+#slide[
 == Remaining details
 - How to start a process.
 - How to start the entire operating system.

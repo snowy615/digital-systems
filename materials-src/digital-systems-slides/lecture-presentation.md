@@ -169,3 +169,53 @@ Demo:
     subs r0, r0, r1     @ (a - b) stored in r0
     muls r0, r3, r0
     ```
+
+
+## Lecture 17
+- Title slide
+    - Last term, details about how to programme microcontrollers
+    - Built up all the way form individual instructions to OS to run tasks in parallel
+    - This term: How to build the machine that executes the instructions
+- Q: How can we build a machine that executes instructions
+    - Central question
+    - 8 Lectures. In that time, *a way* on how to build a functioning machine, all the way down to the transistor level
+    - No the most efficient way. Many tricks to optimise, which we won't study.
+    - But does show that you do have a knowledge that you can build a CPU down to the transistor level.
+    - No magic!
+- Course outline
+    - Transistors => Logic gates
+    - Gates => Modules that perform calculations, like additions / subtractions
+    - Datapath which executes entire instructions
+    - Controls that route determine what datapath controls what the state of the CPU becomes
+    - Finally, end up in a situation where we have a machine that takes in electrical signals that encode machine code, and let them control the datapath, so the state changes in accordance with what is expected from an instruction.
+- What does it mean to execute an instruction? (Remind me)
+    - Mathematical abstraction for what it means to execute an instruction.
+        - Turing machine is a state machine with memory
+        - All you need to do to program a TM, is specify a function that maps from all the states you could be in at the current time, to a state at the next time.
+        - What does this have to do with an instruction?
+            - State of the CPU can be expressed by CPU registers, memory has its own state
+            - We can either see the current instruction as part of the CPU state, and then have one big transition function.
+            - ... or we can see the instruction as determining _which_ transition function is used to change the CPU state.
+    - Can get a hint of how to build such a machine, by the knowledge that state is stored as bit vectors/strings.
+    - We need to specify functions on bit-vectorss
+        - And specifically, we need a mathematical way of reasoning about them: Boolean algebra, which composes functions of ...
+        - And we need a physical way to implement such functions with electrons, and voltage levels.
+...
+- Propagation Delay
+    - Algebraicly, both expressions are the same.
+    - But ultimately, we will implement both using electrical circuits.
+    - Specified by differential equations through time.
+    - Time it takes for signals to stabilise.
+    - Aside: Number of logic gates are another reason why we may prefer one over another.
+- Logic Gates
+    - Circle at the end means inversion.
+    - Discuss truth tables of each of the gates.
+- How can we design a circuit to have a given truth table
+    - Example of adds instruction. We know the truth table. How do we find circuit?
+- Constructing a Circuit from a Truth Table
+    - Draw 3-input AND gates for all ones in the truth table.
+    - ...
+    - Smaller circuit does not check for $a and b and c$
+    - Algorithms... Karnaugh maps... Propagation delay of such a minimal representation
+- Multiplexer
+    - AND gate propagates a signal if one of the inputs (control) is 1.

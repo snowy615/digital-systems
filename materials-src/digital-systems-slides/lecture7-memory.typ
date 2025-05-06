@@ -5,26 +5,26 @@
 
 #title-slide(title: [Lecture 7 \ Memory and Addressing])
 
-#polylux-slide[
+#slide[
   #set align(center + horizon)
   == Questions about the course so far?
 ]
 
-#polylux-slide[
+#slide[
   #callout_question[How can we access memory?][We have seen `push` and `pop`, but they were designed for the stack!]
   #callout_question[How can we place values in a subroutine in memory?][I.e. _local_ variables.]
   #callout_question[How can place values in memory that can be accessed in all subroutines?][I.e. _global_ variables.]
   #callout_question[How can we handle variable amounts of data?][I.e., what happens if we don't know when we write the program, how many variables we need to store?]
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #thebig_question[How can we access memory?]
 ]
 
-#polylux-slide[
+#slide[
   == Accessing Memory
-  #line-by-line[
+  #item-by-item[
   #[Instructions for storing and loading locations in memory: `str` and `ldr`.]
   - Remember: Memory is accessed by providing an _address_. // Draw picture of memory on board
   - `ldr` and `str` have different ways of calculating the address.
@@ -40,9 +40,9 @@ xxr r0, [r1, r2]       @ Load/store r0 in r1 + r2`
 ]
 
 
-#polylux-slide[
+#slide[
   == Accessing Memory: Peculiarities
-  #line-by-line[
+  #item-by-item[
     - Typical encoding: Only the lower registers #r0 - #r7 can be used.
     #[- Alternative encoding for:`
     xxr r0, [sp, #20]
@@ -62,19 +62,19 @@ xxr r0, [r1, r2]       @ Load/store r0 in r1 + r2`
 ]
 
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #thebig_question[How can we store (in memory) local variables?]
 ]
 
-#polylux-slide[
+#slide[
 == Local Variables
 Local variables are allocated on the stack. #light("Remember why?")
   #set align(center)
   #image("figures/subroutine-stack-convention.png", height: 69%)
 ]
 
-#polylux-slide[
+#slide[
 == Factorial Example: Allocating Local Variables
 Instead of restoring #r4, #r5, let's keep variables in memory.
 
@@ -103,7 +103,7 @@ fac:
 ]
 
 
-#polylux-slide[
+#slide[
 == Factorial Example: Accessing Local Variables
 #grid(columns: (0.65fr, 1fr), [
 ```c
@@ -128,7 +128,7 @@ str r0, [sp, #4]  @ save it again
 ]
 
 
-#polylux-slide[
+#slide[
 == Factorial Example: De-allocating Local Variables
 #grid(columns: (0.65fr, 1fr), [
 ```c
@@ -159,16 +159,16 @@ Subroutine contract:
 
 
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #thebig_question[How can we store (in memory) global variables?]
 ]
 
 
-#polylux-slide[
+#slide[
   == Global Variables
     Global variables are stored at a fixed absolute location. #light("Remember why?")
-      #line-by-line[
+      #item-by-item[
 
   Addresses are 32-bit quantities. How can we load the address into a register?
   - Can use `movs rx, #255` to load 8 bits into a register.
@@ -179,9 +179,9 @@ Subroutine contract:
 ]
 
 
-#polylux-slide[
+#slide[
   == It's annoying to manually manage addresses and offsets
-  #line-by-line[
+  #item-by-item[
   #[`ldr` using #pc as the base is again peculiar!]
   - #pc is always 4 ahead of instruction being executed...
     - Makes calculating offsets error-prone.
@@ -196,7 +196,7 @@ Subroutine contract:
 ]
 
 
-#polylux-slide[
+#slide[
   == Relying on the Assembler
   Can we get the assembler to?
   - Select an address in RAM for the global variable?
@@ -205,7 +205,7 @@ Subroutine contract:
 ]
 
 
-#polylux-slide[
+#slide[
 == Global Variables: Example
 
 ```c 
@@ -228,7 +228,7 @@ Now we must tell the assembler what `count` refers to.
 ]
 
 
-#polylux-slide[
+#slide[
   == Telling the Assembler about Locations in RAM
   ```
     .bss                @ Place the following in RAM
@@ -238,7 +238,7 @@ count:
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Assembler Input
   #columns(2, gutter: 11pt)[
   ```
@@ -263,12 +263,12 @@ count:
 ]
 
 
-#polylux-slide[
+#slide[
   == Assembler Output
   #image("./figures/global-assembler-disassembly.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
 == Linker Output
 #image("./figures/global-linker-disassembly.png", height: 90%)
 ]
@@ -280,12 +280,12 @@ count:
 
 
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #thebig_question[How can we store (in memory) arrays?]
 ]
 
-#polylux-slide[
+#slide[
 == Array Addressing
 #grid(columns: (1fr, 1fr), [
 - Arrays are just a collection of contiguous memory locations
@@ -305,7 +305,7 @@ int deposit(int i, int a) {
 ])
 ]
 
-#polylux-slide[
+#slide[
   == Array Addressing in Assembly
   ```
 deposit:
@@ -324,12 +324,12 @@ account:
 ]
 
 
-#polylux-slide[
+#slide[
   #set align(horizon + center)
   == Wrap-up
 ]
 
-#polylux-slide[
+#slide[
   == Other load/store instructions
   `ldr` and `str` deal in 32-bit values, the size of a register. But there are also
 - `ldrb` and `strb` for 8-bit values (useful for strings).
@@ -339,7 +339,7 @@ On Thumb, some of these exist only with the
 reg+reg addressing mode.
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   #callout_question[How can we access memory?][`ldr` and `str`.]
   #callout_question[How can we implement local variables?][Allocate on stack, and access with constant offsets.]
@@ -348,9 +348,9 @@ reg+reg addressing mode.
 ]
 
 
-#polylux-slide[
+#slide[
   == Mistake in the Last Lecture
-  #line-by-line[
+  #item-by-item[
   #[About the behaviour of the `push` and `pop` instructions. #light("Did anyone notice?")
 
 ]

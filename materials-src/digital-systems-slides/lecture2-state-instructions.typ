@@ -5,8 +5,8 @@
 
 // #enable-handout-mode(true)
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #callout_question[How do instructions alter the CPU state?][
     - Understand the effect of instructions on the state of the CPU.
     - Worked example of executing an instruction.
@@ -21,7 +21,7 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Operation
   #grid(columns: (1.5fr, 1fr),
   [
@@ -36,9 +36,9 @@
 ]
 
 
-#polylux-slide[
+#slide[
   == Implementation
-  #line-by-line[
+  #item-by-item[
   #[We will discuss electronics more later, but for now:]
   - All state is represented by an electrical voltage.
   - Voltage is either "high" or "low".
@@ -49,10 +49,10 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
 == Implementation
 #grid(columns: (1fr, 1fr), [
-#line-by-line[
+#item-by-item[
   - Electrical circuits are etched onto silicon.
   - Can zoom in and _look_ at circuits!
   - Register file is a specific segment
@@ -65,7 +65,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 })
 ]
 
-#polylux-slide[
+#slide[
   == Registers: A Closer Look
   For most programming purposes, the state of the registers, is the state that we manipulate with instructions.
   #{
@@ -73,9 +73,9 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
     image("figures/arm-registers.png", height: 69%)
   }
 ]
-#polylux-slide[
+#slide[
 == Registers: Purpose
-#line-by-line[
+#item-by-item[
 #[All Registers are 32 bits "wide"]
   - #r0 - #r7 : General purpose registers. Can be used for any value used in any calculation.
   - #r0 - #r3 : Handled differently during subroutine calls.
@@ -87,7 +87,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 ]
 ]
 
-#polylux-slide[
+#slide[
   == The Effect of an Instruction
   // Let's consider the effect of an instruction.
   // Imagine pc=192, and the instruction at that location is loaded, which we represent in hexadecimal as 0x1840.
@@ -97,7 +97,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   - In assembly language: `adds r0, r0, r1`.
 ]
 
-#polylux-slide[
+#slide[
   == Status Bits
   The status bits `N`, `Z`, `C`, `V` are in #psr. The instruction `adds` is does "add"ition, and sets the "s"tatus bits.
   - `N`: Set if the result is negative.
@@ -106,12 +106,12 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   - `V`: Look at later.
 ]
 
-#polylux-slide[
+#slide[
   == Program Counter
   There are multiple encodings for ARM instructions. Big chips can choose.
 
   #grid(columns: (1fr, 1fr), [
-    #line-by-line[
+    #item-by-item[
     - "Native" ARM instructions (32 bits)
     - "Thumb" instructions (16 bits)
     - Thumb-2 extensions (mixture of 16- and 32 bit)
@@ -120,7 +120,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   ], image("figures/thumb-native.png"))
 ]
 
-#polylux-slide[
+#slide[
   == Assembly Language
   - First level of abstraction up from machine code.
   - Very close correspondence between assembly and machine code.
@@ -129,14 +129,14 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   - Given close correspondence, assemblers are simple programs, particularly when compared to compilers.
 ]
 
-#polylux-slide[
+#slide[
   == Assembly Language has... "Quirks"
   Consider the instruction
 
   //#set align(center)
 
   #[
-    #line-by-line[
+    #item-by-item[
     - `✅ adds r0, r1, #3`
     - `✅ adds r0, r0, #10`
     - `❌ adds r0, r1, #10` \
@@ -151,11 +151,11 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
 ]
 
-#polylux-slide[
+#slide[
   #callout_skill[Decoding machine code][
     I.e. how to take machine code, and determine what assembly instruction it maps to.
   ]
-  #line-by-line[
+  #item-by-item[
   #v(0.8cm)
   - As an assembly level programmer, no need to know this.
   - ... unless you want to understand _why_  assembly works the way it does
@@ -165,7 +165,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Rainbow Chart
   In Moodle you can find `rainbow-chart.pdf`.
   - Nice summary of how binary patterns map to instructions.
@@ -181,16 +181,16 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   #text(font: "Fira Code")[#highlight(fill: orange.lighten(80%))[adds] #highlight(fill: maroon.lighten(50%))[r0], #highlight(fill: purple.lighten(80%))[r0], #highlight(fill: black.lighten(80%))[r1]]
 ]
 
-#polylux-slide[
+#slide[
   #set align( horizon)
   #light[Show how to find this in the datasheet
   - `adds` (register)
   - `adds` (immediate)]
 ]
 
-#polylux-slide[
+#slide[
   == Consequences of Encoding
-  #line-by-line[
+  #item-by-item[
   #[We know know _why_]
   - Only the lower 8 registers can be accessed by most instructions.
     - Allocating 3 bits to indicate the register only gives 8 options!
@@ -199,17 +199,17 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   ]
 ]
 
-#polylux-slide[
+#slide[
   == The Next Instruction
   #[Now the #pc points to 194 in memory, and contains the instruction
   #[
     #set align(center)
     #text(font: "Fira Code")[0x#highlight(fill: blue.lighten(70%))[47]70 = 0b01000111 0 #highlight(fill: red.lighten(80%))[1110] 000]
   ]
-  #line-by-line[
+  #item-by-item[
     
   #grid(columns: (1.1fr, 1fr),
-  line-by-line(start: 2)[
+  item-by-item(start: 2)[
     #[which decodes to:]
     #[#highlight(fill: blue.lighten(70%))[`bx`]. \ ]
     #[
@@ -230,9 +230,9 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Datasheets: How we know how regs are encoded
-  #line-by-line[
+  #item-by-item[
   #[This behaviour is not mysterious. It was _designed_ by humans. Humans want others to understand. So they write documentation / datasheets. ARM publishes all this in easy-to-search formats!
 
   So if you:]
@@ -244,16 +244,16 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   ]
 ]
 
-#polylux-slide[
+#slide[
   == The Effect of `bx lr`
   // Let's consider the effect of an instruction.
   // Imagine pc=192, and the instruction at that location is loaded, which we represent in hexadecimal as 0x1840.
   #image("figures/instruction-bxlr.png", width: 100%)
 ]
 
-#polylux-slide[
+#slide[
   == Subroutines
-  #line-by-line[
+  #item-by-item[
   #callout_question[How can we make parts of a program reusable?][]
   #[Store a re-usable sequence of instructions, starting at a known memory location (e.g. 660). Then run program:]
   - Instr: Store location of next instruction in #lr.
@@ -265,7 +265,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Subroutines
   #callout_warning[Register values remain the same between subroutines!][
     - When jumping into a subroutine, the registers may be in use by the caller.
@@ -277,14 +277,14 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   // So calling subroutines is a bit harder, and we'll get to that.
 ]
 
-#polylux-slide[
+#slide[
   == Lab Exercise One
   - Practice writing assembly language.
   - Your assembly language will be in a subroutine.
   - Called from a bigger C program that handles I/O.
 ]
 
-#polylux-slide[
+#slide[
   == Conclusion
   #callout_question[How do instructions alter the CPU state?][
     - Understand the effect of instructions on the state of the CPU.
@@ -299,7 +299,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
   #callout_question[How can we make parts of a program reusable?][How do subroutines work?]
 ]
 
-#polylux-slide[
+#slide[
 == References / Further reading
 - Image of 386 chip. https://collection.sciencemuseumgroup.org.uk/objects/co523252/intel-386-microprocessor-1985
 - Image of 386 die. Ken Shirriff's Blog. _Reverse engineering the Intel 386 processor's register cell_. http://www.righto.com/2023/11/reverse-engineering-intel-386.html

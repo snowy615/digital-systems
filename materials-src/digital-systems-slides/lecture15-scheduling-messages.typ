@@ -5,9 +5,9 @@
 
 #title-slide(title: [Lecture 15 & 16 \ Scheduling Processes & Messages])
 
-#polylux-slide[
+#slide[
   == C Pointer Syntax
-  #line-by-line[
+  #item-by-item[
   - Variable containing 1 \
     ```c int a = 1;```
   - Variable able to contain address to memory location containing `int`
@@ -19,9 +19,9 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
   == C Pointer Syntax for Structs
-  #line-by-line[
+  #item-by-item[
   #[```c
 typedef struct dst {
   int feet;
@@ -39,14 +39,14 @@ typedef struct dst {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Today
   #callout_question[How are processes started?][]
   #callout_question[What happens to the Operating System on startup?][]
 ]
 
 
-#polylux-slide[
+#slide[
   == Starting a Process
   The first time a process runs, it is resumed just as if returning from a system call.
   
@@ -56,7 +56,7 @@ typedef struct dst {
 - #lr = address of exit stub, in case body returns.
 ]
 
-#polylux-slide[
+#slide[
   == Creating "fake" Stack Frame
   ```c
 int start(...) {
@@ -74,9 +74,9 @@ int start(...) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Starting a Process
-  #line-by-line[
+  #item-by-item[
   #[At this point, every process has a stack frame that:]
   - will restore the #pc at the start of the process's function \
     (i.e. it will run the function)
@@ -87,7 +87,7 @@ int start(...) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Starting the OS
   After `init()` called, all tasks have stack frames that will allow a context switch into them.
 
@@ -105,7 +105,7 @@ void __start(void) {
   ```
 ]
 
-#polylux-slide[
+#slide[
   == Idle Process
   ```c
 void idle_task(void) {
@@ -118,17 +118,17 @@ void idle_task(void) {
   ```
 ]
 
-#polylux-slide[
+#slide[
   == Where are we now?
-  #line-by-line[
+  #item-by-item[
   #[We understand _how_ tasks are switched and started.]
   - OS is an interrupt that performs context switches \ (Q: remind me how)
   - During context switch, interrupt stores some state on stack, \ assembly code stores the rest.
 ]
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
     == What is left to understand?
     #callout_question[How does the OS keep track of processes?][
       We have already seen that we need to start processes, and keep track of various process-specific quantities (e.g. stack location), in order to do context switches. How does the OS do this?
@@ -140,14 +140,14 @@ void idle_task(void) {
   ]
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
       #callout_question[How does the OS keep track of processes?][
       We have already seen that we need to start processes, and keep track of various process-specific quantities (e.g. stack location), in order to do context switches. How does the OS do this?
     ]
 ]
 
-#polylux-slide[
+#slide[
   == Process Structure
   ```c
 struct _proc {
@@ -173,9 +173,9 @@ struct _proc {
 - `IDLING`: idle process, which runs when no other process is ready.
 ]
 
-#polylux-slide[
+#slide[
   == Process Structure
-  #line-by-line[
+  #item-by-item[
   #[```c
   typedef struct _proc *proc;
   ...
@@ -195,23 +195,23 @@ struct _proc {
 ]
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #callout_question[How does the OS decide which process to run next?][
     Start with the easy case: context switch initiated by `yield()`.
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Ready Queues
   #grid(columns: (1fr, 2.5fr), [#set align(horizon)
     In `ACTIVE` processes, the ready queue is implemented using the `next` field.
   ], [#image("./figures/ready-queue.png", height: 90%)])
 ]
 
-#polylux-slide[
+#slide[
   == Ready Queues
-  #line-by-line[
+  #item-by-item[
   ```c
 #define NPRIO 3      /* Number of non-idle priorities */
 ...
@@ -230,7 +230,7 @@ Adds process to appropriate queue.]
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Adding to the Queue: `make_ready()`
   ```c
 static inline void make_ready(proc p) {
@@ -248,11 +248,9 @@ static inline void make_ready(proc p) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Full Story of Startup
-#light[Have code side-by-side.]
-
-  #line-by-line[
+  #item-by-item[
     - `startup.c`:  `__reset()` is called.
     - `microbian.c`: `__start()` is called.
     - Calls `init()`, defined by "our" program.
@@ -264,7 +262,7 @@ static inline void make_ready(proc p) {
   ]
 ]
 
-#polylux-slide[
+#slide[
 == Selecting Next Process
 We end up in `system_call(...)` again.
 ```c
@@ -282,7 +280,7 @@ unsigned *system_call(unsigned *psp) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Selecting Next Process
   Find highest priority process to run, remove it from queue, `return`.
   ```c
@@ -300,8 +298,8 @@ static inline void choose_proc(void) {
   ```
 ]
 
-#polylux-slide[
-#line-by-line[
+#slide[
+#item-by-item[
   #callout_question[How does the OS decide which process to run next?][
     But this time, if we send a message.
   ]
@@ -318,7 +316,7 @@ void NOINLINE send(int dest, message *msg) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == System Call after `send()`
   Just like `yield()`, `send()` simply causes a syscall interrupt.
   ```c
@@ -336,11 +334,11 @@ unsigned *system_call(unsigned *psp) {
   ```
 ]
 
-#polylux-slide[
+#slide[
   == Sending Messages
   Remember the rules for communication by messages!
 
-  #line-by-line[
+  #item-by-item[
     #[Two possible cases:]
     
     #[The destination process is `RECEIVING` and can receive message]
@@ -352,7 +350,7 @@ unsigned *system_call(unsigned *psp) {
   ]
 ]
 
-#polylux-slide[
+#slide[
 == Sending Queues
 Processes can have multiple other processes waiting to send.
 #grid(columns: (1fr, 2.1fr), [
@@ -376,7 +374,7 @@ As the diagram shows, any process that is not DEAD (or the idle process), and is
 
 
 
-#polylux-slide[
+#slide[
   == System call after `send()`
 ```c
 static void mini_send(int dest, int type, message *msg) {
@@ -395,11 +393,11 @@ static void mini_send(int dest, int type, message *msg) {
 ]
 
 
-#polylux-slide[
+#slide[
   #callout_question[How does the OS decide which process to run next?][
     But this time, if we *receive* a message.
   ]
-#line-by-line[
+#item-by-item[
   #[Three possible cases:
   
 ]
@@ -419,7 +417,7 @@ static void mini_send(int dest, int type, message *msg) {
 
 
 
-#polylux-slide[
+#slide[
 == Receiving Messages
 ```c
 static void mini_receive(int type, message *msg) {
@@ -437,14 +435,14 @@ static void mini_receive(int type, message *msg) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #callout_question[How are messages transferred between processes?][
     And in particular, how is this done in interrupts?
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Interrupt Handler
 ```c
 void default_handler(void) {
@@ -459,8 +457,8 @@ void default_handler(void) {
 #light[Discuss code.]
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #callout_question[How are messages delivered][]
 ```c
 static inline void deliver(proc pdest, proc psrc)
@@ -475,7 +473,7 @@ static inline void deliver(proc pdest, proc psrc)
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - Process table
   - Process states
@@ -486,7 +484,7 @@ static inline void deliver(proc pdest, proc psrc)
   Notes contain another example of a device driver, and a discussion of `SENDREC`. Do take a look at this.
 ]
 
-#polylux-slide[
+#slide[
   == End of Term!
   Next term, start from the complete bottom of the stack:
 

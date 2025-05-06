@@ -6,7 +6,7 @@
 
 #title-slide(title: [Lecture 13 \ Device Drivers])
 
-#polylux-slide[
+#slide[
   == List of Demands
   We have a single CPU that can execute instructions.
   // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
@@ -19,8 +19,8 @@
   - *and doesn't require the programmer to know when to disable interrupts in order to guarantee correct code.*
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #callout_question[How can we safely respond to outside events?][]
   - Take advantage of the safety of messages, by making interrupts \ send messages from hardware.
   - Interrupt from peripheral will send messages to _device driver_.
@@ -29,7 +29,7 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Serial Output
   ```c
 void serial_putc(char ch) {
@@ -44,7 +44,7 @@ void serial_putc(char ch) {
 - Process yields to the OS, and waits if driver is not yet ready.
 ]
 
-#polylux-slide[
+#slide[
   == Driver Process
   ```c
 void serial_task(int arg) {
@@ -61,7 +61,7 @@ void serial_task(int arg) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Setting Things Up
   ```c
 void serial_setup(void) {
@@ -73,7 +73,7 @@ void serial_setup(void) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Handling PUTC Messages
 ```c
 while (1) {
@@ -91,7 +91,7 @@ while (1) {
 - No need for `volatile` or to disable interrupts.
 ]
 
-#polylux-slide[
+#slide[
   == Questions
   Several questions remain to be answered:
 + How do characters get out of the buffer and into the UART?
@@ -99,7 +99,7 @@ while (1) {
 + What happens when someone wants to send a PUTC message but the buffer is full?
 ]
 
-#polylux-slide[
+#slide[
   == Handling Interrupts
 Remember: Hardware sends INTERRUPT message.
   
@@ -116,7 +116,7 @@ Remember: Hardware sends INTERRUPT message.
   ```
 ]
 
-#polylux-slide[
+#slide[
   == Responding to Events
   Send character, if possible, after any message.
   ```c
@@ -133,8 +133,8 @@ Remember: Hardware sends INTERRUPT message.
   ```
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   == Bug in the Program!
   What if the buffer is full? #[Let’s replace
    ```c
@@ -151,12 +151,12 @@ When the buffer is full, we just stop accepting requests until it has emptied a 
 ]
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #callout_idea[Use message mechanism to synchronise processes!][]
 ]
 
-#polylux-slide[
+#slide[
   == Full Driver
   #columns(2, [
     ```c
@@ -188,7 +188,7 @@ while (1) {
   ])
 ]
 
-#polylux-slide[
+#slide[
   == Omitted Here
   Lab 4 has a more elaborate serial driver
   - Supports both output and input with echoing and line editing.
@@ -196,12 +196,12 @@ while (1) {
   - There’s an alternative interface print_buf that overcomes the one-message-per-character bottleneck.
 ]
 
-#polylux-slide[
+#slide[
   == Bottleneck
-  #line-by-line[
+  #item-by-item[
   - How many context switches per character?
-  - Multiple µs per context switch
-  - UART baud $=>$ 10k characters/s
+  - $\~20 mu$s per context switch
+  - UART 9600 baud (\~100 $mu$s per bit) $=>$ 1k characters/s
   - Can use up to $10^5$ µs of CPU time per second! 10% of CPU time!
 
 This is a downside of the messaging design
@@ -211,7 +211,7 @@ This is a downside of the messaging design
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Standard Interrupt Handler
   ```c
 void default_handler(void) {
@@ -230,7 +230,7 @@ void default_handler(void) {
 Why do we need `disable_irq(...)`?
 ]
 
-#polylux-slide[
+#slide[
   == Example
   Heart & Primes example. Can we find sequence of events? When we switch contexts, when CPU sleeps/wakes?
   - Look at `ex-heart.c`.
@@ -241,13 +241,13 @@ Why do we need `disable_irq(...)`?
   If time, look at `print_buf()`.
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - Take advantage of the safety of messages, by making interrupts \ send messages from hardware.
   - Interrupt from peripheral will send messages to _device driver_.
   - Device driver is a process that serves messages from hardware/software in a loop.
 
-  #pause
+  #show: later
 
   #v(0.8cm)
 

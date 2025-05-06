@@ -6,7 +6,7 @@
 #title-slide(title: [Lecture 10 \ Programming with Interrupts])
 
 
-/*#polylux-slide[
+/*#slide[
   == More Chocolate
   #grid(columns: (1fr, 1fr), 
   [  #set align(center)
@@ -15,8 +15,8 @@
   What is going on here? Chocolate for the best hypothesis.
 ]*/
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #callout_question[Do we need to wait around while UART is transmitting?][
     What is the point of having hardware to handle receiving/transmission, if the CPU will just wait around until it's done anyway?
   ]
@@ -34,9 +34,9 @@ void serial_putc(char ch) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Today
-  #line-by-line[
+  #item-by-item[
   #callout_question[How can we respond to events (that hardware notices), without making the software do nothing while it waits?][]
   #[We will consider various solutions, keeping in mind _design constraints_.] #[We want:]
   - to avoid making the CPU wait until some event occurs in hardware,
@@ -46,9 +46,9 @@ void serial_putc(char ch) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == One Possible Solution
-  #line-by-line[
+  #item-by-item[
   - `serial_putc()` no longer waits and sends character.
   - Instead, it places a character in a buffer.
   - Throughout the program, check if UART is ready, and send character if so.
@@ -63,14 +63,14 @@ static char txbuf[NBUF];
 ]
 
 
-#polylux-slide[
+#slide[
   == Circular Buffer
   #image("./figures/circular-buffer.png", height: 69%)
   - Add characters at `bufin`.
   - Send characters from `bufout`.
 ]
 
-#polylux-slide[
+#slide[
   == One Possible Solution
   ```c
 void serial_putc(char ch) {
@@ -82,9 +82,9 @@ void serial_putc(char ch) {
   #image("./figures/polling-throughout.png", height: 49%)
 ]
 
-#polylux-slide[
+#slide[
   == What do we think of this solution?
-  #line-by-line[
+  #item-by-item[
   #[We want:]
   - ✅ to avoid making the CPU wait until some event occurs in hardware, 
   - ❓ to be able to deal with many different types of events (not just UART, but e.g. also noticing when a button is pressed), 
@@ -93,9 +93,9 @@ void serial_putc(char ch) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Better Solution: Interrupts
-#line-by-line[
+#item-by-item[
   #[Hardware _interrupts_ the normal execution of instructions in response to an event, and starts executing a different subroutine.]
   - When `UART_TXDRDY` becomes true, execute `uart_handler()`.
   - Variables that are shared between interrupt and main code, must be marked `volatile` (can change any time, outside direct code execution).
@@ -110,7 +110,7 @@ static volatile int txidle;
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Better Solution: Interrupts
 ```c
 void uart_handler(void) {
@@ -128,7 +128,7 @@ void uart_handler(void) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Better Solution: Interrupts
 ```c
 void serial_putc(char ch) {
@@ -146,7 +146,7 @@ void serial_putc(char ch) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Why Disable Interrupts?
   - What happens if interrupt occurs before `bufcnt++;`?
   - What happens if interrupt occurs
@@ -159,7 +159,7 @@ str r1, [r0]
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Setting Up Interrupts
   ```c
   void serial_init(void) {
@@ -173,30 +173,30 @@ str r1, [r0]
 #image("./figures/interrupt-sequence.png", height: 42%)
 ]
 
-#polylux-slide[
+#slide[
   == Timings: Early on in Primes Program
   No (noticeable) delays between sending characters.
   #image("./figures/primes-intr-early.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
   == Timings: Later on in Primes Program
     No (noticeable) delays between sending characters.
   #image("./figures/primes-intr-later.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
   == Timings: End of Primes Program
     Sending characters continues after primes calculation is done!
 #image("./figures/primes-intr-end.png", height: 78%)
 ]
 
 
-#polylux-slide[
+#slide[
   #callout_warning[Crucial detail omitted!][]
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - How to implement a queue with a circular buffer.
   - Why we need interrupts.

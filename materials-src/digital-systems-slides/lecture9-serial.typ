@@ -6,7 +6,7 @@
 #title-slide(title: [Lecture 9 \ Serial I/O])
 
 
-#polylux-slide[
+#slide[
   == More Chocolate
   #grid(columns: (1fr, 1fr), 
   [  #set align(center)
@@ -18,8 +18,8 @@
 
 #title-slide(title: [Lecture 9 \ Serial I/O])
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #callout_question[How can computers communicate with each other?][
     Say we want to transfer a file between computers?
   ]
@@ -31,10 +31,10 @@
 ]
 
 
-#polylux-slide[
+#slide[
   == Serial Communication: Oscilloscope
   #grid(columns: (1fr, 1.55fr), [
-    #line-by-line[
+    #item-by-item[
     - Idle: High.
     - Start bit: Indicates data transmission.
     - Read data at regular time intervals (crucial!).
@@ -48,7 +48,7 @@
   ], {image("./figures/serial-oscilloscope.png", height: 90%)})
 ]
 
-#polylux-slide[
+#slide[
   == UART Interface
   On Nordic chip, hardware handles most conversions, with a convenient _memory-mapped_ interface.
   
@@ -58,7 +58,7 @@
   - Asynchronous: No shared clock signal (cf. SPI)
 ]
 
-#polylux-slide[
+#slide[
   == A Basic UART Driver: Setup
   ```c
   void serial_init(void) {
@@ -76,7 +76,7 @@
   ```
 ]
 
-#polylux-slide[
+#slide[
   == A Basic UART Driver: Transmission
   ```c
 void serial_putc(char ch) {
@@ -88,7 +88,7 @@ void serial_putc(char ch) {
   - `printf()` is wrapper around this.
 ]
 
-#polylux-slide[
+#slide[
   == A Communicating Program
   Print out sequence of primes via serial.
 ```c
@@ -106,7 +106,7 @@ stop_timer();
 Polling: Spends a lot of time transmitting, rather than calculating!
 ]
 
-#polylux-slide[
+#slide[
   == Timing with Logic Analyser
   #grid(columns: (1.1fr, 1fr), [
     Can confirm this hunch by looking at signals from pins.
@@ -119,35 +119,35 @@ Polling: Spends a lot of time transmitting, rather than calculating!
 ]
 
 
-#polylux-slide[
+#slide[
   == Timing with Logic Analyser
   Early on, most time is spent waiting for UART to send.
   #set align(center)
   #image("./figures/logic-analyser-uart-bottleneck.png", height: 75%)
 ]
 
-#polylux-slide[
+#slide[
   == Timing with Logic Analyser
   Later on, longer periods are spent calculating.
   #set align(center)
   #image("./figures/logic-analyser-calc-bottleneck.png", height: 75%)
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #callout_question[Do we need to wait around while UART is transmitting?][
     What is the point of having hardware to handle receiving/transmission, if the CPU will just wait around until it's done anyway?
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - Electrical serial protocol.
   - Software interface of serial.
 ]
 
 
-#polylux-slide[
+#slide[
   == Bonus
   Remember:
   ```c

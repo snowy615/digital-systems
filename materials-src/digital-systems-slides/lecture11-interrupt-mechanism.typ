@@ -5,7 +5,7 @@
 
 #title-slide(title: [Lecture 11 \ The Interrupt Mechanism])
 
-#polylux-slide[
+#slide[
   == Last Lecture...
   We left off with the question: How does the interrupt know 
 
@@ -14,9 +14,9 @@
   vectors part of the rom, all the way at the bottom of the address space
 ]
 
-#polylux-slide[
+#slide[
   #callout_question[What _actually_ happens on an interrupt?][
-    #line-by-line[
+    #item-by-item[
     - Last lecture, we showed how to program an interrupt in a high-level language.
     - ... this course is about you being able to understand every detail so you can _actually build_ a computer.
     - So we'll need to dive deeper:
@@ -26,16 +26,16 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
   == What additional tasks must subroutines do?
   - An interrupt looks like a subroutine, inserted at an arbitrary point.
   - Interrupt _handlers_ can be normal subroutines.
     #image("./figures/polling-throughout.png", height: 70%)
 ]
 
-#polylux-slide[
+#slide[
   == Satisfying the Subroutine Convention in Interrupts
-  #line-by-line[
+  #item-by-item[
   #callout_question[What _additional_ work needs to be done on an interrupt, compared to calling a normal subroutine?][]
   - Remember the subroutine convention. \ What does the interrupt handler expect?
   - What is different about an interrupt cf a normal subroutine? \
@@ -47,15 +47,15 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Satisfying the Subroutine Convention in Interrupts
   #set align(center)
   #image("figures/interrupt-save-state.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Satisfying the Subroutine Convention in Interrupts
-  #line-by-line[
+  #item-by-item[
   #[Imagine interrupt happening in:
   #v(-0.4cm)
   ```
@@ -71,35 +71,35 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Hardware Interrupt Process
   Exception / interrupt frame. State is same as after normal subroutine call.
   #set align(center)
   #image("figures/hardware-interrupt-process.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
   == Entering Handler (that can call subroutines)
   Can `push` additional registers in the usual way.
   #set align(center)
 #image("figures/interrupt-entering-handler.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
   == Exiting Handler (what software must do)
   Can return from subroutine in usual way (`bx lr` or `pop`).
   #set align(center)
 #image("figures/interrupt-exiting-handler.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
 == Exiting Interrupt
 #pc is set to magic number $=>$ follow return from interrupt procedure.
 #set align(center)
 #image("figures/interrupt-exiting-interrupt.png", height: 78%)
 ]
 
-#polylux-slide[
+#slide[
   == Hardware Obeys Calling Conventions
 Advantages
 - Interrupt handlers can be ordinary subroutines.
@@ -109,12 +109,12 @@ Disadvantages
 - Interrupt latency is fixed and large.
 ]
 
-#polylux-slide[
+#slide[
   #set align(center + horizon)
   == Example: Timers
 ]
 
-#polylux-slide[
+#slide[
   == Scheduling Regular Actions
   Version 0: delay loops (already seen).
   - Wasteful of time and power.
@@ -126,14 +126,14 @@ Version 3: use an operating system (next time).
 - Best of all worlds!
 ]
 
-#polylux-slide[
+#slide[
   == Timers
 Multiple compare circuits and counters (up to 32-bit) are available.
   #set align(center)
   #image("./figures/timer.png", height: 75%)
 ]
 
-#polylux-slide[
+#slide[
   == Delay v1: Power Efficient
   ```c
 unsigned volatile millis = 0;
@@ -152,7 +152,7 @@ void delay(unsigned usec) {
 ]
 
 
-#polylux-slide[
+#slide[
   == Aside...
 ```c
 void delay(unsigned usec) {
@@ -161,7 +161,7 @@ void delay(unsigned usec) {
 }
 ```
 
-#line-by-line[
+#item-by-item[
   Any bugs / annoyances about this bit of code?
   - If `goal` overflows, loop terminates immediately $=>$ maximum delay gets smaller as `millis` increases! How to fix?
   - `while ((millis - start_millis) < usec / 1000)`
@@ -171,7 +171,7 @@ void delay(unsigned usec) {
 ]
 
 
-#polylux-slide[
+#slide[
   == Delay v2: Interrupt-driven
   To allow computation while waiting, make `timer_interrupt` call this at 5ms intervals:
   ```c
@@ -187,7 +187,7 @@ void advance(void) {
 - Efficient but inflexible.
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - Details of how interrupts work.
   - Timer circuits.

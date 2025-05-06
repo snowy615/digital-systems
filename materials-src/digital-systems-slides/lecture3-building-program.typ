@@ -6,20 +6,20 @@
 // #enable-handout-mode(true)
 
 
-#polylux-slide[
+#slide[
   Last lecture:
   - We understood instructions, and how they affect CPU state.
   - We introduced assembly instructions,
   - example of tiny subroutine.
 
-  #line-by-line[
+  #item-by-item[
   #callout_skill[Build and run a program on the BBC Microbit?][]
   #callout_question[How do we get our instructions into memory?][]
   #callout_warning[Memory is a bit more complicated than previously implied][]
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Understanding More about the Microbit
   #set align(center)
   #image("figures/microbit-overview.png", height: 90%)
@@ -36,7 +36,7 @@
   // And also a second processor, that controls the USB
 ]
 
-#polylux-slide[
+#slide[
   == Understanding More about the Microbit
   #set align(center)
   #image("figures/microbit-photo.png", height: 90%)
@@ -46,7 +46,7 @@
   // - makes behave like a storage device
 ]
 
-#polylux-slide[
+#slide[
   == Transferring a Program to the Microbit
   Microbit behaves like USB storage device. To upload program:
   - You drag a file, containing the program, to the storage device.
@@ -56,11 +56,11 @@
   - The Nordic chip goes into a mode that allows programming the flash.
   - Nordic chip stores the program into Flash memory.
 
-  #pause
+  #show: later
   #callout_question[If there are multiple types of memory, how do you access it?][]
 ]
 
-#polylux-slide[
+#slide[
   == Memory Layout
   #grid(columns: (1fr, 1fr), [
   Memory is mapped into a single _address space_.
@@ -75,7 +75,7 @@
   // Reprogramming ROM can even be done by processor itself, but this requires a different access than just a store, and we won't do this.
 ]
 
-#polylux-slide[
+#slide[
   == Demo: Building and Running Program
   #set align(center)
   #image("figures/assembly-listing.png", height: 90%)
@@ -97,7 +97,7 @@
   // What is clear though, is that if we have a subroutine that doesn't call another one, we don't need to do a lot of work, which is nice and efficient.
 ]
 
-#polylux-slide[
+#slide[
   == Running Our Subroutine
   We need:
   - to get our subroutine in the correct location in Memory
@@ -106,17 +106,17 @@
 
   #light[Show source files of `lab1-asm`]
 
-  #pause
+  #show: later
 
   #callout_idea[The _only_ thing we can do to program this chip, \
-  is place instructions in memory.][] #pause
+  is place instructions in memory.][] #show: later
   So we will need _tools_ that convert source files (C and asm)... \ 
   to a list of instructions to be placed at specific _addresses_.
 ]
 
-#polylux-slide[
+#slide[
 == Compilation from the Command Line
-#line-by-line[
+#item-by-item[
   - `make all` produces `func.hex`, which you can copy to Microbit.
   - Look at commands it runs. Notice `arm-none-eabi-as`! *Assembler*!
   - `more func.o`: Interpret binary _as_ ASCII-encoded text.
@@ -127,20 +127,20 @@
 ]
 
 
-#polylux-slide[
+#slide[
   == Demo: Compiling, Assembling, Linking
   #image("figures/makefile.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Demo: Compiling, Assembling, Linking
   #set align(center)
   #image("figures/compiling-overview.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Demo: Programming, Running, Debugging
-  #line-by-line[
+  #item-by-item[
   - `arm-none-eabi-objdump -d func.elf`
     - `func.elf` is *after linking*!
     - What is the difference with earlier?
@@ -154,7 +154,7 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Demo: Coding Assembly
   #uncover((start: 1))[
     ```

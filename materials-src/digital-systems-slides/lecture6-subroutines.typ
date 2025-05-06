@@ -5,9 +5,9 @@
 
 // #enable-handout-mode(true)
 
-#polylux-slide[
+#slide[
   == Previously
-  #line-by-line[
+  #item-by-item[
   #[We wrote a single subroutine, but with limitations:]
   - Could not call other subroutines.
   - Could only use #r0 - #r3, while leaving #r4 and above unchanged.
@@ -15,11 +15,11 @@
   ]
 ]
 
-#polylux-slide[
+#slide[
 // == Today
 // So far all our assembly programming was in one subroutine, using only registers #r0 to #r3, while leaving the others alone.
 
-#line-by-line[
+#item-by-item[
 #callout_question[How can we create subroutines which can call others?][
   - Remember value of #lr that will get overwritten by next jump.
 ]
@@ -37,8 +37,8 @@ Today we will discuss how to use RAM to solve these problems.
 ]
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
 #[#callout_important[Subroutines should be black-box][
   Subroutines should work no matter who calls them. Instructions inside are fixed!
   - We need conventions that allow the same instructions to perform the same operation, *regardless of the state of the calling subroutine(s)*.
@@ -54,8 +54,8 @@ Store registers in fixed memory addresses?
 ]
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
   #[#thebig_idea[Use a _Stack_ for local variables]
   #v(1cm)]
   - Let subroutines use memory relative to the _stack pointer_ (register #sp).
@@ -65,7 +65,7 @@ Store registers in fixed memory addresses?
 ]
 ]
 
-#polylux-slide[
+#slide[
   == The Stack
   #v(-0.5cm)
   #grid(columns: (9cm, 3.5cm, 3.5cm, 3.5cm, 3.5cm), gutter: 15pt, [#image("figures/stack.png", width: 100%)], [
@@ -85,7 +85,7 @@ Store registers in fixed memory addresses?
   #table(columns: (auto), inset: 10pt, align: horizon, [`main()`], [`sub1()`], [`sub2()`], [`sub4()`], [`sub5()`])
 ]
 )
-#line-by-line[
+#item-by-item[
   #v(-0.5cm)
 - Convention: Stack starts at top of address space, and grows downwards. So "above" in the stack has a lower address!
 - Each time a subroutine is called, #sp points to a usable region of memory (stack frame), that won't interfere with other subroutines.
@@ -93,9 +93,9 @@ Store registers in fixed memory addresses?
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Subroutine Contract
-  #line-by-line[
+  #item-by-item[
   #[Calling function:
   - Places first arguments 1 ... 4 in #r0 - #r3
   - Places arguments $>=4$ on stack (called function knows how many to expect) (labs won't need this)]
@@ -107,7 +107,7 @@ Store registers in fixed memory addresses?
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Subroutine Convention
   Subroutine can use stack in whatever way it wants (assuming there is space!), but ARM provides instructions for:
 
@@ -115,9 +115,9 @@ Store registers in fixed memory addresses?
   #image("figures/subroutine-stack-convention.png", height: 69%)
 ]
 
-#polylux-slide[
+#slide[
   == Storing Registers
-#line-by-line[
+#item-by-item[
   #[ARM provides two assembly instructions to make restoring state following subroutines easy:]
   - `push {REGISTER_LIST}`: Place registers in list on stack in order, and decrease #sp accordingly.
   - `pop {REGISTER_LIST}`: Take values from stack, and place into the registers in list order, and increase #sp accordingly.
@@ -130,8 +130,8 @@ Store registers in fixed memory addresses?
 // Want to store lr so we can call other subroutines
 ]
 
-// #polylux-slide[
-// #line-by-line[
+// #slide[
+// #item-by-item[
 // #callout_question[Q: Can you explain why the `push`/`pop` instructions imply that the return addr comes under the saved regs in the stack?][
 // This looks like convention, but it has good a good reason!]
 // #[
@@ -140,9 +140,9 @@ Store registers in fixed memory addresses?
 // ]
 // ]
 
-#polylux-slide[
+#slide[
   == Push & Pop Peculiarities
-  #line-by-line[
+  #item-by-item[
   - `push`/`pop` can store/restore lower registers (#r0 - #r7)
   - `push` can store `lr`, as well
   - `pop` can restore to `pc`, as well
@@ -155,12 +155,12 @@ Store registers in fixed memory addresses?
   ]
 ]
 
-#polylux-slide[
+#slide[
 #set align(center + horizon)
 == Putting it all together
 ]
 
-#polylux-slide[
+#slide[
 == Example: Factorial
 `int fac(int n) {
     int k = n, f = 1;
@@ -176,7 +176,7 @@ Subroutine calls another subroutine! So we will use what we discussed.
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, opening
 - As usual, let's start by converting code to assembly, and not worrying about efficiency.
 - For clarity, I recommend making clear which variables are assigned to which registers (little table in your exam answer helps!)
@@ -192,7 +192,7 @@ Subroutine calls another subroutine! So we will use what we discussed.
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, Loop
 Again, we can worry about optimisations later:
 
@@ -208,7 +208,7 @@ again:
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, Subroutine Call
 Again, we can worry about optimisations later:
 
@@ -226,7 +226,7 @@ again:
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, Finish Loop
 `...
 again:
@@ -246,7 +246,7 @@ again:
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, Return Subroutine
 `...
 again:
@@ -263,7 +263,7 @@ finish:
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, All Together
 `fac:
     push {r4, r5, lr}
@@ -289,7 +289,7 @@ finish:
 
 
 
-#polylux-slide[
+#slide[
 == Example: Factorial, optimisation
 You may have spotted that `f` can live in #r0 constantly, since the return value of `mult()` will also be the first argument for the next call.
 
@@ -297,9 +297,9 @@ Optimising compilers can spot this.
 ]
 
 
-#polylux-slide[
+#slide[
 == Summary
-#line-by-line[
+#item-by-item[
 #callout_question[How can we create subroutines which can call others?][
   - Remember value of #lr that will get overwritten by next jump.
 ]

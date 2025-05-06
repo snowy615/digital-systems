@@ -5,7 +5,7 @@
 
 #title-slide(title: [Lecture 12 \ Operating Systems])
 
-#polylux-slide[
+#slide[
   == Problems with Previous Programs
 ```c
 static int row = 0;
@@ -20,7 +20,7 @@ void advance(void) {  // Called by an interrupt
 - No control structures inside `advace()`. Effectively, we had to implement a program counter ourselves (`row`).
 ]
 
-#polylux-slide[
+#slide[
   == Problems with Previous Programs
   Use interrupts to overlap printing with the search, but
   - When the serial buffer is full, wastes time waiting in a loop.
@@ -28,18 +28,18 @@ void advance(void) {  // Called by an interrupt
 
   #v(1.0cm)
 
-  #pause
+  #show: later
 
   To illustrate inflexibility: Consider writing a program that simultaneously runs beating `heart` and `primes`.
 ]
 
-#polylux-slide[
+#slide[
   == List of Demands
-  #line-by-line[
+  #item-by-item[
   We have a single CPU that can execute instructions.
   // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
 
-  #line-by-line(start: 3)[
+  #item-by-item(start: 3)[
   We want to be able to
   - execute multiple programs simultaneously (concurrency),
   - that can respond to external events and communicate with one another,
@@ -50,7 +50,7 @@ void advance(void) {  // Called by an interrupt
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Why concurrency?
 - Sharing one machine between several tasks
 - Responding to several sources of events
@@ -58,8 +58,8 @@ void advance(void) {  // Called by an interrupt
 - Decomposing one task clearly
 ]
 
-#polylux-slide[
-  #line-by-line[
+#slide[
+  #item-by-item[
     #callout_idea[Operating System][]
     In next few lectures: Example design of an Operating System
     - Many different ways of designing an OS, with pros/cons.
@@ -71,20 +71,20 @@ void advance(void) {  // Called by an interrupt
   ]
 ]
 
-#polylux-slide[
+#slide[
   == OS Constructs
   - Processes: embedded programs are conveniently structured as a set of independent processes.
   - Messages: processes can cooperate by exchanging messages in a way that synchronises their behaviour.
   - Shared variables are best avoided by using messages instead (error-prone, and can be eliminated... at a cost)
 
-  #pause
+  #show: later
 
   #v(1.0cm)
 
   In this lecture, we use these concepts to build a concurrent program.
 ]
 
-#polylux-slide[
+#slide[
   == A Process: Heart
   ```c
 static void heart_task(int arg) {
@@ -102,7 +102,7 @@ void show(const unsigned *img, int n){
 ]
 
 
-#polylux-slide[
+#slide[
   == Another Process: Prime
   ```c
 static void prime_task(int arg) {
@@ -123,9 +123,9 @@ static void prime_task(int arg) {
 
 
 
-#polylux-slide[
+#slide[
   == Processes
-  #line-by-line[
+  #item-by-item[
   - Run until no more progress can be made \
     (co-operative multitasking vs pre-emptive multitasking)
   - When this happens, process _yields_ control of CPU, so other process can make progress.
@@ -138,7 +138,7 @@ static void prime_task(int arg) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Startup
   ```c
 void init(void) {
@@ -153,7 +153,7 @@ void init(void) {
 - plus an idle task: Only place where CPU gets put to sleep.
 ]
 
-#polylux-slide[
+#slide[
   == Processes
   We saw:
   - Each process is a main program in its own right
@@ -166,13 +166,13 @@ void init(void) {
   micro:bian supports a fixed set of processes.
 ]
 
-#polylux-slide[
+#slide[
   #callout_question[How can processes communicate amongst them?][
     Let's rewrite the prime example to split calculating, and handing the "UI" (printing to terminal).
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Sending Messages
   ```c
 void prime_task(int arg) { int n = 2;
@@ -188,7 +188,7 @@ void prime_task(int arg) { int n = 2;
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Receiving Messages
   ```c
 void summary_task(int arg) {
@@ -206,9 +206,9 @@ void summary_task(int arg) {
 ```
 ]
 
-#polylux-slide[
+#slide[
   == Message Communication
-  #line-by-line[
+  #item-by-item[
   ```c
   void init(void) {
     ...
@@ -226,7 +226,7 @@ void summary_task(int arg) {
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Message Format
   Both sender and receiver have a message buffer (16 bytes).
   - Message type (2 bytes, `short`)
@@ -234,7 +234,7 @@ void summary_task(int arg) {
   - Data (3 `ints`, 12 bytes)
 ]
 
-#polylux-slide[
+#slide[
 == Alternatives to messages
 Message passing:
 - no “shared variables” between processes.
@@ -245,7 +245,7 @@ Shared variables with semaphores:
 - more efficient, but hard to get right.
 ]
 
-#polylux-slide[
+#slide[
   == Other OSs
   - Processes with communication
   - Drivers for I/O devices
@@ -255,7 +255,7 @@ Shared variables with semaphores:
   - Networking
 ]
 
-#polylux-slide[
+#slide[
   == Summary
   - Why we need an OS
   - How independent processes operate
@@ -263,7 +263,7 @@ Shared variables with semaphores:
   - Danger of shared variables, safetey of messages
 ]
 
-#polylux-slide[
+#slide[
   == Example
   Heart & Primes example.
 
@@ -271,7 +271,7 @@ Shared variables with semaphores:
 ]
 
 
-#polylux-slide[
+#slide[
 /*- Message passing.
 - This way is a good way of structuring software systems that respond to external events.
 - Other ways of building OSs for concurrent processes without using messages, arguably more efficient.

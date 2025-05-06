@@ -5,15 +5,15 @@
 
 // #enable-handout-mode(true)
 
-#polylux-slide[
+#slide[
   #set align(center + horizon)
   = Datasheets
 ]
 
 
-#polylux-slide[
+#slide[
   == Datasheets
-  #line-by-line[
+  #item-by-item[
   If we want to do assembly programming, we will need to understand the effect of each instruction.
   // Remember that
   #callout_important[Instruction behaviour result of hardware implementation][
@@ -29,7 +29,7 @@
 
 
 
-#polylux-slide[
+#slide[
   == Datasheets
   Designers of each part of the Microbit wrote their own datasheet.
   #grid(columns: (1.3fr, 1fr),
@@ -42,9 +42,9 @@
   // Show this actual datasheet.
 ]
 
-#polylux-slide[
+#slide[
   == Datasheet: Pushing Buttons
-  #line-by-line[
+  #item-by-item[
   #callout_question[How can we determine a button is pressed?][
     We already said that peripherals are _memory mapped_, including GPIO.
     - So we need to know which pin the button is connected to.
@@ -53,20 +53,20 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Datasheet: Pushing Buttons
   #set align(center)
   #image("figures/microbit-circuit-part.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Datasheet: GPIO
   Reference manual: https://spivey.oriel.ox.ac.uk/dswiki/images-digisys/3/34/NRF51822-ref-manual.pdf
   - Can find the address of the peripheral
   - Can find the address of the register to *read* the state of the pin \ (determined by voltage put on it)
 ]
 
-#polylux-slide[
+#slide[
   == Datasheet: Sending Data through UART
   Reference manual: https://spivey.oriel.ox.ac.uk/dswiki/images-digisys/3/34/NRF51822-ref-manual.pdf
   - Similar process
@@ -74,10 +74,10 @@
   - To send data over UART
 ]
 
-#polylux-slide[
+#slide[
   == Datasheet: Different ways of Adding
   // Back to our question
-  #line-by-line[
+  #item-by-item[
   #callout_question[How to look up allowed instructions?][
     We have three summaries:
     - "Rainbow Chart" (included in exam)
@@ -119,7 +119,7 @@
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Different Flavours of Addition
   #image("figures/arm-addition-instructions.png")
   #callout_idea[Optimise The Common Case][
@@ -130,30 +130,30 @@
 
 
 // Now that you have some more tools to figure out what goes on
-#polylux-slide[
+#slide[
   #set align(center + horizon)
   = More Assembly Programming
 ]
 
 
-#polylux-slide[
+#slide[
   == Naive Multiplication in C
     #image("figures/code-multiplication-c.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Naive Asm Translation of Naive Multiplication in C
 #image("figures/code-multiplication-asm.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Which Instructions are Actually Used?
 #image("figures/code-multiplication-disasm.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
 == Pipelining
-#line-by-line[
+#item-by-item[
 #callout_question[Why is there an offset of 4 in relative addresses in jumps?][
   - `4: beq.n` would jump +2 instructions ahead.
   - `a: b.n  ` would jump -6 instructions ahead.
@@ -165,7 +165,7 @@ Executing an instruction is more complex than previously described.
 ]
 ]
 
-#polylux-slide[
+#slide[
  == Pipelining: Branch offset
  #table(
   columns: (auto, auto, auto, auto, auto, auto),
@@ -180,7 +180,7 @@ Executing an instruction is more complex than previously described.
 //  [6], [10], [`b`], [`adds`], [`subs`], [next instruction as normal],
 //  [7], [12], [`movs`], [`b`], [`adds`], [],
   )
-  #line-by-line(start: 2)[
+  #item-by-item(start: 2)[
   - When branch is executed, #pc is 8.
   - Want to jump two instructions ahead.
   - $arrow.double$ Encode offset of 2 instructions!
@@ -188,9 +188,9 @@ Executing an instruction is more complex than previously described.
   ]
 ]
 
-#polylux-slide[
+#slide[
   == How Good is Our Code?
-  #line-by-line[
+  #item-by-item[
   #[_Good_ assembly programmers (compiler, mostly) should produce _fast_ code.]
   #[Instruction timings completely predictable (unlike modern archs):
   - Usually: One cycle per instruction.
@@ -204,7 +204,7 @@ Executing an instruction is more complex than previously described.
   ]
 ]
 
-#polylux-slide[
+#slide[
  == Pipelining: Normal Operation
  #table(
   columns: (auto, auto, auto, auto, auto, auto),
@@ -222,7 +222,7 @@ Executing an instruction is more complex than previously described.
 ]
 
 
-#polylux-slide[
+#slide[
  == Pipelining: Branch Taken
  #table(
   columns: (auto, auto, auto, auto, auto, auto),
@@ -241,9 +241,9 @@ Executing an instruction is more complex than previously described.
 ]
 
 
-#polylux-slide[
+#slide[
   == Can We Do Better?
-  #line-by-line[
+  #item-by-item[
   #[
     Solutions:
     - Better algorithm (e.g. $O(log n)$).
@@ -252,17 +252,17 @@ Executing an instruction is more complex than previously described.
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Optimisation
 #image("figures/code-multiplication-asm-opt1.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Optimisation
 #image("figures/code-multiplication-asm-opt2.png", height: 90%)
 ]
 
-#polylux-slide[
+#slide[
   == Optimisation
   Let subs set the condition codes.
   #image("figures/code-multiplication-asm-opt3.png", height: 61%)
@@ -270,16 +270,16 @@ Executing an instruction is more complex than previously described.
   - Would be `do..while` loop in C.
 ]
 
-#polylux-slide[
+#slide[
   == Loop Unrolling
   Duplicate the loop body n times.
  m #image("figures/code-multiplication-asm-opt4.png", height: 69%)
 - 3.5 cycles per iteration!
 ]
 
-#polylux-slide[
+#slide[
   == Observations on Assembly Programming
-  #line-by-line[
+  #item-by-item[
 - Writing optimised asm code is labourious! Small changes in details of program impact many other lines (e.g. change in register!)
 - Good compilers can generate very efficient assembly code from C code.
   - E.g.: It's hard for us to use higher registers. Requires knowing a lot of these quirks of assembly, which instructions can use high registers, and how. Compilers can do this well.
@@ -289,7 +289,7 @@ Executing an instruction is more complex than previously described.
   ]
 ]
 
-#polylux-slide[
+#slide[
 == Recap
 #callout_skill[Looking up things in datasheets][]
 #v(-0.85cm)
@@ -307,7 +307,7 @@ Executing an instruction is more complex than previously described.
 
 
 
-/*#polylux-slide[
+/*#slide[
 Introduce program
 - Connecting values to registers
 - Talking in arguments to the function

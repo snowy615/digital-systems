@@ -5,7 +5,7 @@
 
 // #enable-handout-mode(true)
 
-#polylux-slide[
+#slide[
   #callout_warning[We have not _precisely_ specified finite width arithmetic][
     - Registers have limited _width_ (32 bits for ARM)
     - Can represent $2^32 = #calc.pow(2, 32)$ different values
@@ -35,7 +35,7 @@ We will precisely specify how condition codes in #psr are set by arithmetic oper
 
 ]
 
-#polylux-slide[
+#slide[
   == Representing Numbers: Unsigned
   Let's be precise about how bitstrings represent numbers:
   // Need to be precise about the bit strings that are physically present in our machine, and the number (which is an idea) that they represent
@@ -59,7 +59,7 @@ We will precisely specify how condition codes in #psr are set by arithmetic oper
   $
 ]
 
-#polylux-slide[
+#slide[
   == Defining Unsigned Addition
   Representing `add` operation on bitstrings as $plus.circle$.
   
@@ -73,7 +73,7 @@ We will precisely specify how condition codes in #psr are set by arithmetic oper
   #callout_important[We cannot find $plus.circle$ that satisfies this!][Finite width of bitstrings means we cannot represent all answers we want. E.g. 254 + 3 = 257, but cannot represent this with 8 bits!]
 ]
 
-#polylux-slide[
+#slide[
 == Defining Unsigned Addition
 Instead, want $plus.circle$ so that#footnote[$a≡b mod c$ means that $a-b = k c$, for some $k$ (see modular arithmetic).]:
 $
@@ -91,7 +91,7 @@ $
 $
 ]
 
-#polylux-slide[
+#slide[
   == What can go wrong?
 
   #callout_idea[Status bits tell us when we deviate from normal arithmetic][]
@@ -103,7 +103,7 @@ $
   - `V`: ...
 ]
 
-#polylux-slide[
+#slide[
   == Representing Negative Numbers
   We can introduce a _different_ mapping from binary representations to numbers, to represent negative numbers.
 
@@ -120,9 +120,9 @@ $
   - All modern computers use twoc for representing negative numbers.
 ]
 
-#polylux-slide[
+#slide[
   == Two's Complement Example
-  #line-by-line[
+  #item-by-item[
   - In the last lecture, we encountered a jump instruction with an offset of `0xFA`.
   - #[Decoded into binary, we get
   $
@@ -132,10 +132,10 @@ $
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Binary and Twoc Numbers Compared
   #grid(columns: (1.5fr, 1fr), [
-    #line-by-line[
+    #item-by-item[
     - $-2^(n-1) <= "twoc"_n (a) <= 2^(n-2) - 1$
     - $"twoc"_n (a) = "bin"_(n-1)(a_(n-2:0)) - a_(n-1) 2^(n-1)$
     - So, twoc and bin are equal, or differ by $2^n$
@@ -149,7 +149,7 @@ $
   ], image("figures/bin-twoc.png", height: 90%))
 ]
 
-#polylux-slide[
+#slide[
   #set align(horizon)
   #callout_idea[Addition is the same for both signed and unsigned numbers!][
     - It's just that the interpretation of the binary string is different!
@@ -157,13 +157,13 @@ $
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Subtraction
   #callout_question[How can we implement subtraction?][]
   Since $b - a = b + (-a)$, let's first consider how to negate a number.
 ]
 
-#polylux-slide[
+#slide[
   == Negation
   Take $overline(a)$ to be the binary complement of $a$, i.e. $overline(a)_i = 1 - a_i$.
   $
@@ -183,7 +183,7 @@ $
     - Makes sense, since $+128$ cannot be represented in twoc.
 ]
 
-#polylux-slide[
+#slide[
   == Subtraction
   #callout_question[How can we implement subtraction?][]
   Since $b - a = b + (-a)$, let's first consider how to negate a number:
@@ -197,7 +197,7 @@ $
   $
 ]
 
-#polylux-slide[
+#slide[
   == What can go wrong?
   Overflows can occur in signed arithmatic too: $"twoc"(127 plus.circle 1) = -128$.
   - Overflow is impossible if the signs are opposite.
@@ -211,14 +211,14 @@ $
 ]
 
 
-#polylux-slide[
+#slide[
   #set align(center + horizon)
   == Branching & Comparisons
 ]
 
-#polylux-slide[
+#slide[
   == Conditional Branching
-  #line-by-line[
+  #item-by-item[
   - If/else and loops all require branching if a particular condition is true.
   - ARM provides many branching instructions to make this convenient.
   - The condition of a branch is always a property of arithmetic instr.
@@ -228,7 +228,7 @@ $
 ]
 ]
 
-#polylux-slide[
+#slide[
   == Status Bits
   #[Status bits:
   - `N`: #text(red)[*Negative bit*. If the result is negative, i.e. MSB is one.]
@@ -238,7 +238,7 @@ $
 ]
 
 
-#polylux-slide[
+#slide[
   == Branching Instructions: Equality
   Branching instructions interpret the #psr bits as though a subtraction was performed.
 
@@ -249,7 +249,7 @@ $
   - `bne`: Branch if not equal. Branches if `!Z`.
 ]
 
-#polylux-slide[
+#slide[
   == Branching Instructions: Signed Comparison
   `blt`: Branch if less than (signed). Can we figure out which condition we need to hold the status bits to?
 
@@ -266,13 +266,13 @@ $
   So for this, we need `!N` and `V`.
 ]
 
-#polylux-slide[
+#slide[
   == Branching Instructions: Signed Comparison
   So overall, we need (`N` and `!V`) or (`!N` and `V`), which we can summarise as just needing `N != V`.
 ]
 
 
-#polylux-slide[
+#slide[
   == Branching Instructions: Unsigned Comparison
   `blo`: Branch if lower (unsigned). Can we figure out the condition?
   
@@ -289,7 +289,7 @@ $
 If $"bin"(a) >= "bin"(b)$, then we get an overflow.
 ]
 
-#polylux-slide[
+#slide[
   == Branching Instructions: Unsigned Comparision
   Proof:
 $
@@ -304,7 +304,7 @@ So all we need is `!C`.
 ]
 
 
-#polylux-slide[
+#slide[
   == Summary
   - Full specification of how bit patterns represent numbers, \ signed (bin) and unsigned (twoc).
   - Full specification of addition and subtraction, and the limitation to _modular arithmetic_.
@@ -313,7 +313,7 @@ So all we need is `!C`.
 ]
 
 
-/*#polylux-slide[
+/*#slide[
   == TWOC
   - Smallest, and largerst numbers
   - All modern computers use two's complement for representing negatie numbers

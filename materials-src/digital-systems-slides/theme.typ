@@ -1,4 +1,4 @@
-#import "@preview/polylux:0.3.1": *
+#import "@preview/polylux:0.4.0": *
 
 #let conf(doc, aspect-ratio: "16-9") = [
 #let theme-ox-digital-systems(aspect-ratio: aspect-ratio, body) = {
@@ -26,7 +26,7 @@
 // #enable-handout-mode(true)
 
 #let title-slide(title: [], aspect-ratio: "16-9") = {
-  polylux-slide(
+  slide(
     if aspect-ratio == "4-3" {
     set align(center + horizon)
     rect(width: 95%, radius: 20pt, fill: rgb(233, 243, 253))[
@@ -93,9 +93,10 @@
 
 #let thebig(title, icon: none, colour: rgb(0, 0, 0)) = {
   let icon = {
-    if icon.len() > 2 {
+    if icon.len() > 6 {
       image(icon, width: 1.5em)
     } else {
+      set text(font: "New Computer Modern", size: 1.5em)
       icon
     }
   }
@@ -116,6 +117,7 @@
 #let callout_warning(title, body) = {callout(title, body, icon: "theme/quarto-warning.svg", colour: orange)}
 #let callout_caution(title, body) = {callout(title, body, icon: "theme/quarto-caution.svg", colour: rgb("#f0ad4e"))}
 #let callout_skill(title, body) = {callout(title, body, icon: "💪", colour: rgb(yellow))}
+#let callout_goal(title, body) = {callout(title, body, icon: "🎯", colour: rgb(red))}
 
 #let thebig_question(title) = {thebig(title, icon: "theme/blue_questionmark_icon.svg", colour: purple)}
 #let thebig_info(title) = {thebig(title, icon: "theme/quarto-info.svg", colour: blue)}
@@ -123,6 +125,7 @@
 #let thebig_important(title) = {thebig(title, icon: "theme/quarto-important.svg", colour: red)}
 #let thebig_warning(title) = {thebig(title, icon: "theme/quarto-warning.svg", colour: orange)}
 #let thebig_caution(title) = {thebig(title, icon: "theme/quarto-caution.svg", colour: rgb("#f0ad4e"))}
+#let thebig_goal(title) = {thebig(title, icon: "🎯", colour: rgb(red))}
 
 #let r0 = `r0`
 #let r1 = `r1`
