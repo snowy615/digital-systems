@@ -1,4 +1,5 @@
 #import "@preview/polylux:0.4.0": *
+#import "@preview/cetz:0.3.4"
 
 #let conf(doc, aspect-ratio: "16-9") = [
 #let theme-ox-digital-systems(aspect-ratio: aspect-ratio, body) = {

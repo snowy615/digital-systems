@@ -219,3 +219,25 @@ Demo:
     - Algorithms... Karnaugh maps... Propagation delay of such a minimal representation
 - Multiplexer
     - AND gate propagates a signal if one of the inputs (control) is 1.
+
+
+## Lecture 21
+- Addition circuit
+- Abstraction + collecting lines together
+- Creating the addition circuit of the ARM, so including PSR bits (NCVZ)
+- Create subtraction circuit
+    - $a + not b + 1$
+    - Multiplexer
+    - Need to multiplex collection of wires => repeat pattern
+- Decoder uses recipe from a few lectures ago to output a 1 for a specific bit-pattern
+- How does a memory work? Give address, get number back.
+- Write-once ROM
+    - Fusible links. Link either connects to output of decoder, or goes to ground.
+    - Inefficient way of representing binary functions. Imagine addition!
+- Registers ...
+- Register file
+- What features do we need?
+    - Read from two registers
+    - Write to one register
+    - Write enable
+    - Data in

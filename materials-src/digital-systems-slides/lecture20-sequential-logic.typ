@@ -13,13 +13,15 @@
 #slide[
   == Roadmap
   #callout_goal[We want to build a CPU][]
-  - We needed to build a state machine #show: later
-    - We needed to specify binary functions #show: later
-      - We needed building blocks #show: later
-        - So we learned how to make logic gates! #show: later
-    - We need circuits that have state that can change with time #show: later
-      - We need circuits whose state depends on *past* state #show: later
-        - Sequential circuits #show: later
+  #item-by-item[
+  - We needed to build a state machine
+    - We needed to specify binary functions
+      - We needed building blocks
+        - So we learned how to make logic gates!
+    - We need circuits that have state that can change with time
+      - We need circuits whose state depends on *past* state
+        - Sequential circuits
+  ]
 ]
 
 #slide[
@@ -133,6 +135,7 @@ forever {
   y = x; x = a;  // Simultaneous
 }
   ```
+  #v(-0.4cm)
   - Simultaneous assignment
   - `pause`: Delay until next clock rising edge
 #[You're well-trained in writing code. Perhaps a helpful way to think.]
@@ -141,7 +144,7 @@ forever {
 #slide[
   == Design example: Pulse Shaper
   #[#set align(center)
-    #image("./figures/pulse-shaper.png", width: 95%)]
+    #image("./figures/pulse-shaper.png", width: 90%)]
   - Variables $=>$ *state*.
   - Simultaneous assignment $=>$ connection to *input* of flip-flop.
   - Mathematical expression $=>$ expressed as *combinational logic*.
@@ -150,7 +153,7 @@ forever {
 #slide[
   == Design example: Bathroom Switch
   #[#set align(center)
-#image("./figures/bathroom-switch-timing.png", width: 75%)]
+#image("./figures/bathroom-switch-timing.png", width: 70%)]
 - $a_t$: Pull-cord switch (pulled $=>$ HIGH)
 - $z_t$: Light state (on $=>$ HIGH)
 How many states do we need?
