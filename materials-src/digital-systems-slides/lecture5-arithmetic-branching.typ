@@ -222,7 +222,9 @@ $
   - If/else and loops all require branching if a particular condition is true.
   - ARM provides many branching instructions to make this convenient.
   - The condition of a branch is always a property of arithmetic instr.
-  #callout_idea[In ARM, branching is conditional on state of #psr status bits][]
+  ]
+  #uncover("4-")[#callout_idea[In ARM, branching is conditional on state of #psr status bits][]]
+  #item-by-item(start: 5)[
   - Properties of arithmetic outcomes are stored in #psr *status bits*.
   - In addition to checks if arithmetic goes wrong, #psr contains bits helpful for branching.
 ]
