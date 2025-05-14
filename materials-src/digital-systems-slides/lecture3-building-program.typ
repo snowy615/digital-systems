@@ -12,9 +12,9 @@
   - We introduced assembly instructions,
   - example of tiny subroutine.
 
-  #item-by-item[
-  #callout_skill[Build and run a program on the BBC Microbit?][]
-  #callout_question[How do we get our instructions into memory?][]
+  #one-by-one(start: 2)[
+  #callout_skill[Build and run a program on the BBC Microbit?][]][
+  #callout_question[How do we get our instructions into memory?][]][
   #callout_warning[Memory is a bit more complicated than previously implied][]
   ]
 ]
@@ -156,29 +156,14 @@
 
 #slide[
   == Demo: Coding Assembly
-  #uncover((start: 1))[
+  #reveal-code(lines: (3,4,5,6,7))[
     ```
     @ (a^2 - b^2) = (a+b) * (a-b)
     @ at calling a is stored in r0
     @            b is stored in r1
-    ```]
-  #uncover((start: 2))[
-    ```
     adds r3, r0, r1     @ (a + b) stored in r3
-    ```]
-
-  #uncover((start: 3))[
-    ```
     subs r0, r0, r1     @ (a - b) stored in r0
-    ```]
-
-  #uncover((start: 4))[
-    ```
     muls r0, r3, r0
-    ```]
-
-  #uncover((start: 5))[
-    ```
     bx lr
     ```]
 ]
