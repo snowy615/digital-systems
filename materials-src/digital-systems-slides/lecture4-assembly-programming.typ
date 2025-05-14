@@ -8,7 +8,7 @@
 #slide[
   == Datasheet: Different ways of Adding
   // Back to our question
-  #item-by-item[
+  #one-by-one[
   #callout_question[How to look up allowed instructions?][
     We have three summaries:
     - "Rainbow Chart" (included in exam)
@@ -25,11 +25,13 @@
   // Skill: To find the pages that you need from the entire forest.
   // Things that are included give a general description, and we will guess that behaviour will otherwise be fairly uniform.
   // Demo: 
-  #v(0.6cm)
-  #[Let's look at details of `add` instruction.
+  #v(0.6cm)][
+  Let's look at details of `add` instruction.]
+  #item-by-item(start: 3)[
   - Index: A.6 Thumb Instruction Details // All explanations are in that document! First sections of A.6
   - A.6.7 Alphabetical list of ARMv6-M Thumb instructions
   - Various flavours of `add` instructions.
+  ]
 ]
 // Scroll through
 // ADC addcarry (add but uses the status bits to chain together add operations, if you need to add numbers larger than 32 bits)
@@ -48,8 +50,6 @@
 // Alternatively, you can add one register and 8 bit constant.
 // If you want the destination to be a different register, you may need to load a large constant into a different register first, and then perform the addition, at the cost of using two instructions.
 // So overall, the design principle is to make the common case fast, while leaving the uncommon case possible.
-]
-]
 
 #slide[
   == Different Flavours of Addition
@@ -125,18 +125,20 @@ Executing an instruction is more complex than previously described.
 
 #slide[
   == How Good is Our Code?
-  #item-by-item[
-  #[_Good_ assembly programmers (compiler, mostly) should produce _fast_ code.]
-  #[Instruction timings completely predictable (unlike modern archs):
+  #one-by-one[
+  _Good_ assembly programmers (compiler, mostly) should produce _fast_ code.][
+  Instruction timings completely predictable (unlike modern archs):]
+  #item-by-item(start: 3)[
   - Usually: One cycle per instruction.
   - Branch: Taken branch takes 2 cycles _extra_ (3 total).
   - Load / store: Plus one cycle.]
-  #[Find number of cycles:
+  #uncover("6-")[Find number of cycles:]
+  #item-by-item(start: 7)[
   - Can measure (oscilloscope, see labs)
   - Count instructions (7 cycles)
   ]
-  #callout_question[Why do branches take 3 cycles?][]
-  ]
+  #uncover("9-")[
+  #callout_question[Why do branches take 3 cycles?][]]
 ]
 
 #slide[
@@ -178,13 +180,9 @@ Executing an instruction is more complex than previously described.
 
 #slide[
   == Can We Do Better?
-  #item-by-item[
-  #[
     Solutions:
     - Better algorithm (e.g. $O(log n)$).
     - "Squeeze" loop. // Try to teach you a few techniques.
-  ]
-]
 ]
 
 #slide[
