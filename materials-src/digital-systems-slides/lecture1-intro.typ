@@ -92,6 +92,8 @@ This is not such a course. Instead, we will explore how we can take the messy an
   #callout_info[What is a computer?][#show: later
   A device that produces \ (a representation of) the outcome of a computation, \ given a (representation of) a problem specification.]
 
+  #v(0.5cm)
+
   #show: later
 
   You may well ask: What is a computation?
@@ -99,7 +101,11 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
   #show: later
 
+  
+
   At least there is *one* useful part of this definition:
+
+  #v(0.5cm)
 
   #callout_idea[A Computer is a Device][This means that a computer must be built, which means it is made out matter, and is therefore governed by physics.]
 
@@ -161,16 +167,14 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #slide[
   == Integration with Electricity
-  #item-by-item[
-  #{[How hard is it to integrate a general curve? \ ]}
-  #{[An electric circuit does it naturally!
+  #one-by-one[How hard is it to integrate a general curve? \ ][
+    An electric circuit does it naturally!
   #figure[
   #image("figures/opamp-integrator.png", height: 50%)
   ]
   $
   V_o (t) = - 1/(R_1 C_F) integral_0^t V_"in" (tau) dif tau
-  $]}
-  ]
+  $]
 ]
 
 
@@ -207,8 +211,8 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #slide[
   == General-Purpose Computers
-  #item-by-item[
-  #{[From these examples, we have seen:]}
+  From these examples, we have seen:
+  #item-by-item(start: 2)[
   - Several examples of _physical_ systems that can perform computations.
   - Examples of _analogue_ computers.
   - Examples of _digital_ computers.
@@ -222,13 +226,14 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #slide[
   == General-Purpose Computers
+  #v(3.5cm)
   #thebig_question[How can we build one machine \ that can be configured \ to perform _any_ computation?]
 ]
 
 #slide[
   == Turing Machines
-  #item-by-item[
-  #{[We haven't defined what a computation is yet.]} #{[Alan Turing did...]}
+  #one-by-one[We haven't defined what a computation is yet. ][Alan Turing did...]
+  #item-by-item(start: 3)[
   - Describe a _Turing Machine_ (state machine w/ $infinity$-"tape" memory)
     #image("figures/wiki-turing-machine.jpeg", width: 60%)
   - The choice of state transitions is the program.
@@ -239,15 +244,18 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #slide[
   == Church-Turing Thesis
-  #item-by-item[
   #callout_info[Church-Turing Thesis][
     There exists a well-defined method for computing something \
     if and only if \
     there exists a Turing Machine that produces the result.
   ]
+  #show: later
   #callout_caution[Hold on... is this not circular?]["A computation is what a computer does"? \
   and \
   "A computer is what does computations"?]
+  #v(0.4cm)
+
+  #item-by-item(start: 3)[
   - The Church-Turing thesis simultaneously _defines_ a computer and a computation.
   - Justification for CT-thesis: "It's a good definition, because no way of defining a larger set of computations."
   ]
@@ -310,13 +318,18 @@ This is not such a course. Instead, we will explore how we can take the messy an
   == Practical Computers
   - Turing Machine technically can do anything.
   - But is it the most _practical_?
+  
+  #v(0.4cm)
+  #show: later
 
-  #item-by-item[
   #callout_question[How to build a machine to perform any computation?][
     But we also want it to:
     - perform computations _quickly_ (constants matter!)
     - be programmable by humans
   ]
+  #v(0.4cm)
+
+  #item-by-item(start: 3)[
   - This is where we depart from mathematical eternal truths, \ and enter the world of design and engineering.
   - Things can get messy, but *usually there is a good reason* for doing things a particular way.
   //- Goal: To build an in-depth understanding of how to build a computer, from the transistor up.
