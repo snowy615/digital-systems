@@ -6,19 +6,18 @@
 // #enable-handout-mode(true)
 
 #slide[
-  #item-by-item[
+  #one-by-one[
   #callout_question[How do instructions alter the CPU state?][
     - Understand the effect of instructions on the state of the CPU.
     - Worked example of executing an instruction.
-  ]
+  ]][
   #callout_question[How are instructions encoded electronically?][
     And how does this affect programming the machine?
-  ]
+  ]][
   #callout_skill[Decode machine code][
     I.e. how to take machine code, and determine what it will do.
-  ]
-  #callout_question[How can we make parts of a program reusable?][How do subroutines work?]
-]
+  ]][
+  #callout_question[How can we make parts of a program reusable?][How do subroutines work?]]
 ]
 
 #slide[
@@ -38,13 +37,13 @@
 
 #slide[
   == Implementation
-  #item-by-item[
-  #[We will discuss electronics more later, but for now:]
+  We will discuss electronics more later, but for now:
+  #item-by-item(start: 2)[
   - All state is represented by an electrical voltage.
   - Voltage is either "high" or "low".
-  - Represents binary encoding of numbers.
-  #[We talk about "state", and "registers", and all that, but it's important to keep in mind that...
-  #v(0.5cm)]
+  - Represents binary encoding of numbers.]
+  #one-by-one(start: 5)[We talk about "state", and "registers", and all that, but it's important to keep in mind that...
+  #v(0.5cm)][
   #callout_info[What you are about to learn is _physically real_][If you could open up the chip, and attach an LED circuit to the wires, you would literally see them light up according to binary.]
 ]
 ]
@@ -73,10 +72,11 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
     image("figures/arm-registers.png", height: 69%)
   }
 ]
+
 #slide[
 == Registers: Purpose
-#item-by-item[
-#[All Registers are 32 bits "wide"]
+All Registers are 32 bits "wide"
+#item-by-item(start: 2)[
   - #r0 - #r7 : General purpose registers. Can be used for any value used in any calculation.
   - #r0 - #r3 : Handled differently during subroutine calls.
   - #r8 - #r12 : Can be used for any value, but the instruction set makes it hard to access them, so not as "general purpose" as #r0 - #r7.
@@ -135,27 +135,24 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
   //#set align(center)
 
-  #[
     #item-by-item[
     - `✅ adds r0, r1, #3`
     - `✅ adds r0, r0, #10`
-    - `❌ adds r0, r1, #10` \
+    - `❌ adds r0, r1, #10`]
 
-    Very annoying!
+    #uncover("4-")[Very annoying!]
+    #item-by-item(start: 5)[
     - Exam won't test whether you can memorise these rules (you can look them up)
     - But we do want to understand why this happens!
     ]
-  ]
-
-  #set align(left)
-
 ]
 
 #slide[
   #callout_skill[Decoding machine code][
     I.e. how to take machine code, and determine what assembly instruction it maps to.
   ]
-  #item-by-item[
+  #v(0.5cm)
+  #item-by-item(start: 2)[
   #v(0.8cm)
   - As an assembly level programmer, no need to know this.
   - ... unless you want to understand _why_  assembly works the way it does
@@ -182,7 +179,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 ]
 
 #slide[
-  #set align( horizon)
+  #set align(horizon)
   #light[Show how to find this in the datasheet
   - `adds` (register)
   - `adds` (immediate)]
@@ -190,8 +187,7 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
 #slide[
   == Consequences of Encoding
-  #item-by-item[
-  #[We know know _why_]
+  #one-by-one[We know know _why_][
   - Only the lower 8 registers can be accessed by most instructions.
     - Allocating 3 bits to indicate the register only gives 8 options!
   - The assembler language `adds r0, r1, #10` is illegal.
@@ -206,17 +202,14 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
     #set align(center)
     #text(font: "Fira Code")[0x#highlight(fill: blue.lighten(70%))[47]70 = 0b01000111 0 #highlight(fill: red.lighten(80%))[1110] 000]
   ]
-  #item-by-item[
-    
+
   #grid(columns: (1.1fr, 1fr),
-  item-by-item(start: 2)[
-    #[which decodes to:]
-    #[#highlight(fill: blue.lighten(70%))[`bx`]. \ ]
-    #[
+  one-by-one[
+    which decodes to:][
+    #highlight(fill: blue.lighten(70%))[`bx`]. \ ][
       Looking at the instruction reference:
     #image("figures/instruction-bx.png")
-    ]
-    #[
+    ][
       Regs encoded in following bits \
       #highlight(fill: red.lighten(80%))[`0b1110`] = 14, and #r14 is #lr, so:
       #[
@@ -224,24 +217,21 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
         #highlight(fill: blue.lighten(70%))[`bx`] #highlight(fill: red.lighten(80%))[lr]
       ]
     ]
-  ]
   , {set align(right); image("figures/rainbow-chart-B.png", width: 90%)})
-  ]
 ]
 ]
 
 #slide[
   == Datasheets: How we know how regs are encoded
-  #item-by-item[
-  #[This behaviour is not mysterious. It was _designed_ by humans. Humans want others to understand. So they write documentation / datasheets. ARM publishes all this in easy-to-search formats!
+  #one-by-one[
+  This behaviour is not mysterious. It was _designed_ by humans. Humans want others to understand. So they write documentation / datasheets. ARM publishes all this in easy-to-search formats!
 
-  So if you:]
+  So if you:][
   - go to https://spivey.oriel.ox.ac.uk/digisys/The_BBC_micro:bit,
   - click on ARM "architecture reference manual",
-  - look at the contents, and find "A5.1 Thumb instruction set encoding",
-  #[you will find all information that the rainbow chart was made from. \ \ ]
-  #[Follow links further, and you will find A6.7.15 for `bx`.]
-  ]
+  - look at the contents, and find "A5.1 Thumb instruction set encoding",][
+    you will find all information that the rainbow chart was made from. \ \ ][
+  Follow links further, and you will find A6.7.15 for `bx`.]
 ]
 
 #slide[
@@ -253,16 +243,19 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
 #slide[
   == Subroutines
-  #item-by-item[
   #callout_question[How can we make parts of a program reusable?][]
-  #[Store a re-usable sequence of instructions, starting at a known memory location (e.g. 660). Then run program:]
+  #show: later
+  Store a re-usable sequence of instructions, starting at a known memory location (e.g. 660). Then run program:
+
+  #item-by-item(start: 3)[
   - Instr: Store location of next instruction in #lr.
   - Instr: Change the #pc to known subroutine location.
     - Run multiple instructions in subroutine.
     - Change the #pc back to #lr.
   - Continue program.
-  #[We saw how `bx lr` allows the program to continue.]
   ]
+
+  #uncover("6-")[We saw how `bx lr` allows the program to continue.]
 ]
 
 #slide[
@@ -290,12 +283,15 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
     - Understand the effect of instructions on the state of the CPU.
     - Worked example of executing an instruction.
   ]
+  #v(-0.05cm)
   #callout_question[How are instructions encoded electronically?][
     And how does this affect programming the machine?
   ]
+  #v(-0.05cm)
   #callout_skill[Decode machine code][
     I.e. how to take machine code, and determine what it will do.
   ]
+  #v(-0.05cm)
   #callout_question[How can we make parts of a program reusable?][How do subroutines work?]
 ]
 
