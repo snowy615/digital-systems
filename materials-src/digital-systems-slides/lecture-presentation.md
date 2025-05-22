@@ -241,3 +241,18 @@ Demo:
     - Write to one register
     - Write enable
     - Data in
+
+## Lecture 23 -- Designing a Datapath
+- ...
+- Discuss datapath for `adds`/`subs`
+- Problem with `ands`: Register selections can no longer select only some fixed fields.
+- We need a multiplexer to select which fields to control the register address, based on the opcode.
+- Decode circuit does this translation!
+- We will build a big table with mappings from opcodes to control signals.
+- Immediate instructions.
+    - Example of rand2sel multiplexer.
+        - How many inputs do we select between?
+        - How many control wires as input?
+- Control Signal Table
+    - We represent possibilities symbolically, but in actuality they will be voltage states of wires.
+    - So we should map to numbers.

@@ -4,7 +4,7 @@
 
 // #enable-handout-mode(false)
 
-#title-slide(title: [Lecture 21 \ Architectural Elements])
+#title-slide(title: [Lecture 21 & 22 \ Architectural Elements])
 
 #set table(
   fill: (_, y) => if y==0 { rgb("EAF2F5") },
