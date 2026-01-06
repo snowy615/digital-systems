@@ -1,6 +1,6 @@
 #let conf(
   title: none,
-  date: "Hilary Term 2024",
+  date: "Hilary Term 2026",
   authors: (),
   doc,
 ) = {
@@ -22,6 +22,13 @@ image("microbit.png", height: 14.0em)
   }
 
   set par(justify: true)
+
+  show raw.where(block: true): it => {
+  pad(left: 2em, it)
+  }
+
+  set list(indent: 0.5em)
+  set enum(indent: 0.5em)
 
   outline()
 
