@@ -12,7 +12,7 @@
   text(23pt, title, weight: "bold")
   text("\n")
   v(0.5em)
-image("microbit.png", height: 14.0em)
+image("microbit.png", height: 10.0em)
   text(date)
   }
 
