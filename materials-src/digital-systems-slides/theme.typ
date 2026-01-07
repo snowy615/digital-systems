@@ -40,12 +40,14 @@
     parbreak()
 
     [Mark van der Wilk \
-     Hilary Term 2024]
+     Hilary Term 2026]
 
     set align(bottom)
 
     grid(columns: (0.7fr, 1fr), align(left)[#image("./theme/ox-cs-log.png", width: 100%)],
-    align(right + bottom)[#rect(stroke: none, {text(size: 0.7em, "Following the course of past years by Mike Spivey")})])
+    align(right + bottom)[#rect(stroke: none, [#set text(size: 0.7em)
+    https://gitlab.cs.ox.ac.uk/marilk/digital-systems/
+    Following the course of past years by Mike Spivey])])
   } else if aspect-ratio == "16-9" {
     set align(center)
     rect(width: 95%, radius: 20pt, fill: rgb(233, 243, 253))[

@@ -55,7 +55,6 @@ If you are using the lab machines, then the toolchain should already be installe
   The lab machines are properly set up to run the lab, and you are allowed to use them when they are free. So there is an option for additional practice, even if you do not get the toolchain running on your own computer.
 ]
 \
-TODO: Incorporate instructions into repo for installing the toolchain.
 
 
 = Getting the Sources
