@@ -1,6 +1,68 @@
 # Digital Systems
 Welcome to the material repository of the Digital Systems course. This course is fully based on Mike Spivey's course materials, which can be found on [his Digital Systems website](https://spivey.oriel.ox.ac.uk/corner/Digital_Systems). This repo contains the materials that you need directly for the course. Feel free to clone to get a local copy, or to browse online.
 
+## How This Course Works
+You should:
+- Attend lectures, where I will discuss most of the course material.
+  - Lecture slides are [available in this repo](lecture-slides), but you cannot expect to study from only them.
+- Review lecture material with the [course notes](./notes-digital-systems.pdf).
+  - The lecture notes fill in details of concepts discussed in lectures.
+- Do the exercises in the [problem sheets](problem-sheets), to be discussed in tutorials.
+- Work on the [lab exercises](labs) by:
+  - Reading the lab sheets in full _before_ attending the scheduled lab sessions.
+    - You will not get through enough of the exercises if you need to start reading the lab sheet from scratch!
+  - Working on the lab exercises during the scheduled sessions.
+  - Getting your work graded by the required session.
+    - No lab reports will be needed. Simply demonstrate that your solution works on the micro:bit, show a required bit of code, or answer a question.
+    - There will be a large variation in background knowledge between students. The intention for the labs is to _educate_, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well.
+    - "S+" grades are a bit more elusive. For some labs, I explicitly write something that you should do to get the grade. For others, you should use what you have been taught to build something creative, beyond what the lab sheet required you to do. If you ask us for a specific suggestion of what something "creative" is, you are not being creative.
+  - Completing the lab sheets outside scheduled lab times.
+    - While you are not required to finish all aspects of the labs within the scheduled times, completing the labs in full is one of the best ways to revise and practice for the exams. I highly recommend completing the lab exercises, in your own time if necessary.
+- Practice and self-study certain skills that you need to pick up along the way. The course does include material on everything you strictly need, but to get _good_ you will need to practice by yourself, search online for answers, and discuss with your colleagues. Two of these skills you need to pick up along the way are:
+  - Using the command line, for which [lab 0](./labs/lab0.pdf) gives an introduction.
+  - C programming, which is discussed in lectures, practiced in labs, but for which you may need to do some self-study with materials online, e.g. [this excellent guide by the previous lecturer of this course](https://spivey.oriel.ox.ac.uk/corner/C_–_a_very_quick_guide_(Digital_Systems)).
+
+<!-- This course is different to the others you are taking, in that it is much more practical. One challenge that this brings, is that _you cannot expect to get truly good at this material without practicing these practical skills_ (e.g. C and assembly coding, or writing programs for our example Operating System). In other courses, revising takes the form of reading notes, and working through exercises on pen and paper. Here, you should expect to spend time programming your BBC micro:bit beyond just the labs. You can use the lab computers out of hours for this, or your own computer if you are able to set up the compiler. -->
+
+## Schedule
+See the [lecture slides](lecture-slides) directory for pdf slides and handouts of all the lectures.
+
+### Hilary Term
+| Week | Lecture                            | Practical         | Problem Sheet    |
+|------|------------------------------------|-------------------|------------------|
+| 1 HT | 1 - Machines, State & Instructions |                   |                  |
+|      | 2 - Compiling & Startup            | Lab 0 possible    |                  |
+| 2    | 3 - Assembly Programming           |                   |                  |
+|      | 4 - Arithmetic                     | Lab 1 possible    |                  |
+| 3    | 5 - Subroutines                    |                   | Tutorial Sheet 1 |
+|      | 6 - Buffer overrun attacks         |                   |                  |
+|      | Friday                             | **Lab session 1** |                  |
+| 4    | 7 - Memory & Addressing            |                   |                  |
+|      | 8 - GPIO                           | Lab 2 possible    | Tutorial Sheet 2 |
+|      | Friday                             | **Lab session 2** |                  |
+| 5    | 9 - Serial                         |                   |                  |
+|      | 10 - Interrupts                    | Lab 3 possible    |                  |
+| 6    | 11 - Interrupt Mechanism           |                   | Tutorial Sheet 3 |
+|      | 12 - Intro to Operating Systems    |                   |                  |
+|      | Friday                             | **Lab session 3** |                  |
+| 7    | 13 - Device Drivers                | Lab 4 startable   |                  |
+|      | 14 - Context Switching             |                   |                  |
+|      | Friday                             | **Lab session 4** |                  |
+| 8    | 15 - Scheduling                    |                   |                  |
+|      | 16 - Message Passing               | Lab 4 possible    | Tutorial Sheet 4 |
+|      | Friday                             | **Lab session 5** |                  |
+| 1 TT | 17                                 |                   |                  |
+|      | 18                                 |                   |                  |
+| 2    | 19                                 |                   |                  |
+|      | 20                                 |                   |                  |
+| 3    | 21                                 |                   |                  |
+|      | 22                                 |                   | Tutorial Sheet 5 |
+| 4    | 23                                 |                   |                  |
+|      | 24                                 |                   |                  |
+| 5    | 23                                 |                   | Tutorial Sheet 6 |
+
+
+
 ## Resources
 - [Datasheets & Schematics](schematics/) contain a lot of information on the hardware on the micro:bit.
   You will need this for problem sheets, and for lab exercises.
@@ -8,29 +70,7 @@ Welcome to the material repository of the Digital Systems course. This course is
   In this course, the labs and lecture examples will be given in C. Some students will have more experience with similar (imperative) programming languages than others. During this course, you will be expected to develop a practical ability to write programs in C, as well as the ability to read C programs.
 - [Frequently Asked Questions](resources/FAQ.pdf) about programming the micro:bit, ARM assembly, and low-level C. Worth looking through!
 
-## Lectures
-See the [lecture slides](lecture-slides) directory for pdf handouts of all the lectures.
 
-## Course Notes
-All [course notes](./notes-digital-systems.pdf) are collected in a single pdf.
-
-## Problem Sheets
-Six [problem sheets](./problem-sheets) should be completed throughout the course.
-| Sheet | Week  |
-|-------|-------|
-| 1     | HT 3  |
-| 2     | HT 5  |
-| 3     | HT 6  |
-| 4     | HT 8  |
-| 5     | TT 3  |
-| 6     | TT 5  |
-
-
-## Labs
-Labs will run in Hilary Term, and will put what we discuss in lectures into practice. The [`labs/`](labs/) directory contains all instructions you need to complete the labs.
-
-## Authors & Attribution
-This course is fully based on [Mike Spivey's materials](https://spivey.oriel.ox.ac.uk/corner/Digital_Systems), which were taught by him in CS at Oxford until 2023. The course was then delivered by Mark van der Wilk, with small edits. Use of the materials is done in accordance with the [copyright and attribution policy on Spivey's corner](https://spivey.oriel.ox.ac.uk/corner/Project:Copyright_and_attribution_policy).
 
 ---
 ---
@@ -65,4 +105,3 @@ Again a fascinating topic. Two popular-science videos that I do think raise inte
    A short history of analogue computing.
 - [Future Computers Will Be Radically Different (Analog Computing)](https://www.youtube.com/watch?v=GVsUOuSjvcg&t=898s) \
    An example of a company called Mythic, that proposes to repurpose Flash memory to allow a *single* transistor to perform a low-precision multiplication, in order to implement neural networks in a very energy-efficient manner. I think this is an incredibly cool idea. Again, this is not an endorsement of the company, but it is an interesting idea.
-
