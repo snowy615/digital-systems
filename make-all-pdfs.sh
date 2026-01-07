@@ -30,6 +30,8 @@ if [ "$RUN_LABS" = true ]; then
     cd materials-src/digital-systems-labs
     typst compile lab0.typ
     mv lab0.pdf ../../labs/
+    typst compile lab1.typ
+    mv lab1.pdf ../../labs/
     cd ../..
 fi
 
