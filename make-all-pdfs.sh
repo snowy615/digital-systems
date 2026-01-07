@@ -34,6 +34,8 @@ if [ "$RUN_LABS" = true ]; then
     mv lab1.pdf ../../labs/
     typst compile lab2.typ --root ..
     mv lab2.pdf ../../labs/
+    typst compile lab3.typ
+    mv lab3.pdf ../../labs/
     cd ../..
 fi
 
