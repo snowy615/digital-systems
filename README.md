@@ -1,5 +1,17 @@
 # Digital Systems
-Welcome to the material repository of the Digital Systems course. This course is fully based on Mike Spivey's course materials, which can be found on [his Digital Systems website](https://spivey.oriel.ox.ac.uk/corner/Digital_Systems). This repo contains the materials that you need directly for the course. Feel free to clone to get a local copy, or to browse online.
+Welcome to the material repository of the Digital Systems course. This course is fully based on Mike Spivey's course materials, which can be found on [his Digital Systems website](https://spivey.oriel.ox.ac.uk/corner/Digital_Systems). This repo contains the materials that you need directly for the course. Feel free to clone to get a local copy, or to [browse online on GitLab (CS dept login required)](https://gitlab.cs.ox.ac.uk/marilk/digital-systems/).
+
+To clone, you should get familiar with using Git repositories. If you are new to this, **start on the lab machines first**, and follow the instructions in [lab 0](./labs/lab0.pdf). To clone on your local machine:
+- First make sure you have Git installed.
+  - If you use Linux, I assume that you know how to install git, or find out where to learn (e.g. the [Git docs](https://git-scm.com/install/linux)).
+  - If you use Mac, I recommend using the `brew` solution discussed in the [Git docs](https://git-scm.com/install/mac).
+  - If you use Windows, I recommend following [this YouTube video](https://www.youtube.com/watch?v=UdhAb0t5iHw) to install Git-Bash.
+- To clone from outside the department network, you need to set up a Personal Access Token with the `read_repository` permission.
+  - Instructions here: https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token
+  - Make sure to check `read_repository` under "select scopes"!
+- To clone, run in your terminal
+  - `git clone https://marilk:xyz@gitlab.cs.ox.ac.uk/marilk/digital-systems.git`
+  - While taking care to replace "marilk" with your own departmental username, and "xyz" with your personal access token.
 
 ## How This Course Works
 You should:
@@ -8,21 +20,28 @@ You should:
 - Review lecture material with the [course notes](./notes-digital-systems.pdf).
   - The lecture notes fill in details of concepts discussed in lectures.
 - Do the exercises in the [problem sheets](problem-sheets), to be discussed in tutorials.
-- Work on the [lab exercises](labs) by:
-  - Reading the lab sheets in full _before_ attending the scheduled lab sessions.
-    - You will not get through enough of the exercises if you need to start reading the lab sheet from scratch!
-  - Working on the lab exercises during the scheduled sessions.
-  - Getting your work graded by the required session.
-    - No lab reports will be needed. Simply demonstrate that your solution works on the micro:bit, show a required bit of code, or answer a question.
-    - There will be a large variation in background knowledge between students. The intention for the labs is to _educate_, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well.
-    - "S+" grades are a bit more elusive. For some labs, I explicitly write something that you should do to get the grade. For others, you should use what you have been taught to build something creative, beyond what the lab sheet required you to do. If you ask us for a specific suggestion of what something "creative" is, you are not being creative.
-  - Completing the lab sheets outside scheduled lab times.
-    - While you are not required to finish all aspects of the labs within the scheduled times, completing the labs in full is one of the best ways to revise and practice for the exams. I highly recommend completing the lab exercises, in your own time if necessary.
-- Practice and self-study certain skills that you need to pick up along the way. The course does include material on everything you strictly need, but to get _good_ you will need to practice by yourself, search online for answers, and discuss with your colleagues. Two of these skills you need to pick up along the way are:
-  - Using the command line, for which [lab 0](./labs/lab0.pdf) gives an introduction.
-  - C programming, which is discussed in lectures, practiced in labs, but for which you may need to do some self-study with materials online, e.g. [this excellent guide by the previous lecturer of this course](https://spivey.oriel.ox.ac.uk/corner/C_–_a_very_quick_guide_(Digital_Systems)).
+- Work on the lab exercises (see [below](#lab-instructions)).
+- Practice and self-study certain skills that you need to pick up along the way:
+  - C programming, which is discussed in lectures, practiced in labs, but for which you may need to do some self-study with materials online, e.g. [this excellent guide by the previous lecturer of this course](https://spivey.oriel.ox.ac.uk/corner/C_–_a_very_quick_guide_(Digital_Systems)). The level required to answer the relevant questions in the exam is roughly equivalent to what is practiced in labs.
+  - Using the command line, for which [lab 0](./labs/lab0.pdf) gives an introduction. This is not examined, but is a skill you need as a computer scientist.
+  - Using version control, e.g. git, which is also discussed in lab 0. Again, not examined, but same as above applies.
 
 <!-- This course is different to the others you are taking, in that it is much more practical. One challenge that this brings, is that _you cannot expect to get truly good at this material without practicing these practical skills_ (e.g. C and assembly coding, or writing programs for our example Operating System). In other courses, revising takes the form of reading notes, and working through exercises on pen and paper. Here, you should expect to spend time programming your BBC micro:bit beyond just the labs. You can use the lab computers out of hours for this, or your own computer if you are able to set up the compiler. -->
+
+## Lab Instructions
+All instructions for the labs are in the [labs directory](labs).
+- Reading the lab sheets in full _before_ attending the scheduled lab sessions.
+  - You will not get through enough of the exercises if you need to start reading the lab sheet from scratch!
+- Working on the lab exercises during the scheduled sessions.
+- Getting your work graded by the required session.
+  - No lab reports will be needed. Simply demonstrate that your solution works on the micro:bit, show a required bit of code, or answer a question.
+  - There will be a large variation in background knowledge between students. The intention for the labs is to _educate_, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well.
+  - "S+" grades are a bit more elusive. For some labs, I explicitly write something that you should do to get the grade. For others, you should use what you have been taught to build something creative, beyond what the lab sheet required you to do. If you ask us for a specific suggestion of what something "creative" is, you are not being creative.
+- Completing the lab sheets outside scheduled lab times.
+  - While you are not required to finish all aspects of the labs within the scheduled times, completing the labs in full is one of the best ways to revise and practice for the exams. If you are not able to complete the labs up to "S" standard, you are not prepared to complete the exam questions.
+  - Just as additional practice improves your chances in the exam for other courses, doing additional practice in the form of the "S+" exercises will improve your chances for the Digital Systems exam.
+  - To practice for the exam, I highly recommend completing the lab exercises beyond what is required for an "S" grade, in your own time if necessary.
+
 
 ## Schedule
 See the [lecture slides](lecture-slides) directory for pdf slides and handouts of all the lectures.
