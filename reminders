@@ -1,2 +1,9 @@
 # Don't forget to render the markdown as HTML. Some people will download the ZIP, and not be able to render the markdown.
 pandoc -s --from gfm README.md -o README.html -V header-includes="<style>body { max-width: none; }</style>"
+
+# To upload to Moodle...
+- Download zip from GitLab
+- Extract
+- Remove sources directory `rm -rf materials-src`, to get around the 200MB Moodle limit
+- Compress `zip -r digital-systems.zip digital-systems-main`
+- Upload
