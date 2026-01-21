@@ -21,6 +21,25 @@
 ]
 
 #slide[
+  == RISC + The von Neumann Architecture
+  #grid(columns: (1.6fr, 1fr),
+  [
+    //- Turing machines: not practical // Designed for conceptual/mathematical simplicity, not for practical considerations like speed, energy efficiency, programmability...
+    Many other architectures are provably equally powerful to Turing machine (if given infinite memory)
+    
+    // We will consider ARM.
+
+    - State machine: CPU
+      - State stored in "registers"
+    - Replace tape with *addressable memory* // Each location on memory has an "address", and by specifying the address you can get its contents in constant time.
+    - Conceptual separation between instructions and data // Although this only matters for how the state of the CPU evolves. Instructions can be manipulated as data.
+      - Can think of instructions as parameterising the lookup.
+  ],
+  {set align(right); image("figures/risc-vnm.png", width: 100%)})
+]
+
+
+#slide[
   == Operation
   #grid(columns: (1.5fr, 1fr),
   [
@@ -39,12 +58,13 @@
   == Implementation
   We will discuss electronics more later, but for now:
   #item-by-item(start: 2)[
-  - All state is represented by an electrical voltage.
-  - Voltage is either "high" or "low".
-  - Represents binary encoding of numbers.]
+  - All state is represented by an electrical voltage in a wire.
+  - Voltage is "high" or "low", represented symbolically as "1" or "0".
+  - Collection of wires encodes a binary number. \# of wires is "width".
+  ]
   #one-by-one(start: 5)[We talk about "state", and "registers", and all that, but it's important to keep in mind that...
   #v(0.5cm)][
-  #callout_info[What you are about to learn is _physically real_][If you could open up the chip, and attach an LED circuit to the wires, you would literally see them light up according to binary.]
+  #callout_info[Symbols we use map onto things that are _physically real_][If you could open up the chip, and attach an LED circuit to the wires, you would literally see them light up according to binary.]
 ]
 ]
 
@@ -66,20 +86,20 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
 #slide[
   == Registers: A Closer Look
-  For most programming purposes, the state of the registers, is the state that we manipulate with instructions.
+  Instructions manipulate the state of the CPU, stored in *registers*.
   #{
     set align(center)
-    image("figures/arm-registers.png", height: 69%)
+    image("figures/arm-registers.png", height: 78%)
   }
 ]
 
 #slide[
-== Registers: Purpose
-All Registers are 32 bits "wide"
+== Registers: Programming Limitations & Convention
+All Registers are 32 bits "wide" #light[(How does this look in a physical circuit?)]
 #item-by-item(start: 2)[
   - #r0 - #r7 : General purpose registers. Can be used for any value used in any calculation.
   - #r0 - #r3 : Handled differently during subroutine calls.
-  - #r8 - #r12 : Can be used for any value, but the instruction set makes it hard to access them, so not as "general purpose" as #r0 - #r7.
+  - #r8 - #r12 : Can be used for any value, but not all instructions can use them, so not as "general purpose" as #r0 - #r7.
   - #pc : Program counter. Stores memory address of next instruction.
   - #lr : Link register. Stores address where current subroutine returns.
   - #sp : Stack Pointer.
@@ -98,32 +118,35 @@ All Registers are 32 bits "wide"
 ]
 
 #slide[
+  == Positional Number Systems
+  - We represent numbers as strings of digits, where each digit is a symbol taken from some set.
+  - Digits in decimal numbers come from a set with 10 elements.
+  - We can also construct numbers using sets of different size.
+
+  $
+  "int"(s, b) = sum_(i=0)^"len"(s) d_i dot b^i \
+    x = "int"([d_(L-1), ..., d_3,d_2,d_1,d_0])
+  $
+
+  #v(0.3cm)
+  #callout_skill[Converting between different bases, e.g. binary, hexadecimal.][
+    Exercise: Write a little program to print a number in an arbitrary base!
+  ]
+]
+
+#slide[
   == Status Bits
-  The status bits `N`, `Z`, `C`, `V` are in #psr. The instruction `adds` is does "add"ition, and sets the "s"tatus bits.
-  - `N`: Set if the result is negative.
+  The status bits `N`, `Z`, `C`, `V` are in #psr. The instruction `adds` is does *`add`*ition, and sets the *`s`*tatus bits.
+  - `N`: Set if the result is negative. #light[But how do we represent negative nums?]
   - `Z`: Set if the result is zero.
   - `C`: Look at later.
   - `V`: Look at later.
 ]
 
 #slide[
-  == Program Counter
-  There are multiple encodings for ARM instructions. Big chips can choose.
-
-  #grid(columns: (1fr, 1fr), [
-    #item-by-item[
-    - "Native" ARM instructions (32 bits)
-    - "Thumb" instructions (16 bits)
-    - Thumb-2 extensions (mixture of 16- and 32 bit)
-    Cortex-M0 only has Thumb instructions, but Cortex-M4 uses ThumbV2.
-  ]
-  ], image("figures/thumb-native.png"))
-]
-
-#slide[
   == Assembly Language
-  - First level of abstraction up from machine code.
-  - Very close correspondence between assembly and machine code.
+  - First level of abstraction up from binary machine code.
+  - There is a simple map between assembly and machine code.
   - Basically machine code in human-readable form, with tiny bits of "syntactic sugar".
   - Program that translates from assembly to machine code: _Assembler_.
   - Given close correspondence, assemblers are simple programs, particularly when compared to compilers.
@@ -164,10 +187,10 @@ All Registers are 32 bits "wide"
 
 #slide[
   == Rainbow Chart
-  In Moodle you can find `rainbow-chart.pdf`.
+  In GitLab you can find `rainbow-chart.pdf`.
   - Nice summary of how binary patterns map to instructions.
   - List of all instructions used in the course.
-  - Will be included in the exam.
+  - Will be included in the exam, if needed.
 
   #set align(center)
   #image("figures/rainbow-chart.png", height: 75%)
@@ -179,6 +202,15 @@ All Registers are 32 bits "wide"
 ]
 
 #slide[
+  == Conventions?
+  #callout_question[Who decides these encodings?][]
+
+  #show: later
+  The instruction set designers! In this case ARM.
+  - It is _chosen_ by humans (i.e. not an eternal truth)
+  - But, like everything in this course, not _arbitrary_!
+  - Design constraint: Encode as many useful instructions into 16 bits as possible!
+
   #set align(horizon)
   #light[Show how to find this in the datasheet
   - `adds` (register)
@@ -227,8 +259,8 @@ All Registers are 32 bits "wide"
   This behaviour is not mysterious. It was _designed_ by humans. Humans want others to understand. So they write documentation / datasheets. ARM publishes all this in easy-to-search formats!
 
   So if you:][
-  - go to https://spivey.oriel.ox.ac.uk/digisys/The_BBC_micro:bit,
-  - click on ARM "architecture reference manual",
+  - go to README in #link("https://gitlab.cs.ox.ac.uk/marilk/digital-systems/")[gitlab.cs.ox.ac.uk/marilk/digital-systems/],
+  - Find the link for "architecture reference manual" under "Resources",
   - look at the contents, and find "A5.1 Thumb instruction set encoding",][
     you will find all information that the rainbow chart was made from. \ \ ][
   Follow links further, and you will find A6.7.15 for `bx`.]
@@ -239,6 +271,18 @@ All Registers are 32 bits "wide"
   // Let's consider the effect of an instruction.
   // Imagine pc=192, and the instruction at that location is loaded, which we represent in hexadecimal as 0x1840.
   #image("figures/instruction-bxlr.png", width: 100%)
+]
+
+#slide[
+  == Program Counter
+  There are multiple encodings for ARM instructions. Big chips can choose.
+
+  #grid(columns: (1fr, 1fr), [
+    - "Native" ARM instructions (32 bits)
+    - "Thumb" instructions (16 bits)
+    - Thumb-2 extensions (mixture of 16- and 32 bit)
+    Cortex-M0 only has Thumb instructions, but Cortex-M4 uses ThumbV2.
+  ], image("figures/thumb-native.png"))
 ]
 
 #slide[

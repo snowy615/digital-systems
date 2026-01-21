@@ -66,17 +66,34 @@ This is not such a course. Instead, we will explore how we can take the messy an
 ]
 
 #slide[
-  == Plan for the Term
-  #item-by-item[
-  - All information on Moodle
-  - Labs are a crucial part of the course
+  == How to Study for this Course
+  *Things to do:*
+  #item-by-item(start: 2)[
+  - Come to the lectures (for the high-level story, the "why")
+  - Read the notes (for the details, the "how")
+  - Do the tutorial sheets (to train your knowledge)
+  - Do the labs (to practice your skills, necessary for exam!)
+    - Assembly + C programming
+  ]
+
+  *Expectations to have:*
+  #item-by-item(start: 7)[
+  - Different starting points for different people.
+    - No penalty in labs, but some may need self-study!
+  - To study for exams: practice the labs, not just tutorial sheets.
+  - Gain broader skills (to become a good computer scientist)
+    - Terminal, using/installing compilers, version control (git)
+    - Using the debugger to test your assembly code!
+  ]
+
+
+  /*- Labs are a crucial part of the course
   - You will not gain everything you need from the lectures
   - Labs are designed to teach
   - You will need to pick up C programming in the labs
   - Official sessions in weeks 3, 4, 6, 7
   - It's a good idea to start sessions earlier (see Moodle)
-  - Also teaches general computer literacy \ (command line tools, Linux environments)
-  ]
+  - Also teaches general computer literacy \ (command line tools, Linux environments)*/
 ]
 
 #slide[
@@ -121,12 +138,12 @@ This is not such a course. Instead, we will explore how we can take the messy an
 #slide[
   == Mathematical Descriptions of Physics
 
-  #item-by-item[
-  #{[Physics is a mathematical description of how a description of a system (state) behaves through time. \ ]}
-  #{[Example: State is the position of masses ${x_i}$. Newton's laws:
+  #one-by-one[Physics is a mathematical description of how a description of a system (state) behaves through time. \ ][Example: State is the position of masses ${x_i}$.
+  
+  Newton's laws:
   $
     m_i (dif^2 x_i) / (dif t^2) = sum_k F_k
-  $]}
+  $][
   #thebig_idea[If Calculations describe Physics, \ then\  Physics can do Calculations.]
   ]
 ]
@@ -139,13 +156,13 @@ This is not such a course. Instead, we will explore how we can take the messy an
   - Putting objects end-to-end *adds* their lengths.
   - Flip: Represent numbers by lengths $arrow.double$ can add numbers.
   - Add a logarithmic scale, and you can multiply.
+  ]
   #{block[
     #set align(center)
     #grid(columns: (1fr, 1fr),
     image("figures/wiki-sliderule-demo.jpg", height: 32%),
     image("figures/wiki-sliderule-pic.jpg", height: 38%))
     See https://en.wikipedia.org/wiki/Slide_rule.]}
-  ]
 ]
 
 
@@ -167,7 +184,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
 #slide[
   == Integration with Electricity
-  #one-by-one[How hard is it to integrate a general curve? \ ][
+  #one-by-one[How hard is it to integrate a general curve? #light[board]][
     An electric circuit does it naturally!
   #figure[
   #image("figures/opamp-integrator.png", height: 50%)
@@ -351,9 +368,10 @@ This is not such a course. Instead, we will explore how we can take the messy an
     We will consider ARM.
 
     - State machine: CPU
-    - State stored in "registers"
-    - Replace tape with addressable memory // Each location on memory has an "address", and by specifying the address you can get its contents in constant time.
+      - State stored in "registers"
+    - Replace tape with *addressable memory* #light[board] // Each location on memory has an "address", and by specifying the address you can get its contents in constant time.
     - Conceptual separation between instructions and data // Although this only matters for how the state of the CPU evolves. Instructions can be manipulated as data.
+      - Can think of instructions as parameterising the lookup.
   ],
   {set align(right); image("figures/risc-vnm.png", width: 95%)})
 ]
@@ -391,7 +409,7 @@ This is not such a course. Instead, we will explore how we can take the messy an
   - #link("https://www.youtube.com/watch?v=xWVA6TeUKYU")[Talk on the decipherment of the Antikythera mechanism]
 
   
-  Todo: Attribution of images (from Wikipedia)
+  Images
 ]
 
 

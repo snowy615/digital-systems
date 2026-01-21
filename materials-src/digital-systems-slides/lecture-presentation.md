@@ -251,8 +251,10 @@ Demo:
 - We will build a big table with mappings from opcodes to control signals.
 - Immediate instructions.
     - Example of rand2sel multiplexer.
-        - How many inputs do we select between?
-        - How many control wires as input?
+        - How many inputs do we select between? (rb, imm3, imm8)
+        - How many control wires as input? (4)
 - Control Signal Table
     - We represent possibilities symbolically, but in actuality they will be voltage states of wires.
     - So we should map to numbers.
+    - Control signal table maps to a binary function.
+    - Can implement in ROM. How big?

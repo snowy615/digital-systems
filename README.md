@@ -84,7 +84,9 @@ See the [lecture slides](lecture-slides) directory for pdf slides and handouts o
 
 ## Resources
 - [Datasheets & Schematics](schematics/) contain a lot of information on the hardware on the micro:bit.
-  You will need this for problem sheets, and for lab exercises.
+  You will need this for problem sheets, and for lab exercises. It includes:
+  - The [list of common instructions and rainbow chart](schematics/rainbow-chart.pdf).
+  - The [ARM Architecture Reference Manual](schematics/ARM-architecture-reference-manual.pdf), which specifies the binary encoding of all instructions (`ctrl+f` for the instruction you seek.)
 - A [very quick guide](resources/C-quick-quide.pdf) to programming in C.
   In this course, the labs and lecture examples will be given in C. Some students will have more experience with similar (imperative) programming languages than others. During this course, you will be expected to develop a practical ability to write programs in C, as well as the ability to read C programs.
 - [Frequently Asked Questions](resources/FAQ.pdf) about programming the micro:bit, ARM assembly, and low-level C. Worth looking through!

@@ -115,10 +115,8 @@
   == Stage 3: Immediate Instructions
   #[#set align(center)
   #image("./figures/instr-encoding-addsimm.png", width: 70%)]
-  #item-by-item[
-  How to feed right value into ALU?
+  How to feed right value into ALU? #show: later
   - Multiplexer!
-]
 ]
 
 #slide[
@@ -158,7 +156,7 @@
     #item-by-item(start: 2)[
     - No condition codes written to #psr
     - Logic for `cRegX` not specified! (Not enough to grab a bundle of wires)
-    - `cAluOp`: It's getting complicated to implement this with a multiplexer
+    - `cAluOp`: (Not enough to grab a specific bit from the instruction)
   ]
   ]
 ]
@@ -171,13 +169,11 @@
 
 #slide[
   == Stage 4: Data Memory
-  #item-by-item[
   #[#set align(center)
   #image("./figures/instr-encoding-ldr.png", width: 70%)
   #image("./figures/instr-encoding-str.png", width: 70%)]
   - `ldr` requires read of 3 registers
   - Address calculation requires ALU (i.e. place mem access after ALU)
-]
 ]
 
 #slide[
@@ -198,13 +194,12 @@
 
 #slide[
   == Stage 5: Shifts
-#item-by-item[
-  #[Q: Where should we put the barrel shifter?]
+  #[Q: Where should we put the barrel shifter?] #show: later
   
-  #[Full ARM assembly (i.e. not Thumb) allows  `ldr r0, [r1, r2, LSL #2]`.]
+  #[Full ARM assembly (i.e. not Thumb) allows  `ldr r0, [r1, r2, LSL #2]`.] #show: later
 #[#set align(center)
-#image("./figures/instr-encoding-ldrstrimm.png", width: 67%)]
-] 
+#image("./figures/instr-encoding-ldrstrimm.png", width: 55%)] #show: later
+`imm5` is offset in words, not bytes!
 ]
 
 #slide[
@@ -345,12 +340,10 @@
 ]
 
 #slide[
-  #item-by-item[
       == Conclusion
   - We have seen how to build a complete datapath
   - Reasoned through decoded signals (implement in ROM)
   - Reasoned through derived signals (decoded signals control multiplexer)
   - Understand how symbols can be implemented using binary encoding
   #[This is final lecture! Notes contain detailed derivation of decoding tables, but we discussed in lectures.]
-]
 ]
