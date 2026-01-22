@@ -91,9 +91,9 @@ The resulting list of expressions is exteremely complicated, but the C compiler 
 The program already contains code to initialise the pins connected to the two buttons as inputs: they are pins 17 and 26, which `hardware.h` identifies with the symbolic constants `BUTTON_A` and `BUTTON_B`. To test whether each button is pressed, you need to look at the correct bits in the value read from `GPIO_IN`, which can be selected using the masks `BIT(BUTTON_A) = 0x20000` and `BIT(BUTTON_B) = 0x4000000`. As the circuit diagram shows, the buttons are connected between the pin and ground with a pullup resistor. That means the input bit will be 1 when the button is not pressed, and 0 when it is pressed. (The macro `BIT` is also defined in `hardware.h` so that `BIT(x) = (1 << x)`.)
 
 
-#figure(image("../digital-systems-slides/figures/bbc-led-schematic.png", width: 409%), caption: [Electrical wiring diagram of LEDs and buttons.]) <fig:led-schematic>
+#figure(image("../slides/figures/bbc-led-schematic.png", width: 409%), caption: [Electrical wiring diagram of LEDs and buttons.]) <fig:led-schematic>
 
-#figure(image("../digital-systems-slides/figures/bbc-heart.png", width: 30%), caption: [LEDs that need to be switched on to display a heart.])
+#figure(image("../slides/figures/bbc-heart.png", width: 30%), caption: [LEDs that need to be switched on to display a heart.])
 
 
 
