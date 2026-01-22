@@ -1,4 +1,9 @@
 .*
+*.geany
+*.elf
+*.hex
+*.map
+*.o
 *~
 #*#
 materials-src/digital-systems-slides/*.pdf
