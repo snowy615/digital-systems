@@ -19,7 +19,7 @@ done
 # run if no flags, but do not run if --labs is present
 if [ "$RUN_SLIDES" = true ]; then
     echo "Compiling slides..."
-    cd materials-src/digital-systems-slides
+    cd materials-src/slides
     ./compile-slides.sh lecture*.typ
     cd ../..
 fi
@@ -27,7 +27,7 @@ fi
 # run if no flags, but do not run if --slides is present
 if [ "$RUN_LABS" = true ]; then
     echo "Compiling labs..."
-    cd materials-src/digital-systems-labs
+    cd materials-src/labs
     typst compile lab0.typ
     mv lab0.pdf ../../labs/
     typst compile lab1.typ
