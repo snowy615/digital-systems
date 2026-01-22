@@ -82,8 +82,8 @@ This is not such a course. Instead, we will explore how we can take the messy an
     - No penalty in labs, but some may need self-study!
   - To study for exams: practice the labs, not just tutorial sheets.
   - Gain broader skills (to become a good computer scientist)
-    - Terminal, using/installing compilers, version control (git)
-    - Using the debugger to test your assembly code!
+    - Installing+Using: terminal, compilers, version control (git)
+    - Debugger: Test and run your code before tutorials!
   ]
 
 
@@ -192,6 +192,28 @@ This is not such a course. Instead, we will explore how we can take the messy an
   $
   V_o (t) = - 1/(R_1 C_F) integral_0^t V_"in" (tau) dif tau
   $]
+]
+
+#slide[
+  #callout_warning[Analogue computers are imprecise/unpredictable][
+    Due to imprecision and noise (randomness), analogue computers will give different answers when set up to perform the same calculation at two different times.
+
+    Maths does not _exactly_ describe the output!
+  ]
+
+  #show: later
+
+  #v(1.0cm)
+
+  #callout_goal[We want _reliable_ computing machines!][]
+
+  #show: later
+
+  #v(1.0cm)
+
+  #callout_question[What properties of physical systems _can_ be described _exactly_ by mathematics?][
+    ... and can we use those properties to perform computation instead?
+  ]
 ]
 
 
@@ -407,17 +429,11 @@ This is not such a course. Instead, we will explore how we can take the messy an
 
   More than you could ever want to know about the Antikythera mechanism:
   - #link("https://www.youtube.com/watch?v=xWVA6TeUKYU")[Talk on the decipherment of the Antikythera mechanism]
-
-  
-  Images
 ]
 
 
 
 
-
-
-/**/
 
 
 

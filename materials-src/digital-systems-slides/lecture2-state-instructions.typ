@@ -6,6 +6,39 @@
 // #enable-handout-mode(true)
 
 #slide[
+  == Labs
+  #item-by-item[
+  - Labs are in weeks 3, 4, 6, 7, 8.
+  - Labs are free at the same times every week, and at many other times!
+  - Get started early, even if not in a scheduled lab session.
+  - I will be around at the lab _this Friday_ at the 11am session (not afternoon) to help
+  - I recommend to get started on lab 0 _this week_, particularly if
+    - you haven't used the terminal much,
+    - you want to program the micro:bit on your own laptop
+  - Lab 0 will teach you how to
+    - turn C source code into machine code, that the ARM can run,
+    - send programs to the microbit, and to let it communicate with the PC
+  ]
+]
+
+#slide[
+  == Lab Zero
+  Will teach you:
+  - How to use a terminal
+  - Clone sources using git
+  - How to compile C source code (no programming yet)
+  - How to send a program to the micro:bit
+  - How to send/receive data to the micro:bit
+  - Optional: Includes instructions on how to use the debugger.
+    - If you know how to program already, give it a try, otherwise leave for later.
+    - Look into this if for an S+ in lab 1.
+    
+]
+
+#title-slide(title: [Lecture 2 \ State and Instructions])
+
+
+#slide[
   #one-by-one[
   #callout_question[How do instructions alter the CPU state?][
     - Understand the effect of instructions on the state of the CPU.
@@ -86,16 +119,16 @@ only((beginning: 2))[#image("figures/die-labeled-regs-w600.jpg", height: 90%)]
 
 #slide[
   == Registers: A Closer Look
-  Instructions manipulate the state of the CPU, stored in *registers*.
+  - Instructions manipulate the state of the CPU, stored in *registers*.
+  - All Registers are 32 bits "wide" #light[(draw physical circuit)]
   #{
     set align(center)
-    image("figures/arm-registers.png", height: 78%)
+    image("figures/arm-registers.png", height: 69%)
   }
 ]
 
 #slide[
 == Registers: Programming Limitations & Convention
-All Registers are 32 bits "wide" #light[(How does this look in a physical circuit?)]
 #item-by-item(start: 2)[
   - #r0 - #r7 : General purpose registers. Can be used for any value used in any calculation.
   - #r0 - #r3 : Handled differently during subroutine calls.
@@ -106,6 +139,7 @@ All Registers are 32 bits "wide" #light[(How does this look in a physical circui
   - #psr: Processor Status Register. Different bits have very specific meanings. Some instructions write bits, some read bits.
 ]
 ]
+
 
 #slide[
   == The Effect of an Instruction
@@ -118,7 +152,7 @@ All Registers are 32 bits "wide" #light[(How does this look in a physical circui
 ]
 
 #slide[
-  == Positional Number Systems
+  == Aside: Positional Number Systems
   - We represent numbers as strings of digits, where each digit is a symbol taken from some set.
   - Digits in decimal numbers come from a set with 10 elements.
   - We can also construct numbers using sets of different size.
@@ -219,12 +253,11 @@ All Registers are 32 bits "wide" #light[(How does this look in a physical circui
 
 #slide[
   == Consequences of Encoding
-  #one-by-one[We know know _why_][
+  We know know _why_
   - Only the lower 8 registers can be accessed by most instructions.
     - Allocating 3 bits to indicate the register only gives 8 options!
   - The assembler language `adds r0, r1, #10` is illegal.
     - We only have 3 bits to allocate to the constant, giving only 8 options!
-  ]
 ]
 
 #slide[
@@ -311,8 +344,16 @@ All Registers are 32 bits "wide" #light[(How does this look in a physical circui
     $=>$ We need conventions on how to use registers to prevent overwriting data that is in use, and how to communicate results of subroutine.
   ]
 
+  #show: later
+
+  #v(0.6cm)
+
+  #callout_idea[Calling code needs to anticipate that subroutine will overwrite data `r0`-`r3`.][]
+
   // So calling subroutines is a bit harder, and we'll get to that.
 ]
+
+
 
 #slide[
   == Lab Exercise One
@@ -344,3 +385,4 @@ All Registers are 32 bits "wide" #light[(How does this look in a physical circui
 - Image of 386 chip. https://collection.sciencemuseumgroup.org.uk/objects/co523252/intel-386-microprocessor-1985
 - Image of 386 die. Ken Shirriff's Blog. _Reverse engineering the Intel 386 processor's register cell_. http://www.righto.com/2023/11/reverse-engineering-intel-386.html
 ]
+

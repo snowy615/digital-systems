@@ -51,6 +51,7 @@ See the [lecture slides](lecture-slides) directory for pdf slides and handouts o
 |------|------------------------------------|-------------------|------------------|
 | 1 HT | 1 - Machines, State & Instructions |                   |                  |
 |      | 2 - Compiling & Startup            | Lab 0 possible    |                  |
+|      | Friday                             | Informal Lab session 0 |             |
 | 2    | 3 - Assembly Programming           |                   |                  |
 |      | 4 - Arithmetic                     | Lab 1 possible    |                  |
 | 3    | 5 - Subroutines                    |                   | Tutorial Sheet 1 |

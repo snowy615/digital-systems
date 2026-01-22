@@ -101,6 +101,8 @@ This permanently installs settings under `$HOME/.local/share` and
 `$HOME/.config/geany`, and creates files `lab0-echo/lab0.geany`, etc. in the directory for each lab. The command needs to be run only once, not once for each session.
 
 = Compiling the Program
+TODO: Enccourage taking a look at the C source code. Explain a bit what is going on.
+
 Now that we have set up our environment, we are ready to compile our first program. We will focus on the example that is in the directory `lab0-echo` in the `digisys-labs-src` directory.
 
 The full sequence of actions needed to prepare a program are spelled out in a "makefile". Running the program `make` will look for a file called `Makefile` in the current directory, and follow the instructions in it to build the program.

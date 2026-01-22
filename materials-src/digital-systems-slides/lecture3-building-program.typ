@@ -52,7 +52,7 @@
   - You drag a file, containing the program, to the storage device.
   - 2nd processor receives the file over USB
   - *Doesn't* store it! So it will disappear just after it is copied!
-  - Instead, the 2nd procressor's program controls pins on the Nordic chip, and transmits the program .
+  - Instead, the 2nd procressor's program controls pins on the Nordic chip, and transmits the program.
   - The Nordic chip goes into a mode that allows programming the flash.
   - Nordic chip stores the program into Flash memory.
 
