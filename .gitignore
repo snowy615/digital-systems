@@ -6,4 +6,5 @@
 *.o
 *~
 #*#
-materials-src/digital-systems-slides/*.pdf
+materials-src/slides/*.pdf
+materials-src/labs/*.pdf

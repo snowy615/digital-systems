@@ -29,6 +29,7 @@ image("microbit.png", height: 10.0em)
 
   set list(indent: 0.5em)
   set enum(indent: 0.5em)
+  set figure(placement: auto)
 
   outline()
 
