@@ -15,7 +15,6 @@
   ),
 )
 #import "callouts.typ": *
-#import "@preview/wrap-it:0.1.1": wrap-content
 
 
 
@@ -58,8 +57,8 @@ The main task is to make the program interactive, so that the pattern on the dis
 Another possibility is to make patterns on the display fade in and out, by still devoting 5ms to each row in each iteration, but actually illuminating the LEDs (or some of the LEDs) for only part of that time. Each LED is either fully on or fully off, but if it is on for only a fraction of the time, it will appear dimmer.
 
 #v(0.4cm)
-#callout_info[Requirements for S and S+][
-  For an S, you must demonstrate that you understand how to respond to a button press, and that you can design a pattern for a multiplexed LED display. For an S+, do something creative, that combines several technical skills that you have learned so far.
+#callout_info[Requirements for S][
+  For an S, you must demonstrate that you understand how to respond to a button press, and you can design a pattern for a multiplexed LED display without using the `IMAGE` macro, and that you can respond to a button press _immediately_ rather than after a delay (although there are more, and less elegant ways of doing this).
 ]
 
 = GPIO Connections
@@ -90,8 +89,22 @@ The resulting list of expressions is exteremely complicated, but the C compiler 
 
 The program already contains code to initialise the pins connected to the two buttons as inputs: they are pins 17 and 26, which `hardware.h` identifies with the symbolic constants `BUTTON_A` and `BUTTON_B`. To test whether each button is pressed, you need to look at the correct bits in the value read from `GPIO_IN`, which can be selected using the masks `BIT(BUTTON_A) = 0x20000` and `BIT(BUTTON_B) = 0x4000000`. As the circuit diagram shows, the buttons are connected between the pin and ground with a pullup resistor. That means the input bit will be 1 when the button is not pressed, and 0 when it is pressed. (The macro `BIT` is also defined in `hardware.h` so that `BIT(x) = (1 << x)`.)
 
+#v(0.4cm)
+#callout_info[Requirements for S+][
+   + Go through the preprocessor code to determine the list of calculations that is performed to find the 32-bit constant for the bit pattern. Estimate how many assembly operations you need to perform these calculations, for a general input that is not known at compile-time.
+   + Disassemble the code, and find the assembly instructions that correspond to the `IMAGE` macro. Verify that far fewer instructions are produced by the C compiler than you estimated earlier. Be prepared to demonstrate this to the lab demonstrator.
+   + Write a piece of assembly code that calculates an image at compile time.
 
-#figure(image("../slides/figures/bbc-led-schematic.png", width: 409%), caption: [Electrical wiring diagram of LEDs and buttons.]) <fig:led-schematic>
+   #v(0.5cm)
+   OR
+
+   #h(1.8em) Get creative and create a cool little demo with embedded programming skills that you have. This could incorporate more elaborate things to display and richer ways of interacting with the hardware (e.g. detecting a double click). 
+]
+#v(0.4cm)
+
+
+
+#figure(image("../slides/figures/bbc-led-schematic.png", width: 49%), caption: [Electrical wiring diagram of LEDs and buttons.]) <fig:led-schematic>
 
 #figure(image("../slides/figures/bbc-heart.png", width: 30%), caption: [LEDs that need to be switched on to display a heart.])
 

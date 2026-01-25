@@ -1,17 +1,12 @@
 # Digital Systems
 Welcome to the material repository of the Digital Systems course. This course is fully based on Mike Spivey's course materials, which can be found on [his Digital Systems website](https://spivey.oriel.ox.ac.uk/corner/Digital_Systems). This repo contains the materials that you need directly for the course. Feel free to clone to get a local copy, or to [browse online on GitLab (CS dept login required)](https://gitlab.cs.ox.ac.uk/marilk/digital-systems/).
 
-To clone, you should get familiar with using Git repositories. If you are new to this, **start on the lab machines first**, and follow the instructions in [lab 0](./labs/lab0.pdf). To clone on your local machine:
-- First make sure you have Git installed.
-  - If you use Linux, I assume that you know how to install git, or find out where to learn (e.g. the [Git docs](https://git-scm.com/install/linux)).
-  - If you use Mac, I recommend using the `brew` solution discussed in the [Git docs](https://git-scm.com/install/mac).
-  - If you use Windows, I recommend following [this YouTube video](https://www.youtube.com/watch?v=UdhAb0t5iHw) to install Git-Bash.
-- To clone from outside the department network, you need to set up a Personal Access Token with the `read_repository` permission.
-  - Instructions here: https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token
-  - Make sure to check `read_repository` under "select scopes"!
-- To clone, run in your terminal
-  - `git clone https://marilk:xyz@gitlab.cs.ox.ac.uk/marilk/digital-systems.git`
-  - While taking care to replace "marilk" with your own departmental username, and "xyz" with your personal access token.
+README Contents:
+- [How This Course Works](#how-this-course-works)
+- [Lab Instructions](#lab-instructions)
+- [Schedule & Deadlines](#schedule): Tutorial sheets, lab sign-off deadlines, etc...
+- [Resources](#resources): Misc resources (rainbow chart, guide to C, datasheets...)
+- [How to Clone this Repo](#how-to-clone-with-git)
 
 ## How This Course Works
 You should:
@@ -35,8 +30,9 @@ All instructions for the labs are in the [labs directory](labs).
 - Working on the lab exercises during the scheduled sessions.
 - Getting your work graded by the required session.
   - No lab reports will be needed. Simply demonstrate that your solution works on the micro:bit, show a required bit of code, or answer a question.
-  - There will be a large variation in background knowledge between students. The intention for the labs is to _educate_, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well.
+  - There will be a large variation in background knowledge between students. The intention for the labs is to _educate_, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well (up to the discretion of the demonstrator). Still, if you do not complete labs, you are unlikely to be well-prepared for the exam.
   - "S+" grades are a bit more elusive. For some labs, I explicitly write something that you should do to get the grade. For others, you should use what you have been taught to build something creative, beyond what the lab sheet required you to do. If you ask us for a specific suggestion of what something "creative" is, you are not being creative.
+- Get your labs signed off by the sign-off deadlines in the schedule. Lab demonstrators are allowed to deduct marks if you ask for a sign-off after these sessions. This is both to ensure you keep up with the course, and to avoid pileups of many students showing up in the last session for signoffs.
 - Completing the lab sheets outside scheduled lab times.
   - While you are not required to finish all aspects of the labs within the scheduled times, completing the labs in full is one of the best ways to revise and practice for the exams. If you are not able to complete the labs up to "S" standard, you are not prepared to complete the exam questions.
   - Just as additional practice improves your chances in the exam for other courses, doing additional practice in the form of the "S+" exercises will improve your chances for the Digital Systems exam.
@@ -47,39 +43,39 @@ All instructions for the labs are in the [labs directory](labs).
 See the [lecture slides](lecture-slides) directory for pdf slides and handouts of all the lectures.
 
 ### Hilary Term
-| Week | Lecture                            | Practical         | Problem Sheet    |
-|------|------------------------------------|-------------------|------------------|
-| 1 HT | 1 - Machines, State & Instructions |                   |                  |
-|      | 2 - Compiling & Startup            | Lab 0 possible    |                  |
-|      | Friday                             | Informal Lab session 0 |             |
-| 2    | 3 - Assembly Programming           |                   |                  |
-|      | 4 - Arithmetic                     | Lab 1 possible    |                  |
-| 3    | 5 - Subroutines                    |                   | Tutorial Sheet 1 |
-|      | 6 - Buffer overrun attacks         |                   |                  |
-|      | Friday                             | **Lab session 1** |                  |
-| 4    | 7 - Memory & Addressing            |                   |                  |
-|      | 8 - GPIO                           | Lab 2 possible    | Tutorial Sheet 2 |
-|      | Friday                             | **Lab session 2** |                  |
-| 5    | 9 - Serial                         |                   |                  |
-|      | 10 - Interrupts                    | Lab 3 possible    |                  |
-| 6    | 11 - Interrupt Mechanism           |                   | Tutorial Sheet 3 |
-|      | 12 - Intro to Operating Systems    |                   |                  |
-|      | Friday                             | **Lab session 3** |                  |
-| 7    | 13 - Device Drivers                | Lab 4 startable   |                  |
-|      | 14 - Context Switching             |                   |                  |
-|      | Friday                             | **Lab session 4** |                  |
-| 8    | 15 - Scheduling                    |                   |                  |
-|      | 16 - Message Passing               | Lab 4 possible    | Tutorial Sheet 4 |
-|      | Friday                             | **Lab session 5** |                  |
-| 1 TT | 17                                 |                   |                  |
-|      | 18                                 |                   |                  |
-| 2    | 19                                 |                   |                  |
-|      | 20                                 |                   |                  |
-| 3    | 21                                 |                   |                  |
-|      | 22                                 |                   | Tutorial Sheet 5 |
-| 4    | 23                                 |                   |                  |
-|      | 24                                 |                   |                  |
-| 5    | 23                                 |                   | Tutorial Sheet 6 |
+| Week | Lecture                              | Practical         | Work Deadline    |
+|------|--------------------------------------|-------------------|------------------|
+| 1 HT | 1 - What is a computer?              |                   |                  |
+|      | 2 - State and Instructions           | Lab 0 possible    |                  |
+|      | Friday                               | Informal Lab session 0 |             |
+| 2    | 3 - Compiling & Assembly Programming |                   |                  |
+|      | 4 - Arithmetic                       | Lab 1 possible    |                  |
+| 3    | 5 - Subroutines                      |                   | Tutorial Sheet 1 |
+|      | 6 - Buffer overrun attacks           |                   |                  |
+|      | Friday                               | **Lab session 1** |                  |
+| 4    | 7 - Memory & Addressing              |                   |                  |
+|      | 8 - GPIO                             | Lab 2 possible    | Tutorial Sheet 2 |
+|      | Friday                               | **Lab session 2** | Lab 1 sign-off   |
+| 5    | 9 - Serial                           |                   |                  |
+|      | 10 - Interrupts                      | Lab 3 possible    |                  |
+| 6    | 11 - Interrupt Mechanism             |                   | Tutorial Sheet 3 |
+|      | 12 - Intro to Operating Systems      |                   |                  |
+|      | Friday                               | **Lab session 3** | Lab 2 sign-off   |
+| 7    | 13 - Device Drivers                  | Lab 4 startable   |                  |
+|      | 14 - Context Switching               |                   |                  |
+|      | Friday                               | **Lab session 4** | Lab 3 sign-off   |
+| 8    | 15 - Scheduling                      |                   |                  |
+|      | 16 - Message Passing                 | Lab 4 possible    | Tutorial Sheet 4 |
+|      | Friday                               | **Lab session 5** | Lab 4 sign-off   |
+| 1 TT | 17                                   |                   |                  |
+|      | 18                                   |                   |                  |
+| 2    | 19                                   |                   |                  |
+|      | 20                                   |                   |                  |
+| 3    | 21                                   |                   |                  |
+|      | 22                                   |                   | Tutorial Sheet 5 |
+| 4    | 23                                   |                   |                  |
+|      | 24                                   |                   |                  |
+| 5    | 23                                   |                   | Tutorial Sheet 6 |
 
 
 
@@ -91,6 +87,20 @@ See the [lecture slides](lecture-slides) directory for pdf slides and handouts o
 - A [very quick guide](resources/C-quick-quide.pdf) to programming in C.
   In this course, the labs and lecture examples will be given in C. Some students will have more experience with similar (imperative) programming languages than others. During this course, you will be expected to develop a practical ability to write programs in C, as well as the ability to read C programs.
 - [Frequently Asked Questions](resources/FAQ.pdf) about programming the micro:bit, ARM assembly, and low-level C. Worth looking through!
+
+## How to Clone with Git
+To clone, you should get familiar with using Git repositories. If you are new to this, **start on the lab machines first**, and follow the instructions in [lab 0](./labs/lab0.pdf). To clone on your local machine:
+- First make sure you have Git installed.
+  - If you use Linux, I assume that you know how to install git, or find out where to learn (e.g. the [Git docs](https://git-scm.com/install/linux)).
+  - If you use Mac, I recommend using the `brew` solution discussed in the [Git docs](https://git-scm.com/install/mac).
+  - If you use Windows, I recommend following [this YouTube video](https://www.youtube.com/watch?v=UdhAb0t5iHw) to install Git-Bash.
+- To clone from outside the department network, you need to set up a Personal Access Token with the `read_repository` permission.
+  - Instructions here: https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token
+  - Make sure to check `read_repository` under "select scopes"!
+- To clone, run in your terminal
+  - `git clone https://marilk:xyz@gitlab.cs.ox.ac.uk/marilk/digital-systems.git`
+  - While taking care to replace "marilk" with your own departmental username, and "xyz" with your personal access token.
+
 
 
 

@@ -5,6 +5,13 @@
 
 // #enable-handout-mode(true)
 
+#slide[
+  == Labs
+  - If in doubt, start early! The labs are free every week in the allocated time (and also in many times outside this). Use them.
+  - See the README for lab policies.
+    - E.g. you _must_ sign off your labs by the end of sign-off sessions, or get marks deducted.
+]
+
 
 #slide[
   Last lecture:

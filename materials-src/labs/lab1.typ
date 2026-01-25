@@ -125,17 +125,17 @@ Different participants in the course will have different amounts of experience w
 ]
 #v(0.3cm)
 
-- Try replacing the `adds` instruction with a different instruction, such and the `subs` instruction that subtracts instead of adding. Explain to yourself why a subtraction such as `2 - 5` seems to give a large positive result when it is interpreted as an unsigned number.
-- Explore other ALU operations such as the bitwise logical instructions `ands`, `orrs` and `eors`, or the shifts and rotates `lsls`, `lsrs`, `asrs` and `rors`. Use shifts and adds to write a function that multiplies one of its arguments by a small constant, such as 10.
-- Write a function that multiplies two numbers using the built-in multiply instruction `muls`, and compare it for speed with the supplied code. Note that the Nordic chip includes the optional single-cycle multiplier, but other instances of Cortex-M0 may have a slower multiplier or (I believe) none at all.
-- Write a faster software implementation of multiplication, using a log-time algorithm.
-- Write a simple implementation of unsigned integer division.
-- Write an implementation of unsigned division that runs in a reasonable time.
++ Try replacing the `adds` instruction with a different instruction, such and the `subs` instruction that subtracts instead of adding. Explain to yourself why a subtraction such as `2 - 5` seems to give a large positive result when it is interpreted as an unsigned number (we will discuss this in lectures at some point).
++ Explore other ALU operations such as the bitwise logical instructions `ands`, `orrs` and `eors`, or the shifts and rotates `lsls`, `lsrs`, `asrs` and `rors`. Use shifts and adds to write a function that multiplies one of its arguments by a small constant, such as 10.
++ Write a function that multiplies two numbers using the built-in multiply instruction `muls`, and compare it for speed with the supplied code. Note that the Nordic chip includes the optional single-cycle multiplier, but other instances of Cortex-M0 may have a slower multiplier or (I believe) none at all.
++ Write a faster software implementation of multiplication, using a log-time algorithm.
++ Write a simple implementation of unsigned integer division.
++ Write an implementation of unsigned division that runs in a reasonable time. <last_item>
 
 Some of these tasks we will look at in the lectures, others may be mentioned on a problem sheet. I don't think the overlap matters much, because different settings are good for focussing on different things. You can fruitfully discuss with your tutor the range of algorithms you might use for one of the tasks, but it's a waste of tutorial time to discuss details of assembly level syntax, when the compiler can tell you when you do something wrong in a split second!
 
-- Factorials are often used as an example of recursion, though a bad one because they can be computed with a simple loop. Rewrite the factorial program to use recursion and see how much worse it gets.
-- Factorials provide one way of computing binomial coeffcients since $binom(n, r) = n!
+7. Factorials are often used as an example of recursion, though a bad one because they can be computed with a simple loop. Rewrite the factorial program to use recursion and see how much worse it gets.
++ Factorials provide one way of computing binomial coeffcients since $binom(n, r) = n!
 / (r! (n-r)!)$; others include filling in Pascal's triangle row by row, or using a recurrence such as
   $
 binom(n, r) = n/(r * binom(n-1, r-1))

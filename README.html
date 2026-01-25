@@ -152,24 +152,13 @@
 <body>
 <h1 id="digital-systems">Digital Systems</h1>
 <p>Welcome to the material repository of the Digital Systems course. This course is fully based on Mike Spivey's course materials, which can be found on <a href="https://spivey.oriel.ox.ac.uk/corner/Digital_Systems">his Digital Systems website</a>. This repo contains the materials that you need directly for the course. Feel free to clone to get a local copy, or to <a href="https://gitlab.cs.ox.ac.uk/marilk/digital-systems/">browse online on GitLab (CS dept login required)</a>.</p>
-<p>To clone, you should get familiar with using Git repositories. If you are new to this, <strong>start on the lab machines first</strong>, and follow the instructions in <a href="./labs/lab0.pdf">lab 0</a>. To clone on your local machine:</p>
+<p>README Contents:</p>
 <ul>
-<li>First make sure you have Git installed.
-<ul>
-<li>If you use Linux, I assume that you know how to install git, or find out where to learn (e.g. the <a href="https://git-scm.com/install/linux">Git docs</a>).</li>
-<li>If you use Mac, I recommend using the <code>brew</code> solution discussed in the <a href="https://git-scm.com/install/mac">Git docs</a>.</li>
-<li>If you use Windows, I recommend following <a href="https://www.youtube.com/watch?v=UdhAb0t5iHw">this YouTube video</a> to install Git-Bash.</li>
-</ul></li>
-<li>To clone from outside the department network, you need to set up a Personal Access Token with the <code>read_repository</code> permission.
-<ul>
-<li>Instructions here: <a href="https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token">https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token</a></li>
-<li>Make sure to check <code>read_repository</code> under "select scopes"!</li>
-</ul></li>
-<li>To clone, run in your terminal
-<ul>
-<li><code>git clone https://marilk:xyz@gitlab.cs.ox.ac.uk/marilk/digital-systems.git</code></li>
-<li>While taking care to replace "marilk" with your own departmental username, and "xyz" with your personal access token.</li>
-</ul></li>
+<li><a href="#how-this-course-works">How This Course Works</a></li>
+<li><a href="#lab-instructions">Lab Instructions</a></li>
+<li><a href="#schedule">Schedule &amp; Deadlines</a>: Tutorial sheets, lab sign-off deadlines, etc...</li>
+<li><a href="#resources">Resources</a>: Misc resources (rainbow chart, guide to C, datasheets...)</li>
+<li><a href="#how-to-clone-with-git">How to Clone this Repo</a></li>
 </ul>
 <h2 id="how-this-course-works">How This Course Works</h2>
 <p>You should:</p>
@@ -204,9 +193,10 @@
 <li>Getting your work graded by the required session.
 <ul>
 <li>No lab reports will be needed. Simply demonstrate that your solution works on the micro:bit, show a required bit of code, or answer a question.</li>
-<li>There will be a large variation in background knowledge between students. The intention for the labs is to <em>educate</em>, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well.</li>
+<li>There will be a large variation in background knowledge between students. The intention for the labs is to <em>educate</em>, not to evaluate. You can get an "S" grade without completing all required elements, if you show that you have engaged well (up to the discretion of the demonstrator). Still, if you do not complete labs, you are unlikely to be well-prepared for the exam.</li>
 <li>"S+" grades are a bit more elusive. For some labs, I explicitly write something that you should do to get the grade. For others, you should use what you have been taught to build something creative, beyond what the lab sheet required you to do. If you ask us for a specific suggestion of what something "creative" is, you are not being creative.</li>
 </ul></li>
+<li>Get your labs signed off by the sign-off deadlines in the schedule. Lab demonstrators are allowed to deduct marks if you ask for a sign-off after these sessions. This is both to ensure you keep up with the course, and to avoid pileups of many students showing up in the last session for signoffs.</li>
 <li>Completing the lab sheets outside scheduled lab times.
 <ul>
 <li>While you are not required to finish all aspects of the labs within the scheduled times, completing the labs in full is one of the best ways to revise and practice for the exams. If you are not able to complete the labs up to "S" standard, you are not prepared to complete the exam questions.</li>
@@ -223,19 +213,19 @@
 <th>Week</th>
 <th>Lecture</th>
 <th>Practical</th>
-<th>Problem Sheet</th>
+<th>Work Deadline</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1 HT</td>
-<td>1 - Machines, State &amp; Instructions</td>
+<td>1 - What is a computer?</td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
-<td>2 - Compiling &amp; Startup</td>
+<td>2 - State and Instructions</td>
 <td>Lab 0 possible</td>
 <td></td>
 </tr>
@@ -247,7 +237,7 @@
 </tr>
 <tr class="even">
 <td>2</td>
-<td>3 - Assembly Programming</td>
+<td>3 - Compiling &amp; Assembly Programming</td>
 <td></td>
 <td></td>
 </tr>
@@ -291,7 +281,7 @@
 <td></td>
 <td>Friday</td>
 <td><strong>Lab session 2</strong></td>
-<td></td>
+<td>Lab 1 sign-off</td>
 </tr>
 <tr class="even">
 <td>5</td>
@@ -321,7 +311,7 @@
 <td></td>
 <td>Friday</td>
 <td><strong>Lab session 3</strong></td>
-<td></td>
+<td>Lab 2 sign-off</td>
 </tr>
 <tr class="odd">
 <td>7</td>
@@ -339,7 +329,7 @@
 <td></td>
 <td>Friday</td>
 <td><strong>Lab session 4</strong></td>
-<td></td>
+<td>Lab 3 sign-off</td>
 </tr>
 <tr class="even">
 <td>8</td>
@@ -357,7 +347,7 @@
 <td></td>
 <td>Friday</td>
 <td><strong>Lab session 5</strong></td>
-<td></td>
+<td>Lab 4 sign-off</td>
 </tr>
 <tr class="odd">
 <td>1 TT</td>
@@ -424,6 +414,26 @@
 </ul></li>
 <li>A <a href="resources/C-quick-quide.pdf">very quick guide</a> to programming in C. In this course, the labs and lecture examples will be given in C. Some students will have more experience with similar (imperative) programming languages than others. During this course, you will be expected to develop a practical ability to write programs in C, as well as the ability to read C programs.</li>
 <li><a href="resources/FAQ.pdf">Frequently Asked Questions</a> about programming the micro:bit, ARM assembly, and low-level C. Worth looking through!</li>
+</ul>
+<h2 id="how-to-clone-with-git">How to Clone with Git</h2>
+<p>To clone, you should get familiar with using Git repositories. If you are new to this, <strong>start on the lab machines first</strong>, and follow the instructions in <a href="./labs/lab0.pdf">lab 0</a>. To clone on your local machine:</p>
+<ul>
+<li>First make sure you have Git installed.
+<ul>
+<li>If you use Linux, I assume that you know how to install git, or find out where to learn (e.g. the <a href="https://git-scm.com/install/linux">Git docs</a>).</li>
+<li>If you use Mac, I recommend using the <code>brew</code> solution discussed in the <a href="https://git-scm.com/install/mac">Git docs</a>.</li>
+<li>If you use Windows, I recommend following <a href="https://www.youtube.com/watch?v=UdhAb0t5iHw">this YouTube video</a> to install Git-Bash.</li>
+</ul></li>
+<li>To clone from outside the department network, you need to set up a Personal Access Token with the <code>read_repository</code> permission.
+<ul>
+<li>Instructions here: <a href="https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token">https://gitlab.cs.ox.ac.uk/help/user/profile/personal_access_tokens.md#create-a-personal-access-token</a></li>
+<li>Make sure to check <code>read_repository</code> under "select scopes"!</li>
+</ul></li>
+<li>To clone, run in your terminal
+<ul>
+<li><code>git clone https://marilk:xyz@gitlab.cs.ox.ac.uk/marilk/digital-systems.git</code></li>
+<li>While taking care to replace "marilk" with your own departmental username, and "xyz" with your personal access token.</li>
+</ul></li>
 </ul>
 <hr />
 <hr />
