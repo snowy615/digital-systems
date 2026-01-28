@@ -5,6 +5,11 @@
 
 // #enable-handout-mode(true)
 
+/*
+Notes for next year:
+- Review questions 3 and 4 in the new problem sheet. This is the context that the lecture is given in.
+*/
+
 #slide[
   == Labs
   - If in doubt, start early! The labs are free every week in the allocated time (and also in many times outside this). Use them.
@@ -61,7 +66,7 @@
   - *Doesn't* store it! So it will disappear just after it is copied!
   - Instead, the 2nd procressor's program controls pins on the Nordic chip, and transmits the program.
   - The Nordic chip goes into a mode that allows programming the flash.
-  - Nordic chip stores the program into Flash memory.
+  - Nordic chip stores the program into Flash memory. #light[(Demo lab2)]
 
   #show: later
   #callout_question[If there are multiple types of memory, how do you access it?][]
@@ -111,7 +116,7 @@
   - our subroutine to be called (by another program?)
   - to be able to observe the results
 
-  #light[Show source files of `lab1-asm`]
+  #light[Show source files of `lab1-asm`, demo lab 1 with `minicom`.]
 
   #show: later
 
@@ -130,13 +135,61 @@
   - `hexdump func.o`: Print the binary nicely as numbers.
   - We notice the machine code we expect! `1840` and `4770`! (Plus metadata)
   - `arm-none-eabi-objdump -d func.o`
+  - Compiling and linking.
+  - `arm-none-eabi-objdump -d func.elf` #light[(Difference with before?)]
+  - `more func.hex` #light[(little-endian)]
 ]
 ]
+
+#slide[
+  == Big vs Little Endian
+  What is the format that we actually _send_ the final code in?
+  #item-by-item(start: 2)[
+  - `more func.hex` \
+    I.e. _text_-encoded hexadecimal. The "programmer chip" on the micro:bit turns this into binary, before sending it to the Nordic ARM chip.
+  - Can we still see `18404770` anywhere?
+  - No! Instead, we see `40187047`. Stored "little-endian".
+  ]
+  #set align(center)
+  #uncover(4)[
+  #image("./figures/endianness-wikipedia.png", width: 40%)]
+]
+
 
 
 #slide[
   == Demo: Compiling, Assembling, Linking
   #image("figures/makefile.png", height: 90%)
+]
+
+#slide[
+  == Compiling & Linking
+  - Compilation: From C code to _almost_ machine code.
+    - Assembly instructions are decided.
+    - But, each `.c` file gets its own `.o` file.
+    - $=>$ cannot know the absolute addresses of functions from other files!
+    - Functions can call functions from other files!
+  - Linking:
+    - Fully-functioning program needs to be one long sequence of instructions.
+    - Linking arranges subroutines in one long sequence, and assigns absolute addresses.
+    - Memory map is specified in _linker script_ (`nRF51822.ld`)
+]
+
+#slide[
+  #set align(horizon)
+  #callout_question[Why is there a separation between the compiler and linker?][]
+
+  #show: later
+
+  #one-by-one(start: 2)[
+    So you can pre-compile parts of your code.
+    - Compiling takes time! Some projects take hours to compile. \
+      Only compiling parts that have changed, saves time.][
+    Simplification and encapsulation of tasks:
+    - Compiler only needs to know what CPU _core_ we're running on, i.e. which instructions our CPU (Cortex-M0) has.
+    - Linker needs to know details about specific chip, e.g. the memory map.
+  ]
+
 ]
 
 #slide[
@@ -146,31 +199,29 @@
 ]
 
 #slide[
-  == Demo: Programming, Running, Debugging
-  #item-by-item[
-  - `arm-none-eabi-objdump -d func.elf`
-    - `func.elf` is *after linking*!
-    - What is the difference with earlier?
-  - Look at Intel Hex format (big-endian vs little-endian)
-  - Run code. `minicom` for communication.
-  Debugging
-  - `layout asm`
-  - `layout regs`
-  - `break *func`
-  - `stepi`
-  ]
+  == CPU Startup Sequence
+  - In address space, CPU looks at the first 2 32-bit numbers:
+    - Number `0`: Value loaded into `sp` register (stack, later lectures)
+    - Number `1`: Value loaded into `pc` register $->$ Jump
+  - See `startup.c`:
+    - Defines array `__vectors`, which gets placed at address `0`, as determined by the linker script `nRF51822.ld`
+    - `__vectors[0]`: `__stack` variable (defined in linker script).
+    - `__vectors[0]`: Function `__reset()` is the first to be executed.
 ]
 
 #slide[
-  == Demo: Coding Assembly
-  #reveal-code(lines: (3,4,5,6,7))[
-    ```
-    @ (a^2 - b^2) = (a+b) * (a-b)
-    @ at calling a is stored in r0
-    @            b is stored in r1
-    adds r3, r0, r1     @ (a + b) stored in r3
-    subs r0, r0, r1     @ (a - b) stored in r0
-    muls r0, r3, r0
-    bx lr
-    ```]
+  == Recap
+  #item-by-item[
+    - Different types of memory on micro:bit, all in one address space
+      - Flash, RAM, memory-mapped peripherals
+    - Compiling: Each source (`.c` or `.s`) file becomes an object (`.o`) file.
+      - Turning each source file into machine code
+      - We saw the machine code of our `adds` and `bx lr` instructions!
+      - Unknown absolute memory addresses
+    - Disassembly: From machine code back to assembly.
+    - Linking: Giving subroutines absolute addresses.
+    - Startup procedure
+  ]
 ]
+
+

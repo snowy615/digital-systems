@@ -27,7 +27,7 @@ fi
 # run if no flags, but do not run if --slides is present
 if [ "$RUN_LABS" = true ]; then
     echo "Compiling labs..."
-    cd materials-src/labs
+    cd materials-src/labs-problems/
     typst compile lab0.typ
     mv lab0.pdf ../../labs/
     typst compile lab1.typ
@@ -38,6 +38,8 @@ if [ "$RUN_LABS" = true ]; then
     mv lab3.pdf ../../labs/
     typst compile lab4.typ
     mv lab4.pdf ../../labs/
+    typst compile prob1-new.typ
+    mv prob1-new.pdf ../../problem-sheets/
     cd ../..
 fi
 

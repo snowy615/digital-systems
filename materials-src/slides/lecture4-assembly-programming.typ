@@ -6,9 +6,77 @@
 // #enable-handout-mode(true)
 
 #slide[
-  == Datasheet: Different ways of Adding
+  == Last Lecture: Recap
+  #item-by-item[
+    - Different types of memory on micro:bit, all in one address space
+      - Flash, RAM, memory-mapped peripherals
+    - Compiling: Each source (`.c` or `.s`) file becomes an object (`.o`) file.
+      - Turning each source file into machine code
+      - We saw the machine code of our `adds` and `bx lr` instructions!
+      - Unknown absolute memory addresses
+    - Disassembly: From machine code back to assembly.
+    - Linking: Giving subroutines absolute addresses.
+    - Startup procedure
+  ]
+]
+
+#slide[
+  == Forgot to mention... // TODO: Remove next year, should not be necessary
+  What is the format that we actually _send_ the final code in?
+  #item-by-item(start: 2)[
+  - `more func.hex` \
+    I.e. _text_-encoded hexadecimal. The "programmer chip" on the micro:bit turns this into binary, before sending it to the Nordic ARM chip.
+  - Can we still see `18404770` anywhere?
+  - No! Instead, we see `40187047`. Stored "little-endian".
+  ]
+  #set align(center)
+  #uncover(4)[
+  #image("./figures/endianness-wikipedia.png", width: 40%)]
+]
+
+#slide[ // TODO: Remove next year
+  If you want to practice + learn more about this: \
+  - Additional questions on this in `problem-sheets/prob1-new.pdf`. \
+  - Answers are included, so good study material.
+]
+
+#slide[ // TODO: Remove next year
+  #set align(horizon)
+  #callout_question[Why is there a separation between the compiler and linker?][]
+
+  #show: later
+
+  #one-by-one(start: 2)[
+    So you can pre-compile parts of your code.
+    - Compiling takes time! Some projects take hours to compile. \
+      Only compiling parts that have changed, saves time.][
+    Simplification and encapsulation of tasks:
+    - Compiler only needs to know what CPU _core_ we're running on, i.e. which instructions our CPU (Cortex-M0) has.
+    - Linker needs to know details about specific chip, e.g. the memory map.
+  ]
+]
+
+#title-slide(title: [Lecture 4 \ Assembly Programming])
+
+
+#slide[
+  == Demo: Coding Assembly
+  #reveal-code(lines: (3,4,5,6,7))[
+    ```
+    @ (a^2 - b^2) = (a+b) * (a-b)
+    @ at calling a is stored in r0
+    @            b is stored in r1
+    adds r3, r0, r1     @ (a + b) stored in r3
+    subs r0, r0, r1     @ (a - b) stored in r0
+    muls r0, r3, r0
+    bx lr
+    ```]
+]
+
+
+#slide[
+  == What Instructions Can I Use?
   // Back to our question
-  #one-by-one[
   #callout_question[How to look up allowed instructions?][
     We have three summaries:
     - "Rainbow Chart" (included in exam)
@@ -25,13 +93,11 @@
   // Skill: To find the pages that you need from the entire forest.
   // Things that are included give a general description, and we will guess that behaviour will otherwise be fairly uniform.
   // Demo: 
-  #v(0.6cm)][
-  Let's look at details of `add` instruction.]
-  #item-by-item(start: 3)[
+  #v(0.6cm)
+  Let's look at details of `add` instruction.
   - Index: A.6 Thumb Instruction Details // All explanations are in that document! First sections of A.6
   - A.6.7 Alphabetical list of ARMv6-M Thumb instructions
   - Various flavours of `add` instructions.
-  ]
 ]
 // Scroll through
 // ADC addcarry (add but uses the status bits to chain together add operations, if you need to add numbers larger than 32 bits)
@@ -63,6 +129,13 @@
   ]
 ]
 
+#slide[
+  #set align(horizon)
+  #thebig_idea[For the exam:
+  
+  Familiarise yourself with the instructions, \ but no need to memorise.]
+]
+
 
 // Now that you have some more tools to figure out what goes on
 #slide[
@@ -79,6 +152,22 @@
 #slide[
   == Naive Asm Translation of Naive Multiplication in C
 #image("figures/code-multiplication-asm.png", height: 90%)
+]
+
+#slide[
+  == Demo: Programming, Running, Debugging
+  How do we check whether the programming is running as expected?
+
+  Directory `/lab1`
+  #item-by-item[
+  - `make mul1.hex`
+  - Run code. `minicom` for communication.
+  - `./debug mul1.elf`
+  - `layout asm`
+  - `layout regs`
+  - `break *func`
+  - `stepi`
+  ]
 ]
 
 #slide[
@@ -130,8 +219,8 @@ Executing an instruction is more complex than previously described.
   Instruction timings completely predictable (unlike modern archs):]
   #item-by-item(start: 3)[
   - Usually: One cycle per instruction.
-  - Branch: Taken branch takes 2 cycles _extra_ (3 total).
-  - Load / store: Plus one cycle.]
+  - Branch: Taken branch takes 2 cycles _extra_ (3 total), otherwise 1.
+  - Load / store: Two cycles (one extra for memory access).]
   #uncover("6-")[Find number of cycles:]
   #item-by-item(start: 7)[
   - Can measure (oscilloscope, see labs)
@@ -216,10 +305,9 @@ Executing an instruction is more complex than previously described.
 - Writing optimised asm code is labourious! Small changes in details of program impact many other lines (e.g. change in register!)
 - Good compilers can generate very efficient assembly code from C code.
   - E.g.: It's hard for us to use higher registers. Requires knowing a lot of these quirks of assembly, which instructions can use high registers, and how. Compilers can do this well.
-- Remember Amdahl's law!
-  - It's good to know _how_ to write a very fast, tight loop, but no need to spend all your time doing this for _every_ bit of code.
-  - Focus on where it matters.
+- It's good to know _how_ to write a very fast, tight loop, but no need to spend all your time doing this for _every_ bit of code. (Amdahl's law)
   ]
+#callout_idea[Debugger is _super_ helpful for writing code. Learn it!][]
 ]
 
 #slide[
