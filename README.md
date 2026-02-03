@@ -43,39 +43,42 @@ All instructions for the labs are in the [labs directory](labs).
 See the [lecture slides](lecture-slides) directory for pdf slides and handouts of all the lectures.
 
 ### Hilary Term
-| Week | Lecture                              | Practical         | Work Deadline    |
-|------|--------------------------------------|-------------------|------------------|
-| 1 HT | 1 - What is a computer?              |                   |                  |
-|      | 2 - State and Instructions           | Lab 0 possible    |                  |
-|      | Friday                               | Informal Lab session 0 |             |
-| 2    | 3 - Compiling & Assembly Programming |                   |                  |
-|      | 4 - Arithmetic                       | Lab 1 possible    |                  |
-| 3    | 5 - Subroutines                      |                   | Tutorial Sheet 1 |
-|      | 6 - Buffer overrun attacks           |                   |                  |
-|      | Friday                               | **Lab session 1** |                  |
-| 4    | 7 - Memory & Addressing              |                   |                  |
-|      | 8 - GPIO                             | Lab 2 possible    | Tutorial Sheet 2 |
-|      | Friday                               | **Lab session 2** | Lab 1 sign-off   |
-| 5    | 9 - Serial                           |                   |                  |
-|      | 10 - Interrupts                      | Lab 3 possible    |                  |
-| 6    | 11 - Interrupt Mechanism             |                   | Tutorial Sheet 3 |
-|      | 12 - Intro to Operating Systems      |                   |                  |
-|      | Friday                               | **Lab session 3** | Lab 2 sign-off   |
-| 7    | 13 - Device Drivers                  | Lab 4 startable   |                  |
-|      | 14 - Context Switching               |                   |                  |
-|      | Friday                               | **Lab session 4** | Lab 3 sign-off   |
-| 8    | 15 - Scheduling                      |                   |                  |
-|      | 16 - Message Passing                 | Lab 4 possible    | Tutorial Sheet 4 |
-|      | Friday                               | **Lab session 5** | Lab 4 sign-off   |
-| 1 TT | 17                                   |                   |                  |
-|      | 18                                   |                   |                  |
-| 2    | 19                                   |                   |                  |
-|      | 20                                   |                   |                  |
-| 3    | 21                                   |                   |                  |
-|      | 22                                   |                   | Tutorial Sheet 5 |
-| 4    | 23                                   |                   |                  |
-|      | 24                                   |                   |                  |
-| 5    | 23                                   |                   | Tutorial Sheet 6 |
+- "Tutorial Sheet n" indicates that by this lecture, the material required for the tutorial sheet will be covered. Tutorials can be arranged after this lecture.
+- "Lab n sign-off" indicates that the results from the lab should be signed off by a lab demonstrator. Demonstrators may deduct marks if you sign off later. This is to ensure that work is signed off on time, and to avoid large pile-ups in later lab sessions.
+
+| Week | Lecture                               | Practical         | Work Deadline    |
+|------|---------------------------------------|-------------------|------------------|
+| 1 HT | 1 - What is a computer?               |                   |                  |
+|      | 2 - State and Instructions            | Lab 0 possible    |                  |
+|      | Friday                                | Informal Lab session 0 |             |
+| 2    | 3 - Compiling                         |                   |                  |
+|      | 4 - Assembly Programming              | Lab 1 possible    |                  |
+| 3    | 5 - Optimising Assembly & Subroutines |                   |                  |
+|      | 6 - Arithmetic                        |                   | Tutorial Sheet 1 |
+|      | Friday                                | **Lab session 1** |                  |
+| 4    | 7 - Memory & Addressing               |                   |                  |
+|      | 8 - GPIO                              | Lab 2 possible    | Tutorial Sheet 2 |
+|      | Friday                                | **Lab session 2** | Lab 1 sign-off   |
+| 5    | 9 - Serial                            |                   |                  |
+|      | 10 - Interrupts                       | Lab 3 possible    |                  |
+| 6    | 11 - Interrupt Mechanism              |                   | Tutorial Sheet 3 |
+|      | 12 - Intro to Operating Systems       |                   |                  |
+|      | Friday                                | **Lab session 3** | Lab 2 sign-off   |
+| 7    | 13 - Device Drivers                   | Lab 4 startable   |                  |
+|      | 14 - Context Switching                |                   |                  |
+|      | Friday                                | **Lab session 4** | Lab 3 sign-off   |
+| 8    | 15 - Scheduling                       |                   |                  |
+|      | 16 - Message Passing                  | Lab 4 possible    | Tutorial Sheet 4 |
+|      | Friday                                | **Lab session 5** | Lab 4 sign-off   |
+| 1 TT | 17                                    |                   |                  |
+|      | 18                                    |                   |                  |
+| 2    | 19                                    |                   |                  |
+|      | 20                                    |                   |                  |
+| 3    | 21                                    |                   |                  |
+|      | 22                                    |                   | Tutorial Sheet 5 |
+| 4    | 23                                    |                   |                  |
+|      | 24                                    |                   |                  |
+| 5    | 23                                    |                   | Tutorial Sheet 6 |
 
 
 

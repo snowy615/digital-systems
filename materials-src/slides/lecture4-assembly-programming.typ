@@ -171,159 +171,23 @@
 ]
 
 #slide[
-  == Which Instructions are Actually Used?
-#image("figures/code-multiplication-disasm.png", height: 90%)
-]
-
-#slide[
-== Pipelining
-#item-by-item[
-#callout_question[Why is there an offset of 4 in relative addresses in jumps?][
-  - `4: beq.n` would jump +2 instructions ahead.
-  - `a: b.n  ` would jump -6 instructions ahead.
-]
-Executing an instruction is more complex than previously described.
- - Executing instruction is broken up into stages.
- - In ARM Cortex-M0, 3 cycles needed to execute a single instruction.
- - However, stages operate in _parallel_, so still 1 instruction _per_ cycle.
-]
-]
-
-#slide[
- == Pipelining: Branch offset
- #table(
-  columns: (auto, auto, auto, auto, auto, auto),
-  inset: 8pt,
-  align: horizon,
-  [cycle], [#pc], [Fetch], [Decode], [Execute], [],
-  [1], [0], [`movs`], [], [], [],
-  [2], [2], [`cmp`], [`movs`], [], [],
-  [3], [4], [`beq`], [`cmp`], [`movs`], [],
-  [4], [6], [`subs`], [`beq`], [`cmp`], [],
-  [5], [8], [`adds`], [`subs`], [`beq`], [branch executed now!],
-//  [6], [10], [`b`], [`adds`], [`subs`], [next instruction as normal],
-//  [7], [12], [`movs`], [`b`], [`adds`], [],
-  )
-  #item-by-item(start: 2)[
-  - When branch is executed, #pc is 8.
-  - Want to jump two instructions ahead.
-  - $arrow.double$ Encode offset of 2 instructions!
-  - CPU handles multiplication by two (bit shift) before adding to #pc.
-  ]
-]
-
-#slide[
-  == How Good is Our Code?
-  #one-by-one[
-  _Good_ assembly programmers (compiler, mostly) should produce _fast_ code.][
-  Instruction timings completely predictable (unlike modern archs):]
-  #item-by-item(start: 3)[
-  - Usually: One cycle per instruction.
-  - Branch: Taken branch takes 2 cycles _extra_ (3 total), otherwise 1.
-  - Load / store: Two cycles (one extra for memory access).]
-  #uncover("6-")[Find number of cycles:]
-  #item-by-item(start: 7)[
-  - Can measure (oscilloscope, see labs)
-  - Count instructions (7 cycles)
-  ]
-  #uncover("9-")[
-  #callout_question[Why do branches take 3 cycles?][]]
-]
-
-#slide[
- == Pipelining: Normal Operation
- #table(
-  columns: (auto, auto, auto, auto, auto, auto),
-  inset: 8pt,
-  align: horizon,
-  [cycle], [#pc], [Fetch], [Decode], [Execute], [],
-  [1], [0], [`movs`], [], [], [],
-  [2], [2], [`cmp`], [`movs`], [], [],
-  [3], [4], [`beq`], [`cmp`], [`movs`], [],
-  [4], [6], [`subs`], [`beq`], [`cmp`], [],
-  [5], [8], [`adds`], [`subs`], [`beq`], [branch not taken],
-  [6], [10], [`b`], [`adds`], [`subs`], [next instruction as normal],
-  [7], [12], [`movs`], [`b`], [`adds`], [],
-  )
-]
-
-
-#slide[
- == Pipelining: Branch Taken
- #table(
-  columns: (auto, auto, auto, auto, auto, auto),
-  inset: 8pt,
-  align: horizon,
-  [cycle], [#pc], [Fetch], [Decode], [Execute], [],
-  [1], [0], [`movs`], [], [], [],
-  [2], [2], [`cmp`], [`movs`], [], [],
-  [3], [4], [`beq`], [`cmp`], [`movs`], [],
-  [4], [6], [`subs`], [`beq`], [`cmp`], [],
-  [5], [8], [`adds`], [`subs`], [`beq`], [branch taken!],
-  [6], [12], [`movs`], [`adds X`], [`subs X`], [do not execute!],
-  [7], [14], [`bx`], [`movs`], [`adds X`], [do not execute!],
-  [8], [16], [`...`], [`bx`], [`movs`], [as normal]
-  )
-]
-
-
-#slide[
-  == Can We Do Better?
-    Solutions:
-    - Better algorithm (e.g. $O(log n)$).
-    - "Squeeze" loop. // Try to teach you a few techniques.
-]
-
-#slide[
-  == Optimisation
-#image("figures/code-multiplication-asm-opt1.png", height: 90%)
-]
-
-#slide[
-  == Optimisation
-#image("figures/code-multiplication-asm-opt2.png", height: 90%)
-]
-
-#slide[
-  == Optimisation
-  Let subs set the condition codes.
-  #image("figures/code-multiplication-asm-opt3.png", height: 57%)
-  - 5 cycles per iteration!
-  - Would be `do..while` loop in C.
-]
-
-#slide[
-  == Loop Unrolling
-  Duplicate the loop body n times.
- m #image("figures/code-multiplication-asm-opt4.png", height: 66%)
-- 3.5 cycles per iteration!
-]
-
-#slide[
-  == Observations on Assembly Programming
-  #item-by-item[
-- Writing optimised asm code is labourious! Small changes in details of program impact many other lines (e.g. change in register!)
-- Good compilers can generate very efficient assembly code from C code.
-  - E.g.: It's hard for us to use higher registers. Requires knowing a lot of these quirks of assembly, which instructions can use high registers, and how. Compilers can do this well.
-- It's good to know _how_ to write a very fast, tight loop, but no need to spend all your time doing this for _every_ bit of code. (Amdahl's law)
-  ]
-#callout_idea[Debugger is _super_ helpful for writing code. Learn it!][]
-]
-
-#slide[
 == Recap
-#callout_skill[Looking up things in datasheets][]
-
-#callout_idea[Instruction set restrictions][... exist for a reason and are specified in the datasheet.]
-#callout_idea[Pipelining][
-- Instructions are executed over multiple clock cycles in parallel.
-- Complicates branch instructions, and makes them slower.
+#callout_info[Understanding Compilation Process][
+  What is specified after compilation, and what after linking.
+]
+#callout_skill[Programming in Assembly][
+  - Assembly has quirks: They are there for a reason! (Remember?)
+  - Looking them up in references.
 ]
 
-#callout_skill[Determining execution time of assembly program][]
-#v(-0.85cm)
-#callout_skill[More complex assembly programming, and optimisation][]
+
+#callout_skill[Using a Debugger][
+  - Stepping through assembly, instruction-by-instruction.
+  - Viewing effect on registers.
 ]
+]
+
+
 
 
 
