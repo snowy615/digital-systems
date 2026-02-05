@@ -283,7 +283,6 @@ Store registers in fixed memory addresses?
 
 #slide[
   == Subroutine Contract
-  #item-by-item[
   #[Calling function:
   - Places first arguments 1 ... 4 in #r0 - #r3
   - Places arguments $>=4$ on stack (called function knows how many to expect) (labs won't need this)]
@@ -292,7 +291,6 @@ Store registers in fixed memory addresses?
   - Leave stack pointer #sp unchanged on return
   - Leave stack below current location (i.e. memory addresses above #sp) unchanged
   - Leave return value in #r0]
-]
 ]
 
 #slide[

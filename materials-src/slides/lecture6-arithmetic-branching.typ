@@ -1,7 +1,7 @@
 #import "theme.typ": *
 #show: doc => conf(doc)
 
-#title-slide(title: [Lecture 5 \ Finite Width Artithmetic & Branching])
+#title-slide(title: [Lecture 6 \ Finite Width Artithmetic & Branching])
 
 // #enable-handout-mode(true)
 
@@ -122,14 +122,12 @@ $
 
 #slide[
   == Two's Complement Example
-  #item-by-item[
   - In the last lecture, we encountered a jump instruction with an offset of `0xFA`.
   - #[Decoded into binary, we get
   $
   mono("0xFA") = mono("0b1111 1010")
   $]
   - And $"twoc"(mono("1111 1010")) = -128 + 122 = -6$
-]
 ]
 
 #slide[
@@ -174,7 +172,7 @@ $
 
   So, for all bit strings $a$, we have
   $
-  "twoc"(overline(a) plus.circle 1) = -"twoc"(a) &#h(1.5cm)& mod 2^n
+  "twoc"(overline(a) plus.circle 1) ≡ -"twoc"(a) &#h(1.5cm)& mod 2^n
   $
 
   Few things to note:
@@ -244,7 +242,7 @@ $
   == Branching Instructions: Equality
   Branching instructions interpret the #psr bits as though a subtraction was performed.
 
-  Compare instruction `cmp` performs subtraction, sets #psr status bits, and does not write result to register.#footnote[Other instructions (e.g. `adds`, `subs`) also set #psr status bits, and can also be used to branch.)]
+  Compare instruction `cmp` performs subtraction, sets #psr status bits, and does not write result to register.#footnote[Other instructions (e.g. `adds`, `subs`) also set #psr status bits, and can also be used to branch.]
 
   Equality branches:
   - `beq`: Branch if equal. Branches if `Z`.
@@ -256,9 +254,14 @@ $
   `blt`: Branch if less than (signed). Can we figure out which condition we need to hold the status bits to?
 
   If $"twoc"(a minus.circle b) < 0$ then either
+#item-by-item(start: 2)[
   - we really have $"twoc"(a) < "twoc"(b)$, or
   - the subtraction overflowed (e.g. if $"twoc"(b) < 0 < "twoc"(a)$).
+]
   #v(-0.4cm)
+  #show: later
+  #show: later
+  #show: later
   So for this, we need `N` and `!V`.
 
   If $"twoc"(a minus.circle b) >= 0$ then either
@@ -311,7 +314,8 @@ So all we need is `!C`.
   - Full specification of how bit patterns represent numbers, \ signed (bin) and unsigned (twoc).
   - Full specification of addition and subtraction, and the limitation to _modular arithmetic_.
   - Full specification of status bits, as signifiers of departure from regular arithmetic, and flags helpful for branches (`Z` and `N` flags).
-  - Derivation of flags required for various branch operations (for exam, must demonstrate/understand reasoning, but no need for memorisation, see instruction list).
+  #v(0.6cm)
+  #callout_skill[Derivation of flags required for various branch operations][For exam, must demonstrate/understand reasoning, but no need for memorisation, see instruction list.]
 ]
 
 
