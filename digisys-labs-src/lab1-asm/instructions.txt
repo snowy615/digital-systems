@@ -1,0 +1,30 @@
+make sub.hex
+
+drag .hex file to microbit
+or 
+cp echo.hex /Volumes/MICROBIT/
+cp -X sub.hex /Volumes/MICROBIT/
+
+
+
+fyi
+c to o file
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -O -g -Wall -ffreestanding -c echo.c \ -o echo.o
+
+o to elf (binary) file
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -O -g -Wall -ffreestanding \ -T nRF51822.ld -nostdlib echo.o startup.o -lgcc -o echo.elf -Wl,-Map,echo.map
+
+binary to hex
+arm-none-eabi-objcopy -O ihex echo.elf echo.hex
+
+on terminal
+ls /dev/tty.usbmodem*
+should return /dev/tty.usbmodem102
+
+run microbit screen
+screen /dev/tty.usbmodem102 9600
+
+to stop
+Control + A, k, y
+
+
