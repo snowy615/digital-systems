@@ -25,6 +25,73 @@ run microbit screen
 screen /dev/tty.usbmodem102 9600
 
 to stop
-Control + A, k, y
+Ctrl + A, k, y
+
+
+GDB (GNU Debugger) commands
+
+start debugger
+./debug <filename>.elf
+
+pause debugger
+Ctrl + C
+
+quit debugger
+Ctrl + C, Ctrl + D
+
+resets the CPU and halts the program at the very beginning
+monitor reset halt
+
+resume program execution
+cont or continue
+
+runs program normally until it reaches function
+advance <function name>
+
+executes next single line of C code (steps over functions)
+next
+
+executes next line of C code (steps into functions)
+step
+
+executes the next single assembly instruction (steps into functions)
+stepi
+
+Activates the "Text User Interface" (TUI). It splits your terminal window to show the code and the current state of the CPU registers in real-time
+layout regs
+layout split
+layout regs
+
+Displays the "call stack," showing the list of functions that were called to reach your current location
+where
+
+Moves your view up or down the call stack. This is useful if you accidentally step into a function and want to look back at the function that called it.
+up / down
+
+Switch focus between the code and register windows
+Ctrl + x, o
+
+Enter key to use last command
+
+
+
+order
+monitor reset halt
+advance init
+
+next until input
+minicom on seperate page for input/output
+
+layout regs
+layout split
+
+
+
+
+
+
+
+
+
 
 
