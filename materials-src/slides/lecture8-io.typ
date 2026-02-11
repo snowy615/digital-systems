@@ -33,16 +33,14 @@
 
 #slide[
   == Today
-  #item-by-item[
   #callout_question[How can we control LEDs on the BBC micro:bit?][]
   #[But before we can answer this, we need to know a bit about how LEDs work, _electronically_.]
-]
 ]
 
 #slide[
   == Electronics of LEDs
   #light[Discuss on board: I-V char of LEDs]
-  - Design: $R = 222 omega, I approx 4.5"mA"$.
+  - Design: $R = 222 Omega, I approx 4.5"mA"$.
   - General Purpose In/Out (GPIO) pins on chip act as voltage source.
   #set align(center)
 #image("./figures/led-basics.png", height: 52%)
@@ -86,11 +84,9 @@
 
 #slide[
   == Questions
-  #item-by-item[
   #[Consider \ $A$ GPIO ports connected to LED anodes, and \ $C$ GPIO ports connected  to LED cathodes.]
   #callout_question[How many LEDs can you control in total?][]
   #callout_question[How many LEDs can be _independently_ controlled?][]
-]
 ]
 
 
@@ -229,10 +225,10 @@ void delay(unsigned usec) {
 
 
 #slide[
-  #item-by-item[
   #callout_question[How is `GPIO_OUT` implemented?][
     We want to make C write to a specific memory location! Pointers.
   ]
+  #v(0.8cm)
   ```c
   (* (volatile unsigned *) 0x50000504) = ...
 
@@ -244,7 +240,6 @@ void delay(unsigned usec) {
   #define GPIO_OUT                _REG(unsigned, 0x50000504)
   ```
 ]
-]
 
 #slide[
   == Pushbuttons
@@ -252,12 +247,11 @@ void delay(unsigned usec) {
     Board: Circuit for pushbutton (pull-up resistor)
   ]
 
-  #item-by-item[
   #[Must configure a pin to be an input:
   ```
 SET_FIELD(GPIO_PINCNF[BUTTON_A], GPIO_PINCNF_INPUT, GPIO_INPUT_Connect);
   ```
-  #light[See `hardware.h`.]
+  #light[See `hardware.h`.
 
 ]
 ```c
@@ -272,7 +266,7 @@ if (GET_BIT(x, BUTTON_A) == 0 || GET_BIT(x, BUTTON_B) == 0) {
 
 #slide[
   == Summary
-  #item-by-item[
+  #item-by-item(start: 2)[
   - How LEDs work electrically.
   - How we can control $N^2$ LEDs using $2N$ GPIO pins using _multiplexing_.
   - How we can set a single LED in a multiplexed grid.

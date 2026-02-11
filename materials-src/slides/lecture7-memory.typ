@@ -24,18 +24,18 @@
 
 #slide[
   == Accessing Memory
-  #item-by-item[
-  #[Instructions for storing and loading locations in memory: `str` and `ldr`.]
+  Instructions for storing and loading locations in memory: `str` and `ldr`.
+  #item-by-item(start: 2)[
   - Remember: Memory is accessed by providing an _address_. // Draw picture of memory on board
   - `ldr` and `str` have different ways of calculating the address.
   - These are called _addressing modes_.
-  #[
+  ]
+  #uncover(5)[
   We can use the `ldr` and `str` instructions in two different syntaxes, to use the different addressing modes:
-`
+```
 xxr r0, [r1, #20]      @ Load/store r0 in r1 + 20
-xxr r0, [r1, r2]       @ Load/store r0 in r1 + r2`
-
-]
+xxr r0, [r1, r2]       @ Load/store r0 in r1 + r2
+```
 ]
 ]
 
@@ -44,21 +44,19 @@ xxr r0, [r1, r2]       @ Load/store r0 in r1 + r2`
   == Accessing Memory: Peculiarities
   #item-by-item[
     - Typical encoding: Only the lower registers #r0 - #r7 can be used.
-    #[- Alternative encoding for:`
-    xxr r0, [sp, #20]
-    xxr r0, [pc, #40]`
-    ]
+    - Alternative encoding for:
+      ```
+    --r r0, [sp, #20]
+    --r r0, [pc, #40]
+    ```
     - Different constant ranges allowed.
     - Addresses must be _aligned_, based on their size. \ E.g. for 4-byte quantities, we need `addr % 4 == 0`.
-
-    #[
-      In Native ARM code, we also allow
-
-      `    ldr r0, [r1, r2, LSL #x]      @ r1 + r2 << x`
-      
+  ]
+    #uncover(5)[
+      In Native ARM code, we also allow \
+      `    ldr r0, [r1, r2, LSL #x]      @ r1 + r2 << x` \
       to make this easy to enforce. In Thumb, we made need more instructions.
     ]
-  ]
 ]
 
 
@@ -168,7 +166,7 @@ Subroutine contract:
 #slide[
   == Global Variables
     Global variables are stored at a fixed absolute location. #light("Remember why?")
-      #item-by-item[
+      #item-by-item(start: 2)[
 
   Addresses are 32-bit quantities. How can we load the address into a register?
   - Can use `movs rx, #255` to load 8 bits into a register.
@@ -181,7 +179,6 @@ Subroutine contract:
 
 #slide[
   == It's annoying to manually manage addresses and offsets
-  #item-by-item[
   #[`ldr` using #pc as the base is again peculiar!]
   - #pc is always 4 ahead of instruction being executed...
     - Makes calculating offsets error-prone.
@@ -192,7 +189,6 @@ Subroutine contract:
     `ldr r2, [pc, #d]` rounds #pc down to a multiple of 4 #light("(how to implement this in hardware?)") before adding offset.
   ]
 #callout_warning[You don't want to memorise or deal with all this.][Don't want to manually assign addresses, or remember peculiarities.]
-  ]
 ]
 
 
@@ -347,16 +343,4 @@ reg+reg addressing mode.
   #callout_question[How can we implement arrays?][Access with addressing that adds two registers.]
 ]
 
-
-#slide[
-  == Mistake in the Last Lecture
-  #item-by-item[
-  #[About the behaviour of the `push` and `pop` instructions. #light("Did anyone notice?")
-
-]
-  #[First person to e-mail me with what my mistake was gets a chocolate bar.
-  - You can find the result by looking something up in the datasheet, as we discussed.
-  - You will be able to write correct programs for the exam without knowing this detail.]
-  ]
-]
 
