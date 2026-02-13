@@ -91,9 +91,9 @@ The program already contains code to initialise the pins connected to the two bu
 
 #v(0.4cm)
 #callout_info[Requirements for S+][
-   + Go through the preprocessor code to determine the list of calculations that is performed to find the 32-bit constant for the bit pattern. Estimate how many assembly operations you need to perform these calculations, for a general input that is not known at compile-time.
+   + Go through the preprocessor code to determine the list of calculations that is performed to find the 32-bit constant for the bit pattern. Estimate how many assembly operations you need to perform these calculations, for a general input that is not known at compile time.
    + Disassemble the code, and find the assembly instructions that correspond to the `IMAGE` macro. Verify that far fewer instructions are produced by the C compiler than you estimated earlier. Be prepared to demonstrate this to the lab demonstrator.
-   + Write a piece of assembly code that calculates an image at compile time.
+   + Write a piece of assembly code that calculates an image at _runtime_. The function would need to take in an array with one number (which can be zero or one) per pixel, and output three 32-bit values for controlling the LEDs. You may want to think about compressing the image by storing all 25 pixels in a single 32-bit number, but this is optional for the S+.
 
    #v(0.5cm)
    OR
