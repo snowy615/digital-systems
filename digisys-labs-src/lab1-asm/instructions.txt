@@ -19,10 +19,10 @@ arm-none-eabi-objcopy -O ihex echo.elf echo.hex
 
 on terminal
 ls /dev/tty.usbmodem*
-should return /dev/tty.usbmodem102
+should return /dev/tty.usbmodem1102
 
 run microbit screen
-screen /dev/tty.usbmodem102 9600
+screen /dev/tty.usbmodem1102 9600
 
 to stop
 Ctrl + A, k, y
@@ -76,14 +76,38 @@ Enter key to use last command
 
 
 order
+screen /dev/tty.usbmodem1102 9600
+
+--switch to another terminal--
+cd /Users/snowyan/digitalSystems/digital-systems/digisys-labs-src/lab1-asm
+./debug mul_shift.elf
+
+//pause at start
 monitor reset halt
-advance init
+//reach init
+advance init or advance func
 
 next until input
 minicom on seperate page for input/output
 
+display/i $pc
+
+//can do multiple times
+stepi
+info registers r0 r1 r2
+
+layout asm
 layout regs
-layout split
+disassemble func
+
+
+to quit
+GDB: Ctrl+C then Ctrl+D
+Screen: Ctrl+A, then k, then y
+
+screen -ls
+screen -S 53342 -X quit
+
 
 
 
