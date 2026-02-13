@@ -90,16 +90,13 @@ The resulting list of expressions is exteremely complicated, but the C compiler 
 The program already contains code to initialise the pins connected to the two buttons as inputs: they are pins 17 and 26, which `hardware.h` identifies with the symbolic constants `BUTTON_A` and `BUTTON_B`. To test whether each button is pressed, you need to look at the correct bits in the value read from `GPIO_IN`, which can be selected using the masks `BIT(BUTTON_A) = 0x20000` and `BIT(BUTTON_B) = 0x4000000`. As the circuit diagram shows, the buttons are connected between the pin and ground with a pullup resistor. That means the input bit will be 1 when the button is not pressed, and 0 when it is pressed. (The macro `BIT` is also defined in `hardware.h` so that `BIT(x) = (1 << x)`.)
 
 #v(0.4cm)
-#callout_info[Requirements for S+][
+#callout_info[Requirements for S+: Option \#1][
    + Go through the preprocessor code to determine the list of calculations that is performed to find the 32-bit constant for the bit pattern. Estimate how many assembly operations you need to perform these calculations, for a general input that is not known at compile time.
    + Disassemble the code, and find the assembly instructions that correspond to the `IMAGE` macro. Verify that far fewer instructions are produced by the C compiler than you estimated earlier. Be prepared to demonstrate this to the lab demonstrator.
-   + Write a piece of assembly code that calculates an image at _runtime_. The function would need to take in an array with one number (which can be zero or one) per pixel, and output three 32-bit values for controlling the LEDs. You may want to think about compressing the image by storing all 25 pixels in a single 32-bit number, but this is optional for the S+.
-
-   #v(0.5cm)
-   OR
-
-   #h(1.8em) Get creative and create a cool little demo with embedded programming skills that you have. This could incorporate more elaborate things to display and richer ways of interacting with the hardware (e.g. detecting a double click). 
+   + Write a piece of assembly code that calculates an image at _runtime_. The function would need to take in an array with one number (which can be zero or one) per pixel, and output three 32-bit values for controlling the LEDs. Demonstrate this by showing that you can transmit an arbitrary image over the serial port (using the functions from lab0 and lab1), and display this on the LEDs.
+   + You may want to think about compressing the image by storing all 25 pixels in a single 32-bit number, but this is optional for the S+.
 ]
+#callout_info[Requirements for S+: Option \#2][Get creative and create a cool little demo with embedded programming skills that you have. This could incorporate more elaborate things to display and richer ways of interacting with the hardware (e.g. detecting a double click). ]
 #v(0.4cm)
 
 
