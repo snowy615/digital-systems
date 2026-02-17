@@ -52,7 +52,7 @@ The following listing shows a disassembly of the simple multiplication
 routine from the lecture.
 ```
           func:
-c0: 2200      movs    r0, #0
+c0: 2200      movs    r2, #0
           loop:
 c2: 2900      cmp     r1, #0
 c4: d002      beq     cc <done>

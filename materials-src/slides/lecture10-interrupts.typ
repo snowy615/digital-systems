@@ -36,14 +36,14 @@ void serial_putc(char ch) {
 
 #slide[
   == Today
-  #item-by-item[
   #callout_question[How can we respond to events (that hardware notices), without making the software do nothing while it waits?][]
   #[We will consider various solutions, keeping in mind _design constraints_.] #[We want:]
+  #item-by-item(start: 2)[
   - to avoid making the CPU wait until some event occurs in hardware,
   - to be able to deal with many different types of events (not just UART, but e.g. also noticing when a button is pressed),
   - to have a minimal waiting time to respond to an event,
   - software that is modular, in the sense that it doesn't need to be adapted when other parts of the program change which events they deal with.
-]
+  ]
 ]
 
 #slide[
