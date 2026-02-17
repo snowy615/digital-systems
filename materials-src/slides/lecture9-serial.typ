@@ -19,15 +19,16 @@
 #title-slide(title: [Lecture 9 \ Serial I/O])
 
 #slide[
-  #item-by-item[
   #callout_question[How can computers communicate with each other?][
     Say we want to transfer a file between computers?
   ]
+  #v(0.7cm)
+  #item-by-item(start: 2)[
   - We have electrical signals at our disposal.
   - Design constraint: Let's try to use as few pins as possible.
   - Communicate bits sequentially over a single wire.
+  ]
   #light[History, current hardware setup (PC, Freescale, Nordic), linux device driver, terminal.]
-]
 ]
 
 
