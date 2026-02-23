@@ -1,0 +1,3 @@
+cd /Users/snowyan/digitalSystems/digital-systems/digisys-labs-src/lab2-gpio
+make heart3.hex
+cp -X heart3.hex /Volumes/MICROBIT/
