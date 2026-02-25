@@ -7,11 +7,13 @@
 
 #slide[
   == Last Lecture...
-  We left off with the question: How does the interrupt know 
-
-  Table with all interrupt addresses
-
-  vectors part of the rom, all the way at the bottom of the address space
+  We saw:
+  #item-by-item(start: 2)[
+    - How to program with interrupts
+      - 1. Configure hardware to send interrupts, 2. write handler.
+    - How interrupts know which function to call
+      - `__vectors` table, with addresses to handlers, in expected locations
+  ]
 ]
 
 #slide[
@@ -30,21 +32,24 @@
   == What additional tasks must subroutines do?
   - An interrupt looks like a subroutine, inserted at an arbitrary point.
   - Interrupt _handlers_ can be normal subroutines.
-    #image("./figures/polling-throughout.png", height: 70%)
+    #image("./figures/polling-throughout.png", height: 69%)
 ]
 
 #slide[
   == Satisfying the Subroutine Convention in Interrupts
-  #item-by-item[
   #callout_question[What _additional_ work needs to be done on an interrupt, compared to calling a normal subroutine?][]
   - Remember the subroutine convention. \ What does the interrupt handler expect?
   - What is different about an interrupt cf a normal subroutine? \
     What does the interrupted code assume?
+
+  #show: later
+  #v(0.6cm)
   #callout_warning[Parent's code does not know it will be interrupted!][
       So we need to more careful with storing/restoring _state_.
     ]
+  #v(0.6cm)
+  #show: later
     - Must also store #psr, #pc, #lr, #r12, #r0 - #r3!
-  ]
 ]
 
 #slide[
@@ -119,7 +124,7 @@ Disadvantages
   Version 0: delay loops (already seen).
   - Wasteful of time and power.
 Version 1: use a timer for delays (this lecture).
-- Easier to maintain, but still wasteful of time and power.
+- Easier to maintain, power efficient, but still wasteful of CPU time.
 Version 2: purely interrupt driven (this lecture).
 - Allows computation while waiting but inflexible.
 Version 3: use an operating system (next time).
