@@ -148,8 +148,8 @@ void timer1_handler(void) {
         TIMER1_COMPARE[0] = 0;
     }
 }
-
 void delay(unsigned usec) {
+    // Interface gets μs, we offer ms resolution...
     unsigned goal = millis + usec/1000;
     while (millis < goal) { pause(); } // Uses wfe instruction
 }
