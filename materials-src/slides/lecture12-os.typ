@@ -35,19 +35,18 @@ void advance(void) {  // Called by an interrupt
 
 #slide[
   == List of Demands
-  #item-by-item[
   We have a single CPU that can execute instructions.
   // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
 
-  #item-by-item(start: 3)[
-  We want to be able to
+We want to be able to
+  #item-by-item(start: 2)[
+  
   - execute multiple programs simultaneously (concurrency),
   - that can respond to external events and communicate with one another,
   - with each program written using its own control flow,
   - seeming as each program is running simultaneously,
   - and doesn't require the programmer to know when to disable interrupts in order to guarantee correct code.
 ]
-  ]
 ]
 
 #slide[
@@ -59,7 +58,6 @@ void advance(void) {  // Called by an interrupt
 ]
 
 #slide[
-  #item-by-item[
     #callout_idea[Operating System][]
     In next few lectures: Example design of an Operating System
     - Many different ways of designing an OS, with pros/cons.
@@ -68,7 +66,6 @@ void advance(void) {  // Called by an interrupt
     - You will discuss these structures next year (Concurrency), \
       but you _won't_ see low-level implementation of what allows concurrent processes to run.
     - We will discuss low-level mechanisms for allowing concurrent processes.
-  ]
 ]
 
 #slide[
@@ -91,13 +88,14 @@ static void heart_task(int arg) {
   while (1) {
     show(heart, 70); show(small, 10);
     show(heart, 10); show(small, 10);
-} }
-
+  }
+}
 void show(const unsigned *img, int n){
   while (n-- > 0) {  /* Takes 15msec per iteration */
     for (int p = 0; p < 3; p++) {
       GPIO_OUT = img[p]; timer_delay(5);
-} } }
+    }
+} }
 ```
 ]
 
@@ -125,7 +123,6 @@ static void prime_task(int arg) {
 
 #slide[
   == Processes
-  #item-by-item[
   - Run until no more progress can be made \
     (co-operative multitasking vs pre-emptive multitasking)
   - When this happens, process _yields_ control of CPU, so other process can make progress.
@@ -135,7 +132,6 @@ static void prime_task(int arg) {
   #[Notice:]
   - Yield could happen in a subroutine.
   - So, each process needs its own subroutine stack.
-]
 ]
 
 #slide[
@@ -208,7 +204,6 @@ void summary_task(int arg) {
 
 #slide[
   == Message Communication
-  #item-by-item[
   ```c
   void init(void) {
     ...
@@ -223,7 +218,6 @@ void summary_task(int arg) {
   - If message not ready, process yields, and OS runs another process.
   - If message *is* ready, OS transfers when both processes are frozen.
   - If two processes send to same receiver, OS determines ordering.
-]
 ]
 
 #slide[
