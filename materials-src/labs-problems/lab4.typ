@@ -67,11 +67,22 @@ To support these programs, the operating system kernel (in `microbian.c`) is aug
 Typing `make` or choosing Build>Make as usual compiles all the example programs into hex files ready for download to the micro:bit. With one of the example programs open, you can choose Build>Upload me to upload the corresponding hex file to the micro:bit.
 
 = Tasks
-+ Heart: Try removing the system call that gives the display process a higher priority than the primes process. Then start searching for primes at 1000000 or 10000000 instead of 2. Observe the results, then reinstate the priority. Why should the display process have a higher priority than the primes process?
-+ Race: Run the program and observe the output. Then try swapping the two calls the `start()` from `init()`. Why does this affect the action of the program? Although unpredictable in advance, the results printed are actually consistent from run to run: why is that? Try adding a driver for the RNG (see below), and see if just doing that introduces enough randomness to make the results change from run to run.
-+ Today: Run the program and observe the output. Then introduce an interviewer process that makes the two politicians speak in turn. One solution has each politician passing its slogans to the interviewer; another has the interviewer giving permission to a politician to speak until they indicate they have finished.
+#callout_info[Requirements for S][
+  + Today: Run the program and observe the output. Then introduce an interviewer process that makes the two politicians speak in turn. One solution has each politician passing its slogans to the interviewer; another has the interviewer giving permission to a politician to speak until they indicate they have finished.
+  + Race: Run the program and observe the output. Then try swapping the two calls the `start()` from `init()`. Why does this affect the action of the program? Although difficult to predict precisely in advance, the results printed are actually consistent from run to run: why is that?
+  + Heart: Try removing the system call that gives the display process a higher priority than the primes process. Then start searching for primes at 1000000 or 10000000 instead of 2. Observe the results, then reinstate the priority. Why should the display process have a higher priority than the primes process?
+]
+#callout_info[Requirements for S+][
+  - Design an interesting multi-person application that uses the radio to communicate. As configured, the radio module can broadcast packets containing up to 32 bytes of payload. For point-to-point communication, you could embed a destination address in each packet, and have each micro:bit ignore messages that were not addressed to it. One idea is to implement the chain reaction game.
+#v(0.3cm)
+  OR
+#v(0.3cm)
+  - Do something creative.
+]
+#v(0.3cm)
+
+Extra exercises:
+
 + Make a driver process for the hardware random number generator. Write a program that shows random dice rolls on the display whenever a button is pressed. Alternatively, there is an onboard sensor that measures the temperature of the processor die, giving an answer in quarters of a degree Celsius. It generates an interrupt when data is ready, but then suspends itself until started again. Write a device driver for it.
 + Construct a test program to measure the time taken to send and receive a message as the length of an output pulse. Experiment to find the combination of circumstances that makes this quickest: does sending the message with `sendrec` help, and why?
-+ Design an interesting multi-person application that uses the radio to communicate. As configured, the radio module can broadcast packets containing up to 32 bytes of payload. For point-to-point communication, you could embed a destination address in each packet, and have each micro:bit ignore messages that were not addressed to it. One idea is to implement the chain reaction game.
 
-TODO: Be specific about what constitutes an S and S+.
