@@ -29,13 +29,19 @@ void serial_init(void)
 /* serial_putc -- send output character */
 void serial_putc(char ch)
 {
-    if (! txinit) {
-        while (! UART_TXDRDY) { }
-    }
-    txinit = 0;
-    UART_TXDRDY = 0;
+    //original = 12s
+    // if (! txinit) {
+    //     while (! UART_TXDRDY) { }
+    // }
+    // txinit = 0;
+    // UART_TXDRDY = 0;
+    // UART_TXD = ch;
+    //after = should be slightly slower
     UART_TXD = ch;
+    while (! UART_TXDRDY) { }
+    UART_TXDRDY = 0;
 }
+//+1ms for last char to send 
 
 /* print_buf -- output routine for use by printf */
 void print_buf(char *buf, int n)
@@ -106,4 +112,5 @@ void init(void)
     }
     
     stop_timer();
+
 }
