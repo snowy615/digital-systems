@@ -89,6 +89,7 @@ void serial_putc(char ch)
     }
     intr_enable();
 }
+//code is wrong
 //removing intr_disable(); and intr_enable(); would most likely have no impact because chance of interrupt happening between the short code is small
 //could go wrong if there was interrupt happening between the short code
 //eg.
