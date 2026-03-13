@@ -356,7 +356,6 @@ unsigned *system_call(unsigned *psp) {
   == Sending Messages
   Remember the rules for communication by messages!
 
-  #item-by-item[
     #[Two possible cases:]
     
     #[The destination process is `RECEIVING` and can receive message]
@@ -365,7 +364,6 @@ unsigned *system_call(unsigned *psp) {
     #[The destination process cannot receive...]
     - Multiple possible reasons for this (Q: which?)
     - Must (somehow) keep sender in queue until process is ready to receive it.
-  ]
 ]
 
 #slide[
