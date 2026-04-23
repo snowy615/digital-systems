@@ -27,4 +27,5 @@ void init(void) {
     serial_init();
     start("Proc1", proc1, 0, STACK);
     start("Proc2", proc2, 0, STACK);
+    
 }

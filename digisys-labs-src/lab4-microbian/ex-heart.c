@@ -41,7 +41,7 @@ void heart_task(int n)
     SET_FIELD(GPIO_PINCNF[ROW2], GPIO_PINCNF_DRIVE, GPIO_DRIVE_S0H1);
     SET_FIELD(GPIO_PINCNF[ROW3], GPIO_PINCNF_DRIVE, GPIO_DRIVE_S0H1);
 
-    priority(P_HIGH);
+    // priority(P_HIGH);
 
     while (1) {
         show(heart, 70);
@@ -69,7 +69,7 @@ int prime(int n)
 /* prime_task -- print primes on the serial port */
 void prime_task(int arg)
 {
-    int n = 2, count = 0;
+    int n = 10000000, count = 0;
 
     while (1) {
         if (prime(n)) {
