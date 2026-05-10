@@ -3,7 +3,7 @@
 
 // #enable-handout-mode(true)
 
-#title-slide(title: [Lecture 15 & 16 \ Scheduling Processes & Messages])
+#title-slide(title: [Lecture 15 & 16 \ Messages & Scheduling])
 
 #slide[
   == C Pointer Syntax
@@ -21,15 +21,15 @@
 
 #slide[
   == C Pointer Syntax for Structs
-  #item-by-item[
   #[```c
 typedef struct dst {
   int feet;
   float inch;
 } distance;
 
-
 ```]
+
+  #item-by-item(start: 2)[
 - Struct-typed variable \
   ```c distance a; a.feet = 9001; a.inch = 11;```
 - Pointer to `distance`-typed variable, assign address of `a` \
@@ -47,19 +47,43 @@ typedef struct dst {
 
 
 #slide[
+  == Reminder: State Saved on Stack
+  #set align(center)
+  #image("./figures/context-switch2.png", height: 90%)
+]
+
+
+#slide[
   == Starting a Process
   The first time a process runs, it is resumed just as if returning from a system call.
+
+  #show: later
   
   So we set up a fake exception frame that invokes the process body when resumed.
-- #r0 = integer argument,
-- #pc = process body,
-- #lr = address of exit stub, in case body returns.
+- #r0 = #uncover("3-")[integer argument we want to pass to the function (`start()`),]
+- #pc = #uncover("4-")[first instruction in process function,]
+- #lr = #uncover("5-")[address of exit stub, in case body returns.]
+- All other registers = #uncover("6-")[Doesn't matter!]
+]
+
+#slide[
+  == Our Program
+  ```c
+void init(void) {
+    serial_init();
+    timer_init();
+    start("Heart", heart_task, 0, STACK);
+    start("Prime", prime_task, 0, STACK);
+}
+  ```
+
+  #light[Discuss in code... `ex-heart.c`]
 ]
 
 #slide[
   == Creating "fake" Stack Frame
   ```c
-int start(...) {
+int start(char *name, void (*body)(int), int arg,int stksize){
     ...
     unsigned *sp = p->sp - FRAME_WORDS;
     memset(sp, 0, 4*FRAME_WORDS);
@@ -76,8 +100,8 @@ int start(...) {
 
 #slide[
   == Starting a Process
-  #item-by-item[
   #[At this point, every process has a stack frame that:]
+  #item-by-item(start: 2)[
   - will restore the #pc at the start of the process's function \
     (i.e. it will run the function)
   - has values for all state and registers that respects the restoring convention (manual part + hardware part),
@@ -89,7 +113,7 @@ int start(...) {
 
 #slide[
   == Starting the OS
-  After `init()` called, all tasks have stack frames that will allow a context switch into them.
+  After `init()` called, all tasks have stack frames that will allow a context switch into them.  #light[(Introduce `os_current` variable.)]
 
   ```c
 void __start(void) {
@@ -120,16 +144,15 @@ void idle_task(void) {
 
 #slide[
   == Where are we now?
-  #item-by-item[
   #[We understand _how_ tasks are switched and started.]
+  #item-by-item(start: 2)[
   - OS is an interrupt that performs context switches \ (Q: remind me how)
   - During context switch, interrupt stores some state on stack, \ assembly code stores the rest.
 ]
 ]
 
 #slide[
-  #item-by-item[
-    == What is left to understand?
+  == What is left to understand?
     #callout_question[How does the OS keep track of processes?][
       We have already seen that we need to start processes, and keep track of various process-specific quantities (e.g. stack location), in order to do context switches. How does the OS do this?
     ]
@@ -137,7 +160,6 @@ void idle_task(void) {
     #callout_question[How are messages transferred between processes?][
       And in particular, how is this done in interrupts?
     ]
-  ]
 ]
 
 #slide[
@@ -175,7 +197,6 @@ struct _proc {
 
 #slide[
   == Process Structure
-  #item-by-item[
   #[```c
   typedef struct _proc *proc;
   ...
@@ -192,7 +213,6 @@ struct _proc {
   - Find a memory location to initialise the stack (`sbrk(...)`)
   - Find a memory location for proc variable (`new_proc(...)`)
   #light[Draw memory layout (heap, stacks, ..., processes, main stack). $<==$]
-]
 ]
 
 #slide[
@@ -211,7 +231,6 @@ struct _proc {
 
 #slide[
   == Ready Queues
-  #item-by-item[
   ```c
 #define NPRIO 3      /* Number of non-idle priorities */
 ...
@@ -227,7 +246,6 @@ static struct _queue {
 ```c     make_ready(p);```
 
 Adds process to appropriate queue.]
-]
 ]
 
 #slide[
@@ -250,7 +268,7 @@ static inline void make_ready(proc p) {
 
 #slide[
   == Full Story of Startup
-  #item-by-item[
+  #item-by-item(start: 2)[
     - `startup.c`:  `__reset()` is called.
     - `microbian.c`: `__start()` is called.
     - Calls `init()`, defined by "our" program.
@@ -338,7 +356,6 @@ unsigned *system_call(unsigned *psp) {
   == Sending Messages
   Remember the rules for communication by messages!
 
-  #item-by-item[
     #[Two possible cases:]
     
     #[The destination process is `RECEIVING` and can receive message]
@@ -347,7 +364,6 @@ unsigned *system_call(unsigned *psp) {
     #[The destination process cannot receive...]
     - Multiple possible reasons for this (Q: which?)
     - Must (somehow) keep sender in queue until process is ready to receive it.
-  ]
 ]
 
 #slide[
@@ -487,6 +503,8 @@ static inline void deliver(proc pdest, proc psrc)
 #slide[
   == End of Term!
   Next term, start from the complete bottom of the stack:
+
+  #v(0.5cm)
 
   #callout_question[How to we build a computer?][... starting from a transistor]
 ]

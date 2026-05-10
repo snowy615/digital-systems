@@ -7,6 +7,15 @@
 #title-slide(title: [Lecture 13 \ Device Drivers])
 
 #slide[
+  == Lab 4
+  Lab 4 spec is now updated to include specific instructions for S/S+.
+
+  As usual, not finishing everything required for S will not preclude you from getting an S, if you show you engaged properly.
+
+  Doing the labs is a great preparation for exams though.
+]
+
+#slide[
   == List of Demands
   We have a single CPU that can execute instructions.
   // #callout_idea[The time a program spends waiting to respond to external events, is much larger than the time spent computing.][]
@@ -20,13 +29,15 @@
 ]
 
 #slide[
-  #item-by-item[
-  #callout_question[How can we safely respond to outside events?][]
+  #callout_question[How can we safely respond to outside events?][
+    - How can we write code to respond to interrupts (drivers)?
+    - How can events be communicated to programs?
+  ]
+  #v(0.6cm)
   - Take advantage of the safety of messages, by making interrupts \ send messages from hardware.
   - Interrupt from peripheral will send messages to _device driver_.
   - Other processes communicate with hardware through device driver, by sending messages.
   - Device driver is a process that serves messages from hardware/software in a loop.
-]
 ]
 
 #slide[
@@ -198,8 +209,8 @@ while (1) {
 
 #slide[
   == Bottleneck
+  How many context switches per character?
   #item-by-item[
-  - How many context switches per character?
   - $\~20 mu$s per context switch
   - UART 9600 baud (\~100 $mu$s per bit) $=>$ 1k characters/s
   - Can use up to $10^5$ µs of CPU time per second! 10% of CPU time!
